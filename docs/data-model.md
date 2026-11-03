@@ -212,7 +212,7 @@ For each batch, generate up to 3 reasons from the model (no LLM). Ingredient rea
 ## 10. Data rules
 - `data/recipes.json` and `data/ingredients.json` are the only recipe data. Never invent recipes, macros or URLs.
 - Recipes with `protein: null` are excluded from auto-solve but can be pinned (show "macros not published").
-- `freezesWell` is set only when the recipe's source says the cooked dish freezes; record the wording in `docs/recipes-research.md`. No recipe has it yet. Until the frittata's source is checked, the frittata (`b04`, 6 servings) can't be planned at 1 breakfast/day.
+- `freezesWell` is set only when the recipe's source says the cooked dish freezes; record the wording in `docs/recipes-research.md`. No recipe has it yet. The frittata's source (`b04`, 6 servings) gives fridge storage only (3–4 days, no freezing), so it stays unset and the frittata can't be planned at 1 breakfast/day; pinning it returns the constraint-4 reason.
 - Shelf lives and pack sizes are estimates (`estimated: true`); show them as editable assumptions, not facts. A user's edits are stored as overrides (`ingredientId → { shelfLifeDays?, packSize? }`) in `localStorage` and applied to the data before every solve, preview and lens; `data/*.json` is never changed by the app.
 
 ## 11. Ingredient map & lenses (`src/lib/graph.ts`, `src/lib/lenses.ts`)
@@ -228,7 +228,7 @@ Pure functions only; the UI maps their output to tokens. No React or d3 imports 
 
 **Families (clusters).** Project to a recipe–recipe graph where edge weight = number of shared **perishable** ingredients (`shelfLifeDays ≤ 14`). Run **label propagation**, deterministic: nodes visited in id order, ties broken by smallest label, max 20 iterations. Name each family by its top 2 perishables by within-family degree ("cilantro–lime"). Families of size 1 are labelled "standalone".
 
-**Absorbers.** `absorbers(ingredientId, plan, constraints)` = **swaps**: replace a planned, unpinned batch with a recipe of the same meal type on the same day that uses the ingredient. Adding a batch would break constraint 4, so absorbers never add. Keep only swaps where constraints 2–6 still hold, ranked by Δ`wastePacks` from `preview.ts` (most negative first). The Waste lens shows the top one ("Swap in the frittata Thu → −0.6 packs").
+**Absorbers.** `absorbers(ingredientId, plan, constraints)` = **swaps**: replace a planned, unpinned batch with a recipe of the same meal type on the same day that uses the ingredient. Adding a batch would break constraint 4, so absorbers never add. Keep only swaps where constraints 2–6 still hold, ranked by Δ`wastePacks` from `preview.ts` (most negative first). The Waste lens shows the top one ("Swap in the tuna salad Thu → −0.6 packs").
 
 **Lenses.** `lens(name, ctx)` returns:
 ```ts

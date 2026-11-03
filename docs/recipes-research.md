@@ -52,7 +52,7 @@
 - **12. Steak Fajita Bowls:** Card says 45 min, intro says 30; Uses guacamole rather than whole avocado.
 - **13. Greek Yogurt Parfait Bowl:** Source URL is the print page.
 - **15. High-Protein Breakfast Burrito (Tofu Scramble):** Exactly at 25 g breakfast minimum.
-- **16. Ham & Cottage Cheese Frittata with Spinach:** Exactly at 25 g breakfast minimum; Contains ham (processed meat); Excludes 5–10 min rest.
+- **16. Ham & Cottage Cheese Frittata with Spinach:** Exactly at 25 g breakfast minimum; Contains ham (processed meat); Excludes 5–10 min rest. Storage (checked 2026-11-03): the source says to refrigerate leftovers in an airtight container for 3–4 days and gives no freezing guidance, so `freezesWell` is not set. At 6 servings and 1 breakfast a day it can't be eaten within the 3-day cooked life, so the optimizer never picks it and pinning it is infeasible.
 - **17. Shrimp and Broccoli Stir Fry:** Unclear whether nutrition includes rice.
 - **18. Sheet Pan Salmon, Broccoli and Potatoes:** Uses garlic powder, not fresh garlic; Fillet weight not given.
 - **19. Lemon Garlic Baked Cod:** Intro says under 30 min, card says 20; Ingredients list cilantro, steps say parsley.
