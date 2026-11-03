@@ -433,7 +433,23 @@ export function decodeSolution(
     const key = `${v.recipeId}@${v.day}`;
     batches.push({ recipeId: v.recipeId, day: v.day, pinned: pinned.has(key), frozenPortions: frozen.get(key) ?? 0 });
   }
-  return sortBatches(batches, catalog);
+  return fewestFrozen(sortBatches(batches, catalog), constraints, catalog);
+}
+
+/**
+ * f has no cost in the objective, so the solver may freeze more than it must (even portions
+ * needed fresh on the cook day). Keep the fewest frozen portions constraint 4 needs, latest
+ * batch first (each covers the overflow from its day on); this never breaks constraints 3–6
+ * because frozen portions only appear in constraint 4.
+ */
+export function fewestFrozen(batches: Batch[], constraints: Constraints, catalog: Catalog): Batch[] {
+  const out = batches.map((b) => ({ ...b, frozenPortions: 0 }));
+  const order = out.map((_, k) => k).sort((a, b) => out[b]!.day - out[a]!.day);
+  for (const k of order) {
+    if (batches[k]!.frozenPortions === 0) continue;
+    out[k]!.frozenPortions = minFrozenPortions(out[k]!, out.filter((_, j) => j !== k), constraints, catalog);
+  }
+  return out;
 }
 
 /** Stable batch order: day, then breakfast before main, then recipe order in the catalog. */
