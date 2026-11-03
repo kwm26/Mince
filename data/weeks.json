@@ -1,0 +1,53 @@
+[
+  {
+    "id": "standard",
+    "name": "Standard week",
+    "description": "Defaults with an empty fridge: 150 g protein a day, up to 60 min of cooking every day, no pins. The same week as the offline validation.",
+    "fridgeId": null,
+    "proteinPerDay": 150,
+    "maxCookMinutes": [60, 60, 60, 60, 60, 60, 60],
+    "pins": []
+  },
+  {
+    "id": "use-it-up",
+    "name": "Use it up",
+    "description": "Plan around last week's leftovers before they turn.",
+    "fridgeId": "end-of-week",
+    "proteinPerDay": 150,
+    "maxCookMinutes": [60, 60, 60, 60, 60, 60, 60],
+    "pins": []
+  },
+  {
+    "id": "busy-weekdays",
+    "name": "Busy weekdays",
+    "description": "A long cook on shopping day, quick cooks on work days, and one day with no cooking at all.",
+    "fridgeId": "fresh-shop",
+    "proteinPerDay": 150,
+    "maxCookMinutes": [90, 30, 30, 60, 30, 0, 60],
+    "pins": []
+  },
+  {
+    "id": "favourites",
+    "name": "Favourites pinned",
+    "description": "Three pinned favourites and a higher protein target. May show the protein-short warning instead of a plan that hits 170 g.",
+    "fridgeId": "fresh-shop",
+    "proteinPerDay": 170,
+    "maxCookMinutes": [60, 60, 60, 60, 60, 60, 60],
+    "pins": [
+      { "recipeId": "a01-greek-chicken-protein-bowl", "day": 0 },
+      { "recipeId": "b01-greek-yogurt-parfait-bowl", "day": 1 },
+      { "recipeId": "m04-cilantro-lime-salmon-bake", "day": 2 }
+    ]
+  },
+  {
+    "id": "pin-conflict",
+    "name": "Pin conflict",
+    "description": "Shows the infeasible state on purpose: a 45-minute recipe pinned on a 20-minute day.",
+    "fridgeId": null,
+    "proteinPerDay": 150,
+    "maxCookMinutes": [60, 20, 60, 60, 60, 60, 60],
+    "pins": [
+      { "recipeId": "a02-chicken-fried-rice", "day": 1 }
+    ]
+  }
+]

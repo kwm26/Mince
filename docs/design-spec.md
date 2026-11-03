@@ -187,7 +187,7 @@ No tab bar: it's a focus mode. From top to bottom:
 
 ### Empty, loading and error states
 Every list needs all three. They use the reading layer: an h2, one muted sentence, and one primary button.
-- **Kitchen empty:** "Nothing on hand yet", then "Add what's in your fridge" with an Add button.
+- **Kitchen empty:** "Nothing on hand yet", then "Add what's in your fridge" with an Add button, and a "Try an example fridge →" text link that opens the three example fridges.
 - **Planner empty:** "No meals planned", with a button to pick recipes.
 - **Error:** say what failed and offer Retry. The error colour is text in `--color-warn-text` with an icon, never colour alone.
 - **Infeasible (Plan):** h2 "These pins don't fit", the solver's reason as the muted sentence ("Mon: pinned meals need 75 min, limit is 60"), and a primary button to edit pins.

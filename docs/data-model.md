@@ -266,3 +266,20 @@ Pure functions for the Kitchen screen.
 - `rankByOverlap(recipes, pantry, date)`: for each recipe, `overlap` = number of distinct **perishable** pantry ingredients it uses (core or optional). Sort by overlap (descending), then by the soonest `daysLeft` among those ingredients (ascending), then by protein per serving (descending). Recipes with overlap 0 come last. The recipe row shows "Uses N of yours".
 
 **Tests.** `daysLeft` counts down by one per calendar day and never goes below 0; ranking puts a recipe using a 1-day-left item above one using a 4-day-left item at equal overlap.
+
+## 13. Example data (`data/fridges.json`, `data/weeks.json`)
+Demo and test seeds built only from ingredients and recipes in `data/*.json`. They are not recipe data.
+
+**Fridges.** `{ id, name, description, items: { ingredientId, amount, daysLeft }[] }`. `amount` is in the ingredient's `packUnit`; `daysLeft` is counted from the day the example is loaded, so the demo never goes stale. Loading converts each item to a `PantryItem` with `addedOn = today` and `daysLeftAtAdd = daysLeft`.
+- `fresh-shop`: full packs of the most-shared ingredients, bought today.
+- `end-of-week`: half-used perishables 1–3 days from turning (the waste story).
+- `almost-bare`: a few long-life items.
+
+**Weeks.** `{ id, name, description, fridgeId: string | null, proteinPerDay, maxCookMinutes, pins }`. Loading merges these over the `Constraints` defaults (`startDate` = today); `fridgeId` picks the pantry (`null` = empty).
+- `standard`: the defaults and an empty fridge; the same week as the offline validation.
+- `use-it-up`: `end-of-week` fridge, defaults otherwise.
+- `busy-weekdays`: `fresh-shop` fridge, `maxCookMinutes` `[90, 30, 30, 60, 30, 0, 60]`.
+- `favourites`: `fresh-shop` fridge, 170 g target, three pins; may end protein-short.
+- `pin-conflict`: a 45-min recipe pinned on a 20-min day; must return `infeasible` with the time reason.
+
+**Tests.** Every id resolves; no fridge item is a staple or appears twice; `1 ≤ daysLeft ≤ shelfLifeDays`; `maxCookMinutes` has `days` entries; every pin passes the mask and time limit except in `pin-conflict`; `standard` solves with 0 shortfall (it is the §9 regression week); `pin-conflict` returns `infeasible`.

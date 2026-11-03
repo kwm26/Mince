@@ -1,0 +1,61 @@
+[
+  {
+    "id": "fresh-shop",
+    "name": "Fresh shop",
+    "description": "Shopped for the week without a plan: full packs of the most-shared ingredients, bought today. Mince plans the week around them.",
+    "items": [
+      { "ingredientId": "garlic", "amount": 10, "daysLeft": 30 },
+      { "ingredientId": "lemon", "amount": 3, "daysLeft": 14 },
+      { "ingredientId": "lime", "amount": 2, "daysLeft": 14 },
+      { "ingredientId": "broccoli", "amount": 4, "daysLeft": 5 },
+      { "ingredientId": "cherry-tomatoes", "amount": 2, "daysLeft": 5 },
+      { "ingredientId": "spinach", "amount": 5, "daysLeft": 5 },
+      { "ingredientId": "mushrooms", "amount": 8, "daysLeft": 5 },
+      { "ingredientId": "green-onion", "amount": 8, "daysLeft": 7 },
+      { "ingredientId": "greek-yogurt", "amount": 4, "daysLeft": 14 },
+      { "ingredientId": "eggs", "amount": 12, "daysLeft": 28 },
+      { "ingredientId": "sweet-potato", "amount": 3, "daysLeft": 21 },
+      { "ingredientId": "red-onion", "amount": 1, "daysLeft": 21 },
+      { "ingredientId": "ginger", "amount": 4, "daysLeft": 21 },
+      { "ingredientId": "rice", "amount": 10, "daysLeft": 365 }
+    ]
+  },
+  {
+    "id": "end-of-week",
+    "name": "End of week",
+    "description": "Last week's leftovers: half-used perishables one to three days from turning. The Kitchen ranking, Freshness and Waste lenses have plenty to say.",
+    "items": [
+      { "ingredientId": "spinach", "amount": 2, "daysLeft": 1 },
+      { "ingredientId": "cherry-tomatoes", "amount": 1, "daysLeft": 1 },
+      { "ingredientId": "cilantro", "amount": 0.5, "daysLeft": 1 },
+      { "ingredientId": "greek-yogurt", "amount": 1.5, "daysLeft": 2 },
+      { "ingredientId": "mushrooms", "amount": 3, "daysLeft": 2 },
+      { "ingredientId": "broccoli", "amount": 1.5, "daysLeft": 2 },
+      { "ingredientId": "green-onion", "amount": 4, "daysLeft": 3 },
+      { "ingredientId": "feta", "amount": 0.5, "daysLeft": 3 },
+      { "ingredientId": "bell-pepper", "amount": 1, "daysLeft": 3 },
+      { "ingredientId": "cottage-cheese", "amount": 1, "daysLeft": 4 },
+      { "ingredientId": "lemon", "amount": 1, "daysLeft": 6 },
+      { "ingredientId": "lime", "amount": 2, "daysLeft": 8 },
+      { "ingredientId": "sweet-potato", "amount": 1, "daysLeft": 10 },
+      { "ingredientId": "cheddar", "amount": 1, "daysLeft": 12 },
+      { "ingredientId": "eggs", "amount": 7, "daysLeft": 15 },
+      { "ingredientId": "garlic", "amount": 4, "daysLeft": 20 },
+      { "ingredientId": "rice", "amount": 3, "daysLeft": 300 }
+    ]
+  },
+  {
+    "id": "almost-bare",
+    "name": "Almost bare",
+    "description": "Shopping day with almost nothing in: a few long-life items. Close to planning from scratch.",
+    "items": [
+      { "ingredientId": "eggs", "amount": 4, "daysLeft": 20 },
+      { "ingredientId": "lemon", "amount": 1, "daysLeft": 9 },
+      { "ingredientId": "garlic", "amount": 6, "daysLeft": 25 },
+      { "ingredientId": "rice", "amount": 2, "daysLeft": 300 },
+      { "ingredientId": "oats", "amount": 2, "daysLeft": 300 },
+      { "ingredientId": "frozen-berries", "amount": 1, "daysLeft": 200 },
+      { "ingredientId": "tuna-canned", "amount": 1, "daysLeft": 600 }
+    ]
+  }
+]

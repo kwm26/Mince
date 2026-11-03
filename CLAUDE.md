@@ -31,7 +31,7 @@ Favor clarity, polish and a working optimizer over breadth.
 
 ## Structure
 ```
-data/            ingredients.json, recipes.json
+data/            ingredients.json, recipes.json; fridges.json, weeks.json (example seeds, see data-model §13)
 src/types.ts     types mirroring docs/data-model.md
 src/lib/         model.ts (builds the MILP), solve.ts (+ solve.worker.ts, a thin wrapper), greedy.ts, waste.ts, schedule.ts, preview.ts, explain.ts, graph.ts, lenses.ts, kitchen.ts (+ *.test.ts)
 src/screens/     Kitchen.tsx, Plan.tsx (Pin → Solve → Steer; Week / Map toggle with lenses), Cook.tsx
