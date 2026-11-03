@@ -116,7 +116,7 @@ interface PlanResult {
 
 Solver: `highs` (HiGHS compiled to WebAssembly, MILP), run in a Web Worker, with a **2 s time limit**. On timeout, return the best solution found (`timeout-best`). If none was found, fall back to the greedy plan. Show a "Solving…" state; previews (§7) never wait for the solver.
 
-**Validated offline.** This exact model was run on `data/*.json` with an open-source MILP solver (CBC) before the build: with the defaults it is feasible, hits 150 g protein/day, and solves in 0.3–2 s. Two things were required, both now in the model: **freezing** (raw meat and fish only last ~2 days, so without it the back half of the week has no protein) and the **variety rule** (without it the optimum is the same bowl four times). Changes made since (frozen cooked portions, dropping expired optional ingredients, the pantry window) only add options or apply to a non-empty pantry, so the default week stays feasible; the regression test in §9 re-checks it.
+**Validated offline.** This exact model was run on `data/*.json` with an open-source MILP solver (CBC) before the build: with the defaults it is feasible and solves in 0.3–2 s. That run counted protein in the old weekly form, which included cooked portions left over after the last day, so its "150 g/day" was not protein eaten: with this data the best possible day is 137 g (31 g breakfast + 2 × 53 g mains), and the standard week eats about 131 g/day. Constraint 7 now counts only portions eaten, so the standard week honestly reports a shortfall at the 150 g default. Two things were required, both now in the model: **freezing** (raw meat and fish only last ~2 days, so without it the back half of the week has no protein) and the **variety rule** (without it the optimum is the same bowl four times). Changes made since (frozen cooked portions, dropping expired optional ingredients, the pantry window) only add options or apply to a non-empty pantry, so the default week stays feasible; the regression test in §9 re-checks it.
 
 **Indices.** Recipes *r* (eligible: not excluded, `macrosPerServing.protein != null` unless pinned), days *d* = 0…D−1, non-staple ingredients *i*.
 
@@ -142,7 +142,7 @@ Solver: `highs` (HiGHS compiled to WebAssembly, MILP), run in a Web Worker, with
    - 4b. **No overcooking:** `Σ_{d, r ∈ m} servings_r · y[r,d] ≤ n_m · (D − 1 + L)`. This is the old constraint 4 at the last day; it stops the solver cooking extra frozen portions just to raise average protein.
 5. **Ingredients:** `packSize_i · b[i] + u[i] ≥ Σ_{r,d} qty_{r,i,d} · y[r,d]` (core and unexpired optional; never garnish), with `u[i] ≤ pantryAmount_i` and `u[i] ≤ Σ_{d ≤ daysLeft_i} qty_{r,i,d} · y[r,d]` (pantry stock only feeds batches cooked before it expires).
 6. **Variety:** for each recipe *r*, `Σ_d y[r,d] ≤ maxRepeatsPerRecipe`.
-7. **Protein (soft, weekly form for tractability):** `Σ_{r,d} servings_r · protein_r · y[r,d] / D + s ≥ proteinPerDay`. Per-day protein is reported after solving (§5).
+7. **Protein eaten (soft):** with `x[r,d,t] ≥ 0` = portions of batch (r, d) eaten on day *t* (fresh within `d ≤ t ≤ d + L − 1`, frozen portions any later day, and `Σ_t x[r,d,t] ≤ servings_r · y[r,d]`), require `Σ_{r,d,t} protein_r · x[r,d,t] / D + s ≥ proteinPerDay`. Only portions eaten on days 0…D−1 count; leftovers after the last day add no protein. `proteinByDay` (§5) and `proteinShortfall` must agree with this count.
 
 **Infeasible reasons.** Before solving, check each pin on its own and report the first failure in `infeasibleReason`: "Fajita bowls on Sat: guacamole is only good through Thu" (mask), "Mon: pinned meals need 75 min, limit is 60" (time), "Frittata makes 6 portions; 3 can be eaten fresh and it doesn't freeze well" (constraint 4), "Pinned 3 times; the limit is 2" (variety). If every pin passes alone but the solver still reports infeasible: "These pins leave no way to cover every meal." Protein never makes a plan infeasible; a shortfall is reported in `proteinShortfall` ("12 g/day short of 150 g").
 
@@ -201,7 +201,7 @@ For each batch, generate up to 3 reasons from the model (no LLM). Ingredient rea
 - A 7-day solve finishes in < 2 s in the worker (or returns `timeout-best`).
 - Freezing: a chicken recipe can be placed on day 5 only when `freezable` is true.
 - Variety: no recipe appears in more than `maxRepeatsPerRecipe` batches.
-- Default week on the real data is feasible with 0 protein shortfall at 150 g/day (regression test for the offline validation).
+- Default week on the real data is feasible; its `proteinShortfall` equals 150 − mean(`proteinByDay`) and is > 0 with this data; no day's protein exceeds the best possible day; a 120 g target gives 0 shortfall.
 - Frozen cooked portions: a 6-serving breakfast with `freezesWell` can be planned at 1 breakfast/day and the schedule eats its frozen portions after the fresh ones; without `freezesWell`, pinning it returns `infeasible` with the constraint-4 reason.
 - No fresh portion is eaten after its life, and frozen portions are only eaten on days fresh portions don't cover.
 - Optional ingredients: an optional ingredient that expires before the cook day is not in `need` or `shopping`; garnish never is.
@@ -276,10 +276,10 @@ Demo and test seeds built only from ingredients and recipes in `data/*.json`. Th
 - `almost-bare`: a few long-life items.
 
 **Weeks.** `{ id, name, description, fridgeId: string | null, proteinPerDay, maxCookMinutes, pins }`. Loading merges these over the `Constraints` defaults (`startDate` = today); `fridgeId` picks the pantry (`null` = empty).
-- `standard`: the defaults and an empty fridge; the same week as the offline validation.
+- `standard`: the defaults and an empty fridge; the same week as the offline validation. It opens with the protein-short warning, because 150 g a day eaten isn't reachable with these recipes.
 - `use-it-up`: `end-of-week` fridge, defaults otherwise.
 - `busy-weekdays`: `fresh-shop` fridge, `maxCookMinutes` `[90, 30, 30, 60, 30, 0, 60]`.
 - `favourites`: `fresh-shop` fridge, 170 g target, three pins; may end protein-short.
 - `pin-conflict`: a 45-min recipe pinned on a 20-min day; must return `infeasible` with the time reason.
 
-**Tests.** Every id resolves; no fridge item is a staple or appears twice; `1 ≤ daysLeft ≤ shelfLifeDays`; `maxCookMinutes` has `days` entries; every pin passes the mask and time limit except in `pin-conflict`; `standard` solves with 0 shortfall (it is the §9 regression week); `pin-conflict` returns `infeasible`.
+**Tests.** Every id resolves; no fridge item is a staple or appears twice; `1 ≤ daysLeft ≤ shelfLifeDays`; `maxCookMinutes` has `days` entries; every pin passes the mask and time limit except in `pin-conflict`; `standard` solves and reports its honest shortfall (it is the §9 regression week); `pin-conflict` returns `infeasible`.
