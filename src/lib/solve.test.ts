@@ -3,7 +3,8 @@ import type { MealType, PlanResult } from '../types';
 import { weeks, weekToConstraints } from './data';
 import { constraints, realCatalog, START, withIngredient, withRecipe } from './fixtures';
 import { greedyPlan } from './greedy';
-import { checkPlan, MEAL_TYPES } from './model';
+import highsLoader from 'highs';
+import { buildModel, checkPlan, MEAL_TYPES } from './model';
 import { solve } from './solve';
 
 const T = 30_000;
@@ -37,12 +38,45 @@ function expectSoundSchedule(plan: PlanResult, c = week('standard')) {
   }
 }
 
+const mean = (xs: number[]) => xs.reduce((s, x) => s + x, 0) / xs.length;
+
+/** The most protein any day can hold: best breakfast × breakfasts a day + best main × mains a day. */
+function bestDay(c = week('standard')): number {
+  const best = (m: MealType) => Math.max(...realCatalog.recipes.filter((r) => r.mealType === m).map((r) => r.macrosPerServing.protein ?? 0));
+  return best('breakfast') * c.mealsPerDay.breakfast + best('main') * c.mealsPerDay.main;
+}
+
 describe('default week (§9 regression, §13 standard)', () => {
-  it('is feasible with 0 protein shortfall at 150 g/day', () => {
-    expect(standard.status).toBe('optimal');
-    expect(standard.proteinShortfall).toBe(0);
+  it('is feasible, and its shortfall is 150 g minus the protein actually eaten (> 0 with this data)', () => {
+    expect(['optimal', 'timeout-best']).toContain(standard.status);
     expect(checkPlan(standard.batches, week('standard'), realCatalog)).toBeNull();
+    expect(Math.abs(standard.proteinShortfall - (150 - mean(standard.proteinByDay)))).toBeLessThan(0.5);
+    expect(standard.proteinShortfall).toBeGreaterThan(0);
+    console.info(`standard week: ${mean(standard.proteinByDay).toFixed(1)} g/day eaten, ${standard.proteinShortfall.toFixed(1)} g/day short`);
   });
+
+  it("reports the model's own s as the shortfall (schedule and model count the same eaten portions)", async () => {
+    const highs = await highsLoader();
+    for (const c of [week('standard'), week('busy-weekdays')]) {
+      const result = highs.solve(buildModel(c, realCatalog).lp, { time_limit: 5, output_flag: false });
+      const s = (result.Columns as Record<string, { Primal?: number }>).s?.Primal ?? NaN;
+      const plan = await solve(c, realCatalog);
+      expect(plan.proteinShortfall).toBeCloseTo(s, 6);
+    }
+  }, T);
+
+  it('never puts more protein on a day than the best possible day', () => {
+    // 31 g (best breakfast) × 1 + 53 g (best main) × 2 = 137 g with this data.
+    expect(bestDay()).toBe(137);
+    for (const p of standard.proteinByDay) expect(p).toBeLessThanOrEqual(bestDay() + 1e-9);
+  });
+
+  it('has no shortfall at a reachable target (120 g)', async () => {
+    const plan = await solve({ ...week('standard'), proteinPerDay: 120 }, realCatalog);
+    expect(plan.status).not.toBe('infeasible');
+    expect(plan.proteinShortfall).toBe(0);
+    expect(mean(plan.proteinByDay)).toBeGreaterThanOrEqual(120 - 1e-9);
+  }, T);
 
   it('solves in under 2 s once the wasm is loaded (or returns timeout-best)', () => {
     if (standard.status !== 'timeout-best') expect(standard.solveMs).toBeLessThan(2000);
@@ -91,6 +125,8 @@ describe('pins', () => {
       expect(plan.batches.some((b) => b.recipeId === pin.recipeId && b.day === pin.day && b.pinned)).toBe(true);
     }
     expectSoundSchedule(plan, c);
+    for (const p of plan.proteinByDay) expect(p).toBeLessThanOrEqual(bestDay(c) + 1e-9);
+    expect(plan.proteinShortfall).toBeCloseTo(Math.max(0, c.proteinPerDay - mean(plan.proteinByDay)), 9);
   }, T);
 
   it('pin-conflict returns infeasible with the time reason (§13)', async () => {

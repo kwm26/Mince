@@ -205,6 +205,7 @@ export function checkPlan(
 export type ModelVar =
   | { kind: 'y'; recipeId: string; day: number }
   | { kind: 'f'; recipeId: string; day: number }
+  | { kind: 'x'; recipeId: string; day: number; eatDay: number; frozen: boolean }
   | { kind: 'b'; ingredientId: string }
   | { kind: 'u'; ingredientId: string; pantryIndex: number }
   | { kind: 's' };
@@ -321,22 +322,56 @@ export function buildModel(constraints: Constraints, catalog: Catalog): BuiltMod
     if (terms.size > 0) rows.push({ name: `time_${d}`, terms, sense: '<=', rhs: constraints.maxCookMinutes[d] ?? 0 });
   }
 
-  // 3, 4, 4a, 4b per meal type
+  // 3, 4, 4a, 4b per meal type, with eaten portions x[r,d,t] (continuous ≥ 0):
+  //   xf: fresh portions of batch (r,d) eaten on t ∈ [d, min(d+L−1, D−1)]
+  //   xz: frozen portions eaten on t ∈ [d+1, D−1] (freezesWell only)
+  // 3.  Σ x over each (meal type, day) = n_m: every slot eaten exactly once.
+  // 4.  Σ_t xf ≤ servings·y − f, with equality when d+L−1 ≤ D−1 (no fresh portion spoils;
+  //     the rest may carry over past the last day); Σ_t xz ≤ f. The cumulative bound
+  //     Σ_{d≤t}(servings·y − f) ≤ n_m(t+L) stays, so carried-over portions also keep.
+  // 7.  uses Σ protein·x (portions eaten in the plan), below.
+  const proteinTerms: Terms = new Map();
   for (const m of MEAL_TYPES) {
     const n = constraints.mealsPerDay[m];
     if (n <= 0) continue;
     const ofType = slots.filter((s) => s.recipe.mealType === m);
+    const coverRows: Terms[] = Array.from({ length: D }, () => new Map());
+    for (const s of ofType) {
+      const protein = s.recipe.macrosPerServing.protein ?? 0;
+      const fresh: Terms = new Map();
+      const lastFresh = s.day + L - 1;
+      for (let t = s.day; t <= Math.min(lastFresh, D - 1); t++) {
+        const x = `xf_${s.name.slice(2)}_${t}`;
+        vars[x] = { kind: 'x', recipeId: s.recipe.id, day: s.day, eatDay: t, frozen: false };
+        add(fresh, x, 1);
+        add(coverRows[t]!, x, 1);
+        add(proteinTerms, x, protein / D);
+      }
+      add(fresh, s.name, -s.recipe.servings);
+      if (s.f) add(fresh, s.f, 1);
+      rows.push({ name: `eat_${s.name}`, terms: fresh, sense: lastFresh <= D - 1 ? '=' : '<=', rhs: 0 });
+      if (s.f) {
+        const frozen: Terms = new Map();
+        for (let t = s.day + 1; t < D; t++) {
+          const x = `xz_${s.name.slice(2)}_${t}`;
+          vars[x] = { kind: 'x', recipeId: s.recipe.id, day: s.day, eatDay: t, frozen: true };
+          add(frozen, x, 1);
+          add(coverRows[t]!, x, 1);
+          add(proteinTerms, x, protein / D);
+        }
+        add(frozen, s.f, -1);
+        rows.push({ name: `thaw_${s.name}`, terms: frozen, sense: '<=', rhs: 0 });
+      }
+    }
     for (let t = 0; t < D; t++) {
-      const cover: Terms = new Map();
+      if (coverRows[t]!.size === 0) trivialInfeasible = true;
+      else rows.push({ name: `cover_${m}_${t}`, terms: coverRows[t]!, sense: '=', rhs: n });
       const fresh: Terms = new Map();
       for (const s of ofType) {
         if (s.day > t) continue;
-        add(cover, s.name, s.recipe.servings);
         add(fresh, s.name, s.recipe.servings);
         if (s.f) add(fresh, s.f, -1);
       }
-      if (cover.size === 0) trivialInfeasible = true;
-      else rows.push({ name: `cover_${m}_${t}`, terms: cover, sense: '>=', rhs: n * (t + 1) });
       if (fresh.size > 0) rows.push({ name: `fresh_${m}_${t}`, terms: fresh, sense: '<=', rhs: n * (t + L) });
     }
     for (const s of ofType) {
@@ -397,12 +432,10 @@ export function buildModel(constraints: Constraints, catalog: Catalog): BuiltMod
     if (terms.size > constraints.maxRepeatsPerRecipe) rows.push({ name: `variety_${ri}`, terms, sense: '<=', rhs: constraints.maxRepeatsPerRecipe });
   });
 
-  // 7. Protein (soft, weekly)
+  // 7. Protein (soft, weekly average of portions eaten in the plan)
   vars.s = { kind: 's' };
-  const protein: Terms = new Map();
-  for (const s of slots) add(protein, s.name, (s.recipe.servings * (s.recipe.macrosPerServing.protein ?? 0)) / D);
-  add(protein, 's', 1);
-  rows.push({ name: 'protein', terms: protein, sense: '>=', rhs: constraints.proteinPerDay });
+  add(proteinTerms, 's', 1);
+  rows.push({ name: 'protein', terms: proteinTerms, sense: '>=', rhs: constraints.proteinPerDay });
   objective.set('s', (objective.get('s') ?? 0) + w.protein / 10);
 
   const objText = writeTerms(objective) || '0 s';

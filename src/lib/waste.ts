@@ -158,16 +158,17 @@ export function cookMinutesByDay(batches: readonly Batch[], constraints: Constra
 }
 
 /**
- * Average g/day below target in the model's weekly form (constraint 7):
- * max(0, proteinPerDay − Σ servings·protein / D). Recipes without published protein count 0.
+ * Average g/day below target, counting only portions eaten in the plan (constraint 7):
+ * max(0, proteinPerDay − mean(proteinByDay)). Portions left after the last day add nothing;
+ * recipes without published protein count 0. Equals the model's s at the optimum.
  */
 export function proteinShortfall(batches: readonly Batch[], constraints: Constraints, catalog: Catalog): number {
-  let total = 0;
-  for (const b of batches) {
-    const r = catalog.recipeById.get(b.recipeId);
-    if (r) total += r.servings * (r.macrosPerServing.protein ?? 0);
-  }
-  const s = constraints.proteinPerDay - total / constraints.days;
+  return shortfallFrom(schedule(batches, constraints, catalog).proteinByDay, constraints);
+}
+
+function shortfallFrom(proteinByDay: readonly number[], constraints: Constraints): number {
+  const mean = proteinByDay.reduce((s, x) => s + x, 0) / constraints.days;
+  const s = constraints.proteinPerDay - mean;
   return s > 1e-6 ? s : 0;
 }
 
@@ -202,7 +203,7 @@ export function planFromBatches(batches: Batch[], constraints: Constraints, cata
     wastePacks: sumWaste(l, catalog),
     reuseRate: reuseRate(batches, constraints, catalog),
     proteinByDay: sched.proteinByDay,
-    proteinShortfall: proteinShortfall(batches, constraints, catalog),
+    proteinShortfall: shortfallFrom(sched.proteinByDay, constraints),
     status: extras.status,
     solveMs: extras.solveMs,
   };
