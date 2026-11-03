@@ -155,3 +155,47 @@ For each batch, generate up to 3 reasons from the model (no LLM):
 - `data/recipes.json` and `data/ingredients.json` are the only recipe data. Never invent recipes, macros or URLs.
 - Recipes with `protein: null` are excluded from auto-solve but can be pinned (show "macros not published").
 - Shelf lives and pack sizes are estimates (`estimated: true`); show them as editable assumptions, not facts.
+
+## 11. Ingredient map & lenses (`src/lib/graph.ts`, `src/lib/lenses.ts`)
+Pure functions only; the UI maps their output to tokens. No React or d3 imports in these files (d3-force is used only in the map component).
+
+**Graph.**
+- `buildGraph(recipes, ingredients, { includeSingleUse })` → `{ nodes, edges }`.
+  - Nodes: every recipe; every **non-staple** ingredient. Ingredients used by exactly one recipe are omitted unless `includeSingleUse` (default false).
+  - Edge `recipe → ingredient` for each core/optional use; `weight = qty / packSize` (fraction of a pack).
+- `degree(ingredientId)` = number of distinct recipes using it.
+- `neighbours(nodeId)` = directly connected node ids.
+- `shared(recipeA, recipeB)` = non-staple ingredient ids used by both.
+
+**Families (clusters).** Project to a recipe–recipe graph where edge weight = number of shared **perishable** ingredients (`shelfLifeDays ≤ 14`). Run **label propagation**, deterministic: nodes visited in id order, ties broken by smallest label, max 20 iterations. Name each family by its top 2 perishables by within-family degree ("cilantro–lime"). Families of size 1 are labelled "standalone".
+
+**Absorbers.** `absorbers(ingredientId, plan, constraints)` = feasible (recipe, day) pairs not in the plan that use the ingredient, ranked by Δ`wastePacks` from `preview.ts` (most negative first). The Waste lens shows the top one.
+
+**Lenses.** `lens(name, ctx)` returns:
+```ts
+interface LensResult {
+  nodes: Record<string, { emphasis: 'high' | 'normal' | 'dim'; size?: number; label?: string; badge?: string; family?: string }>;
+  ghostEdges?: { from: string; to: string; label: string }[];  // Waste lens suggestions
+  sentence: string;   // the one-line key insight
+  list: string[];     // text equivalent of everything the lens shows
+}
+```
+| Lens | Rule |
+|---|---|
+| `week` | Planned recipes and the ingredients they use: `high`; everything else `dim`. Sentence: batches count and shared-ingredient count. |
+| `hubs` | Ingredient `size` ∝ degree; top 5 perishables by degree get labels. Recipes `normal`. |
+| `freshness` | Ingredient badge = days left (pantry `daysLeft`, else `shelfLifeDays` from shopping day). ≤ 2 days: `high`; recipes using those: `high`. |
+| `waste` | Ingredients with `leftover > 0` in the current plan: `high` with badge "+0.6 pack"; one ghost edge to the best absorber, labelled with its Δ. |
+| `protein` | Recipe `size` ∝ protein per serving; < 30 g: `dim`; `protein == null`: `dim` + badge "n/a". |
+| `families` | `family` set on every recipe node; sentence names the family the current plan mostly sits in. |
+
+**Layout.** Run d3-force for a fixed 300 ticks with nodes seeded deterministically (by id hash), then render static. No continuous animation; same data → same picture.
+
+**Tests (add to §9).**
+- Staples never appear as nodes; single-use ingredients appear only with `includeSingleUse`.
+- `degree` matches a hand count for garlic and lemon in the fixture data.
+- `shared(a, b)` is symmetric.
+- Label propagation is deterministic (same input → same families, twice).
+- Every perishable used by ≥ 2 recipes in one family keeps them in the same family in a 3-recipe fixture.
+- The Waste lens's ghost edge points to the absorber with the most negative Δ, and Δ equals `preview.ts` output.
+- Every lens returns a non-empty `sentence` and a `list` that mentions every `high` node.

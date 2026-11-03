@@ -227,3 +227,36 @@ Dark mode follows the OS by default. Setting `data-theme="light"` or `"dark"` on
 - [ ] Empty, loading and error states present
 - [ ] Checked at 375px, in light and dark, and with reduced motion
 - [ ] Cook Mode text ≥ 17px, step text 28px
+
+## 11. Ingredient map & lenses (addendum)
+
+Extends the shared-ingredient graph in §5. Same tokens, same three stroke widths.
+
+**Placement.** Plan tab, under a **Week / Map** segmented toggle (styled like the tab bar: active = primary fill, 3px ink, `--shadow-tab`). Map height fills the space between the toggle and the bottom dock. Kitchen rows get a "See on map →" text link.
+
+**Lens chips.** A horizontally wrapping row above the map (no horizontal scroll). Each chip is 48px tall, 15px / 600 Public Sans.
+- Inactive: `--color-bg` fill, 2px ink outline (`--stroke-tag`), no shadow.
+- Active: `--color-primary` fill, `--color-on-primary` text, 3px ink outline, `--shadow-tab`, `aria-pressed="true"`.
+- One active at a time; default lens is **This week** once a plan exists, otherwise **Hubs**.
+
+**Key sentence.** Directly under the chips: the lens `sentence` in Playfair Display 20px / 700 (h2 style), one line, wraps if needed. This is the insight; the map is the evidence.
+
+**Node states** (on top of §5's base styles):
+| State | Style |
+|---|---|
+| `high` | Full opacity, normal stroke |
+| `normal` | Full opacity |
+| `dim` | Opacity 0.25, labels hidden |
+| Selected | 3px ink stroke + 2px offset ring in `--color-ring`; neighbours stay `high`, all else `dim` |
+| Badge (days left, "+0.6 pack", "n/a") | Warn-tag style from §5 chips: warn fill/text, 2px ink, radius 4, 12px / 700, placed top-right of the node |
+| Size scaling (hubs, protein) | Radius 8–22px, applied with `transform: scale()` so it animates |
+| Family | Convex hull behind the family's nodes: `--color-surface-2` fill, 1px rule outline; family name as a 12px uppercase label at the hull's top |
+| Ghost edge (waste lens) | 2px dashed `--color-primary`, with a label pill: bg fill, 2px ink, "−0.6 packs" |
+
+Colour never carries meaning alone: badges carry words, sizes are backed by the text list.
+
+**Bottom sheet (tap a node).** Reading layer: h3 title, metadata line (recipe: minutes · protein/serving; ingredient: shelf life · pack size · "estimate" note), shared-with list, and one primary action: "Add to plan" (shows the Steer Δ preview before confirming) or "Show recipes using this".
+
+**Text list.** Below the map, the lens `list` as plain rows with 1px rules. Screen readers get the list; the SVG keeps `role="img"` with the sentence as its `aria-label`.
+
+**Labels on a 375px screen.** Only hubs (top 5), the selected node and its neighbours show labels. Pinch to zoom, double-tap to reset. Lens changes animate opacity and transform over `--duration-base`; reduced motion = instant.

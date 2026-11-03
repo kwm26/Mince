@@ -33,8 +33,8 @@ Favor clarity, polish and a working optimizer over breadth.
 ```
 data/            ingredients.json, recipes.json
 src/types.ts     types mirroring docs/data-model.md
-src/lib/         model.ts (builds the MILP), solve.worker.ts, greedy.ts, waste.ts, schedule.ts, preview.ts, explain.ts (+ *.test.ts)
-src/screens/     Kitchen.tsx, Plan.tsx (Pin → Solve → Steer), Cook.tsx
+src/lib/         model.ts (builds the MILP), solve.worker.ts, greedy.ts, waste.ts, schedule.ts, preview.ts, explain.ts, graph.ts, lenses.ts (+ *.test.ts)
+src/screens/     Kitchen.tsx, Plan.tsx (Pin → Solve → Steer; Week / Map toggle with lenses), Cook.tsx
 src/components/  small, presentational
 src/styles/      tokens.css, base.css
 ```

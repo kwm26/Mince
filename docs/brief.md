@@ -23,8 +23,24 @@ Recipes come one at a time, but ingredients come in packs, and each pack has an 
 
 ## Screens (match the design spec's tab bar)
 - **Kitchen:** what I have, with use-soon tags; recipes ranked by overlap with my kitchen.
-- **Plan:** Pin → Solve → Steer; week day rows; stats; shared-ingredient graph.
+- **Plan:** Pin → Solve → Steer; **Week / Map** toggle (week day rows + stats, or the ingredient map with lenses).
 - **Cook:** focus mode with steps, timers, wake lock.
+
+## Ingredient map & lenses (the insight layer)
+One node map of my data: **recipes** and **ingredients** as nodes, "uses" as edges. Instead of separate charts, every insight is a **lens**: the same map, recoloured and resized to answer one question, with a one-line key sentence.
+
+| Lens | Question | Key sentence example |
+|---|---|---|
+| This week | How does my plan connect? | "Your 6 batches share 9 ingredients" |
+| Hubs | What's safe to buy? | "Garlic, lemon and broccoli link 6+ recipes" |
+| Freshness | What's about to turn? | "Spinach expires in 2 days; 3 recipes can use it" |
+| Waste | Where does my leftover go? | "Add the frittata Thu → −0.6 packs" |
+| Protein | What feeds my goal? | "14 recipes hit ≥ 30 g per serving" |
+| Families | What should I cook together? | "Cilantro–lime family: plan inside it to waste least" |
+
+Interactions: tap a node to focus it and its neighbours (facts in a bottom sheet); tap two recipes to see what they share; add a recipe to the plan from the map with the same Δ preview as Steer. Every lens's findings are also listed as text below the map, so the graph is never the only way to get the information.
+
+**Where it lives:** the Plan tab has a **Week / Map** toggle; Kitchen links into the map ("See on map").
 
 ## Success metric
 **Ingredient reuse rate:** share of purchased perishables used in ≥ 2 planned batches. Supporting metrics: packs wasted per week, and days the protein target is hit.
@@ -39,7 +55,8 @@ Accounts, sync, a backend, prices or cost optimization, recipe import or scrapin
 ## Cut list (cut from the bottom first if behind)
 1. Optimizer + explanations ← never cut
 2. Steer preview (Δ before commit) ← never cut
-3. Cook mode timers
-4. Greedy-vs-optimal comparison view
-5. Shared-ingredient graph (day rows already list shared items)
-6. Dark mode polish
+3. Ingredient map with **This week, Hubs and Waste** lenses ← core insight layer
+4. Remaining lenses: Freshness, Protein, Families
+5. Cook mode timers
+6. Greedy-vs-optimal comparison view
+7. Dark mode polish
