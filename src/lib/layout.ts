@@ -5,15 +5,9 @@
 
 import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3-force';
 import type { SimulationLinkDatum, SimulationNodeDatum } from 'd3-force';
-import { degree, type Graph } from './graph';
+import { BASE_RADIUS, MAX_RADIUS, degree, scaleRadius, type Graph } from './graph';
 
 export const LAYOUT_TICKS = 300;
-
-/** Base radii from design-spec §5. Lens sizes scale these with transform: scale(). */
-export const BASE_RADIUS = { recipe: 17, shared: 10, single: 8 } as const;
-/** Lens size range (design-spec §11). */
-export const MIN_RADIUS = 8;
-export const MAX_RADIUS = 22;
 
 export interface Point { x: number; y: number; }
 
@@ -26,13 +20,6 @@ export interface Layout {
 export interface LayoutOptions {
   width?: number;                       // default 360: about 1 map unit per CSS px on a 375px phone
   height?: number;                      // default 480
-}
-
-/** Linear radius in [8, 22] for a value in [min, max]; the midpoint when min = max. */
-export function scaleRadius(value: number, min: number, max: number): number {
-  if (max <= min) return (MIN_RADIUS + MAX_RADIUS) / 2;
-  const t = Math.min(1, Math.max(0, (value - min) / (max - min)));
-  return MIN_RADIUS + t * (MAX_RADIUS - MIN_RADIUS);
 }
 
 /** FNV-1a, 32-bit: a stable hash of a node id. */

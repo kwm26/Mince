@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { catalog } from './data';
-import { buildGraph } from './graph';
-import { computeLayout, convexHull, hashId, paddedHull, scaleRadius } from './layout';
+import { buildGraph, scaleRadius } from './graph';
+import { computeLayout, convexHull, hashId, paddedHull } from './layout';
 
 describe('computeLayout', () => {
   const graph = buildGraph(catalog, { includeSingleUse: true });

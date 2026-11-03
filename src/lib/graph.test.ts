@@ -127,5 +127,7 @@ describe('names', () => {
     expect(shortIngredientName('Cherry/grape tomatoes')).toBe('cherry tomatoes');
     expect(shortIngredientName('Chicken breast, boneless skinless')).toBe('chicken breast');
     expect(shortIngredientName('Mushrooms (baby bella/white)')).toBe('mushrooms');
+    expect(shortIngredientName('Greek yogurt, plain')).toBe('Greek yogurt');
+    expect(shortIngredientName('Pico de gallo / salsa')).toBe('pico de gallo');
   });
 });

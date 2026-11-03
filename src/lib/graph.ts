@@ -130,10 +130,17 @@ export interface Families {
   byRecipe: Record<string, string>;     // recipe id → family name
 }
 
-/** Short, lower-case ingredient name for family names: "Baby spinach" → "baby spinach", "Cherry/grape tomatoes" → "cherry tomatoes". */
+const PROPER_FIRST_WORDS = new Set(['greek', 'kalamata', 'puy']);
+
+/**
+ * Short ingredient name for use mid-sentence: "Baby spinach" → "baby spinach",
+ * "Cherry/grape tomatoes" → "cherry tomatoes", "Greek yogurt, plain" → "Greek yogurt".
+ */
 export function shortIngredientName(name: string): string {
-  const base = name.split(',')[0]?.replace(/\s*\(.*?\)/g, '') ?? name;
-  return base.replace(/(\w+)\/\w+/g, '$1').trim().toLowerCase();
+  const base = (name.split(',')[0] ?? name).replace(/\s*\(.*?\)/g, '').split(' / ')[0] ?? name;
+  const lower = base.replace(/(\w+)\/\w+/g, '$1').trim().toLowerCase();
+  const first = lower.split(' ')[0] ?? '';
+  return PROPER_FIRST_WORDS.has(first) ? lower.charAt(0).toUpperCase() + lower.slice(1) : lower;
 }
 
 /**
@@ -254,6 +261,21 @@ export function families(graph: Graph, catalog: Catalog): Families {
   const byRecipe: Record<string, string> = {};
   for (const f of list) for (const r of f.recipes) byRecipe[r] = f.name;
   return { families: list, byRecipe };
+}
+
+// ── Node sizes ──
+
+/** Base radii from design-spec §5. Lens sizes scale these with transform: scale(). */
+export const BASE_RADIUS = { recipe: 17, shared: 10, single: 8 } as const;
+/** Lens size range (design-spec §11). */
+export const MIN_RADIUS = 8;
+export const MAX_RADIUS = 22;
+
+/** Linear radius in [8, 22] for a value in [min, max]; the midpoint when min = max. */
+export function scaleRadius(value: number, min: number, max: number): number {
+  if (max <= min) return (MIN_RADIUS + MAX_RADIUS) / 2;
+  const t = Math.min(1, Math.max(0, (value - min) / (max - min)));
+  return MIN_RADIUS + t * (MAX_RADIUS - MIN_RADIUS);
 }
 
 // ── Display names ──
