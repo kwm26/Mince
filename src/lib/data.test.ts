@@ -13,6 +13,7 @@ import {
   weeks,
   withOverrides,
 } from './data';
+import { isFeasibleSlot } from './model';
 
 const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const CATEGORIES = ['protein', 'produce', 'herb', 'dairy', 'grain', 'pantry', 'spice', 'fruit', 'other'];
@@ -30,15 +31,6 @@ function recipe(id: string): Recipe {
   return r;
 }
 
-// Mask rule from data-model §3 (core, non-staple ingredients, "good through").
-// Replace with the mask from model.ts once it exists.
-function passesMask(r: Recipe, day: number, frozenLifeDays: number): boolean {
-  return r.ingredients.every((ri) => {
-    const i = ingredient(ri.ingredientId);
-    if (ri.role !== 'core' || i.staple) return true;
-    return (i.freezable ? frozenLifeDays : i.shelfLifeDays) >= day;
-  });
-}
 
 describe('ingredients.json', () => {
   it('has unique kebab-case ids', () => {
@@ -170,7 +162,7 @@ describe('example weeks (data-model §13)', () => {
       const minutes = Array<number>(defaults.days).fill(0);
       for (const p of w.pins) {
         const r = recipe(p.recipeId);
-        expect(passesMask(r, p.day, defaults.frozenLifeDays), `${w.id}: ${r.id} on day ${p.day}`).toBe(true);
+        expect(isFeasibleSlot(r, p.day, defaults, catalog), `${w.id}: ${r.id} on day ${p.day}`).toBe(true);
         minutes[p.day] = (minutes[p.day] ?? 0) + r.minutes;
       }
       minutes.forEach((m, d) => expect(m, `${w.id}: day ${d}`).toBeLessThanOrEqual(w.maxCookMinutes[d] ?? 0));
