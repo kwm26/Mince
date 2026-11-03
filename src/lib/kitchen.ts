@@ -1,6 +1,7 @@
 // Kitchen helpers (data-model §12). Pure: no React, no storage.
 
-import type { Ingredient, PantryItem } from '../types';
+import type { Ingredient, PantryItem, Recipe } from '../types';
+import { ingredientById } from './data';
 import { daysBetween } from './dates';
 
 /** Perishable per data-model §3–4: not a staple, and lasts 14 days or less. */
@@ -33,4 +34,50 @@ export function formatAmount(amount: number, unit: string): string {
   if (unit === 'inch') return `${n} ${amount === 1 ? 'inch' : 'inches'}`;
   if (COUNT_UNITS.has(unit) && amount > 1) return `${n} ${unit}s`;
   return `${n} ${unit}`;
+}
+
+export interface RankedRecipe {
+  recipe: Recipe;
+  overlap: number;                // distinct perishable pantry ingredients it uses (core or optional)
+  usesIds: string[];              // those ingredient ids, soonest to turn first
+  soonestDaysLeft: number | null; // among those ingredients; null when overlap is 0
+}
+
+/**
+ * Recipes ranked by how many of your perishables they use (data-model §12): overlap descending,
+ * then the soonest days left among those ingredients, then protein per serving descending.
+ * Overlap 0 comes last. Pass the catalog's ingredient map so the user's shelf-life overrides count.
+ */
+export function rankByOverlap(
+  recipes: readonly Recipe[],
+  pantry: readonly PantryItem[],
+  date: string,
+  ingredients: ReadonlyMap<string, Ingredient> = ingredientById,
+): RankedRecipe[] {
+  const left = new Map<string, number>();
+  for (const item of pantry) {
+    const ingredient = ingredients.get(item.ingredientId);
+    if (!ingredient || !isPerishable(ingredient)) continue;
+    const d = daysLeft(item, date);
+    left.set(item.ingredientId, Math.min(d, left.get(item.ingredientId) ?? Infinity));
+  }
+
+  const ranked = recipes.map((recipe) => {
+    const ids = new Set<string>();
+    for (const ri of recipe.ingredients) {
+      if (ri.role !== 'garnish' && left.has(ri.ingredientId)) ids.add(ri.ingredientId);
+    }
+    const usesIds = [...ids].sort((a, b) => left.get(a)! - left.get(b)! || a.localeCompare(b));
+    const first = usesIds[0];
+    return { recipe, overlap: usesIds.length, usesIds, soonestDaysLeft: first === undefined ? null : left.get(first)! };
+  });
+
+  const protein = (r: Recipe) => r.macrosPerServing.protein ?? -Infinity;
+  return ranked.sort(
+    (a, b) =>
+      b.overlap - a.overlap ||
+      (a.soonestDaysLeft ?? Infinity) - (b.soonestDaysLeft ?? Infinity) ||
+      protein(b.recipe) - protein(a.recipe) ||
+      a.recipe.title.localeCompare(b.recipe.title),
+  );
 }

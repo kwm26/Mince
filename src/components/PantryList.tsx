@@ -1,4 +1,5 @@
-import { EmptyState } from './EmptyState';
+import type { ReactNode } from 'react';
+import { ChevronRightIcon } from './icons';
 import { UseSoonTag } from './UseSoonTag';
 
 export interface PantryRow {
@@ -10,22 +11,40 @@ export interface PantryRow {
   useSoon: boolean;
 }
 
+interface Props {
+  rows: PantryRow[];
+  onSelect?: (id: string) => void;   // makes each row a 48px button that opens the item
+  empty?: ReactNode;
+}
+
 /** What's on hand, soonest to turn first. Rows are reading layer; only use-soon items get a tag. */
-export function PantryList({ rows }: { rows: PantryRow[] }) {
-  if (rows.length === 0) {
-    return <EmptyState title="Nothing on hand yet">This fridge is empty.</EmptyState>;
-  }
+export function PantryList({ rows, onSelect, empty }: Props) {
+  if (rows.length === 0) return <>{empty ?? <p className="muted">Nothing on hand yet.</p>}</>;
   return (
     <ul className="pantry-list">
-      {rows.map((row) => (
-        <li key={row.id} className="pantry-row">
-          <span className="pantry-name">{row.name}</span>
-          <span className="pantry-amount">{row.amount}</span>
-          <span className="pantry-left">
-            {row.useSoon ? <UseSoonTag>{row.daysLeftLabel}</UseSoonTag> : <span className="muted">{row.daysLeftLabel}</span>}
-          </span>
-        </li>
-      ))}
+      {rows.map((row) => {
+        const content = (
+          <>
+            <span className="pantry-name">{row.name}</span>
+            <span className="pantry-amount">{row.amount}</span>
+            <span className="pantry-left">
+              {row.useSoon ? <UseSoonTag>{row.daysLeftLabel}</UseSoonTag> : <span className="muted">{row.daysLeftLabel}</span>}
+            </span>
+          </>
+        );
+        return (
+          <li key={row.id}>
+            {onSelect ? (
+              <button type="button" className="pantry-row pantry-row-button" onClick={() => onSelect(row.id)} aria-label={`${row.name}, ${row.amount}, ${row.daysLeftLabel} left. Edit`}>
+                {content}
+                <ChevronRightIcon size={18} />
+              </button>
+            ) : (
+              <div className="pantry-row">{content}</div>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }

@@ -68,3 +68,56 @@ p {
   outline: var(--stroke-control) solid var(--color-ring);
   outline-offset: 2px;
 }
+
+/* Headings that receive focus programmatically (tabindex="-1") still show where focus went. */
+[tabindex='-1']:focus-visible {
+  outline-offset: 4px;
+}
+
+[tabindex='-1'] {
+  scroll-margin-top: var(--space-6);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 50;
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--weight-strong);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border: var(--stroke-control) solid var(--color-ink);
+  border-radius: var(--radius-control);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
