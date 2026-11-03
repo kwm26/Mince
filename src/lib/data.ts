@@ -15,14 +15,6 @@ export const weeks = weeksJson as WeekSeed[];
 export const ingredientById: ReadonlyMap<string, Ingredient> = new Map(ingredients.map((i) => [i.id, i]));
 export const recipeById: ReadonlyMap<string, Recipe> = new Map(recipes.map((r) => [r.id, r]));
 
-/** Local calendar date as YYYY-MM-DD. */
-export function isoDate(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
 export function defaultConstraints(startDate: string): Constraints {
   const days = 7;
   return {

@@ -6,7 +6,6 @@ import {
   fridgeToPantry,
   ingredientById,
   ingredients,
-  isoDate,
   recipeById,
   recipes,
   weekToConstraints,
@@ -229,9 +228,5 @@ describe('loading', () => {
 
   it('rejects a week with an unknown fridge', () => {
     expect(() => weekToConstraints({ ...weeks[0]!, fridgeId: 'nope' }, TODAY)).toThrow(/unknown fridge/);
-  });
-
-  it('formats local dates as YYYY-MM-DD', () => {
-    expect(isoDate(new Date(2026, 0, 5))).toBe('2026-01-05');
   });
 });

@@ -49,6 +49,7 @@
   --text-label: 0.75rem;        /* 12px, uppercase + tracked only */
   --text-small: 0.8125rem;      /* 13px, metadata */
   --text-body: 1rem;            /* 16px */
+  --text-chip: 0.9375rem;       /* 15px, on-hand and lens chip labels */
   --text-body-lg: 1.0625rem;    /* 17px, buttons + Cook Mode minimum */
   --text-h3: 1.0625rem;         /* 17px, recipe titles */
   --text-h2: 1.25rem;           /* 20px, section heads */
