@@ -12,6 +12,7 @@ import {
   planCookMinutes,
   plural,
   PROTEIN_WORDS,
+  sentence,
   shortDay,
   signed,
   WASTE_WORDS,
@@ -33,6 +34,12 @@ describe('signed deltas', () => {
     expect(deltaPhrase(0.01, WASTE_WORDS)).toBe('No change in waste');
     expect(deltaPhrase(51, PROTEIN_WORDS)).toBe('+51 g, more protein');
     expect(deltaPhrase(-8, COOK_WORDS)).toBe('−8 min, less cooking');
+  });
+
+  it('ends solver messages as sentences', () => {
+    expect(sentence('Wed: pinned meals need 45 min, limit is 20')).toBe('Wed: pinned meals need 45 min, limit is 20.');
+    expect(sentence('Already ends.')).toBe('Already ends.');
+    expect(sentence('  ')).toBe('');
   });
 
   it('lists only days that changed by at least half a unit', () => {

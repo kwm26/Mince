@@ -169,13 +169,12 @@ function CookMode({ recipe, session, onStep, onExit }: CookModeProps) {
   const headingRef = useRef<HTMLParagraphElement>(null);
 
   // Move focus to the new step so screen readers read it and keyboard users stay in place.
-  const first = useRef(true);
+  const shownStep = useRef(stepIndex);
   useEffect(() => {
-    if (first.current) {
-      first.current = false;
-      return;
-    }
-    headingRef.current?.focus();
+    if (shownStep.current === stepIndex) return;
+    shownStep.current = stepIndex;
+    headingRef.current?.focus({ preventScroll: true });
+    window.scrollTo(0, 0);
   }, [stepIndex]);
 
   const dayName = session.day !== null ? weekdayName(c.startDate, session.day) : weekdayName(today, 0);

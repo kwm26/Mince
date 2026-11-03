@@ -16,7 +16,7 @@ import { UseSoonTag } from '../components/UseSoonTag';
 import type { PlanEngine } from '../engine';
 import { shortName } from '../lib/cook';
 import { dayLabel, daysBetween } from '../lib/dates';
-import { average, longDate, packs, percent, plural, shortDay, weekdayName } from '../lib/format';
+import { average, longDate, packs, percent, plural, sentence, shortDay, weekdayName } from '../lib/format';
 import { formatAmount, isPerishable } from '../lib/kitchen';
 import { levelWeight, levelWord, weightLevel, type Level } from '../lib/priorities';
 import { inputsKey, PROTEIN_MAX, PROTEIN_MIN, useStore } from '../state';
@@ -92,7 +92,8 @@ export function Plan({ engine, mapSlot, view: viewProp, onViewChange, mapFocus =
   const runSolve = () => void solve(c);
   const editPins = () => {
     setView('week');
-    requestAnimationFrame(() => {
+    // After React commits the Week view (rAF would stall in a background tab).
+    window.setTimeout(() => {
       pinsHeading.current?.scrollIntoView({ block: 'start' });
       pinsHeading.current?.focus({ preventScroll: true });
     });
@@ -221,14 +222,14 @@ function PlanStatus({ loading, plan, error, onRetry, onEditPins, onPin, onExampl
   if (error && !loading) {
     return (
       <EmptyState title="Couldn't plan the week" tone="error" action={<Button onClick={onRetry}>Retry</Button>}>
-        {`${error}. Your pins, limits and kitchen are saved.`}
+        {`${sentence(error)} Your pins, limits and kitchen are saved.`}
       </EmptyState>
     );
   }
   if (plan?.status === 'infeasible') {
     return (
       <EmptyState title="These pins don't fit" action={<Button onClick={onEditPins}>Edit pins</Button>}>
-        {`${plan.infeasibleReason ?? 'These pins leave no way to cover every meal.'} Unpin a meal, move it to a longer day, or raise that day's cooking limit.`}
+        {`${sentence(plan.infeasibleReason ?? 'These pins leave no way to cover every meal')} Unpin a meal, move it to a longer day, or raise that day's cooking limit.`}
       </EmptyState>
     );
   }

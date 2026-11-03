@@ -74,6 +74,10 @@ p {
   outline-offset: 4px;
 }
 
+[tabindex='-1'] {
+  scroll-margin-top: var(--space-6);
+}
+
 button,
 input,
 select,

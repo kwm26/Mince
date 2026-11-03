@@ -699,6 +699,10 @@
   gap: var(--space-2);
 }
 
+.batch + .batch {
+  margin-top: var(--space-3);
+}
+
 .batch-meta {
   font-size: var(--text-small);
   color: var(--color-text-muted);
@@ -941,9 +945,11 @@
   border: 0;
 }
 
+/* A floated legend is ordinary content, so it never sits on the fieldset's top rule. */
 .fieldset > legend {
+  float: left;
+  width: 100%;
   padding: 0;
-  margin-bottom: var(--space-3);
 }
 
 .estimates {
@@ -1152,7 +1158,7 @@
 
 .sticky-actions {
   position: sticky;
-  bottom: 0;
+  bottom: calc(-1 * var(--space-5)); /* the sheet body's bottom padding */
   margin: 0 calc(-1 * var(--space-5)) calc(-1 * var(--space-5));
   padding: var(--space-3) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
   background: var(--color-bg);

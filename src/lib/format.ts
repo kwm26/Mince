@@ -51,6 +51,13 @@ export function changedDays(deltaByDay: readonly number[]): number[] {
   return out;
 }
 
+/** End a solver message as a sentence: "limit is 20" → "limit is 20." (keeps existing punctuation). */
+export function sentence(text: string): string {
+  const t = text.trim();
+  if (t === '') return t;
+  return /[.!?]$/.test(t) ? t : `${t}.`;
+}
+
 /** "67%" for a 0–1 rate. */
 export function percent(rate: number): string {
   return `${Math.round(rate * 100)}%`;

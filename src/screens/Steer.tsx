@@ -2,7 +2,7 @@
 // cost before committing (data-model §7). Apply pins the edit, re-solves the
 // rest of the week, then shows the final Δ against the plan before the edit.
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { BottomSheet } from '../components/BottomSheet';
 import { Button } from '../components/Button';
 import { AlertIcon } from '../components/icons';
@@ -14,6 +14,7 @@ import {
   deltaPhrase,
   planCookMinutes,
   PROTEIN_WORDS,
+  sentence,
   shortDay,
   signed,
   WASTE_WORDS,
@@ -177,14 +178,14 @@ function SteerBody({ request, engine, solve, onClose }: { request: SteerRequest;
           {!preview.ok ? (
             <p className="warn-line">
               <AlertIcon size={18} />
-              Couldn't preview this change: {preview.message}.
+              Couldn't preview this change: {sentence(preview.message)}
             </p>
           ) : (
             <>
               {!preview.value.feasible && (
                 <p className="warn-line">
                   <AlertIcon size={18} />
-                  This doesn't fit: {preview.value.reason ?? 'it breaks a limit or a pin'}. Pick another option.
+                  This doesn't fit: {sentence(preview.value.reason ?? 'it breaks a limit or a pin')} Pick another option.
                 </p>
               )}
               <DeltaRows
@@ -226,13 +227,18 @@ function SteerBody({ request, engine, solve, onClose }: { request: SteerRequest;
 
 function Resolved({ outcome, plan0, startDate }: { outcome: Outcome; plan0: PlanResult; startDate: string }) {
   const { catalog } = useStore();
+  const ref = useRef<HTMLElement>(null);
+  // The result lands below the preview; bring it into view.
+  useEffect(() => {
+    ref.current?.scrollIntoView({ block: 'nearest' });
+  }, []);
   if (outcome.kind === 'error') {
     return (
-      <section className="resolved" role="alert">
+      <section className="resolved" role="alert" ref={ref}>
         <h3>Couldn't re-solve</h3>
         <p className="warn-line">
           <AlertIcon size={18} />
-          {outcome.message}. Your change is saved; tap Plan again to retry, or Undo.
+          {sentence(outcome.message)} Your change is saved; tap Plan again to retry, or Undo.
         </p>
       </section>
     );
@@ -240,16 +246,16 @@ function Resolved({ outcome, plan0, startDate }: { outcome: Outcome; plan0: Plan
   const p = outcome.plan;
   if (p.status === 'infeasible') {
     return (
-      <section className="resolved" role="alert">
+      <section className="resolved" role="alert" ref={ref}>
         <h3>Re-solved: these pins don't fit</h3>
-        <p className="muted">{p.infeasibleReason ?? 'These pins leave no way to cover every meal.'} Undo, or change a pin under Pins & limits.</p>
+        <p className="muted">{sentence(p.infeasibleReason ?? 'These pins leave no way to cover every meal')} Undo, or change a pin under Pins & limits.</p>
       </section>
     );
   }
   const days = Math.max(p.proteinByDay.length, plan0.proteinByDay.length);
   const proteinByDay = Array.from({ length: days }, (_, d) => (p.proteinByDay[d] ?? 0) - (plan0.proteinByDay[d] ?? 0));
   return (
-    <section className="resolved" aria-live="polite" aria-labelledby="resolved-title">
+    <section className="resolved" aria-live="polite" aria-labelledby="resolved-title" ref={ref}>
       <h3 id="resolved-title">Re-solved:</h3>
       <DeltaRows
         startDate={startDate}
@@ -268,7 +274,7 @@ interface DeltaRowsProps { startDate: string; waste: number; proteinByDay: numbe
 export function DeltaRows({ startDate, waste, proteinByDay, cookMinutes }: DeltaRowsProps) {
   const changed = changedDays(proteinByDay);
   const total = proteinByDay.reduce((a, b) => a + b, 0);
-  const perDay = changed.map((d) => `${shortDay(startDate, d)} ${signed(proteinByDay[d] ?? 0)} g`).join(', ');
+  const perDay = changed.map((d) => `${shortDay(startDate, d)} ${signed(proteinByDay[d] ?? 0)} g`).join(', ');
   const proteinWords =
     changed.length === 0
       ? 'No change in protein'
