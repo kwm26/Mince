@@ -144,7 +144,7 @@ Solver: `highs` (HiGHS compiled to WebAssembly, MILP), run in a Web Worker, with
 6. **Variety:** for each recipe *r*, `Σ_d y[r,d] ≤ maxRepeatsPerRecipe`.
 7. **Protein (soft, weekly form for tractability):** `Σ_{r,d} servings_r · protein_r · y[r,d] / D + s ≥ proteinPerDay`. Per-day protein is reported after solving (§5).
 
-**Infeasible reasons.** Before solving, check each pin on its own and report the first failure in `infeasibleReason`: "Frittata on Sun: spinach is only good through Sat" (mask), "Mon: pinned meals need 75 min, limit is 60" (time), "Frittata makes 6 portions; 3 can be eaten fresh and it doesn't freeze well" (constraint 4), "Pinned 3 times; the limit is 2" (variety). If every pin passes alone but the solver still reports infeasible: "These pins leave no way to cover every meal." Protein never makes a plan infeasible; a shortfall is reported in `proteinShortfall` ("12 g/day short of 150 g").
+**Infeasible reasons.** Before solving, check each pin on its own and report the first failure in `infeasibleReason`: "Fajita bowls on Sat: guacamole is only good through Thu" (mask), "Mon: pinned meals need 75 min, limit is 60" (time), "Frittata makes 6 portions; 3 can be eaten fresh and it doesn't freeze well" (constraint 4), "Pinned 3 times; the limit is 2" (variety). If every pin passes alone but the solver still reports infeasible: "These pins leave no way to cover every meal." Protein never makes a plan infeasible; a shortfall is reported in `proteinShortfall` ("12 g/day short of 150 g").
 
 **Objective (minimize).**
 ```
@@ -166,7 +166,7 @@ Roles: `need` counts **core** and **unexpired optional** uses (`qty_{r,i,d}` fro
 ## 5. Post-solve schedule (`src/lib/schedule.ts`)
 Assign portions to days per meal type: **fresh portions first**, first-in-first-out (oldest batch first); frozen portions fill the days fresh portions can't. The result is `meals`.
 - **Freezing raw items:** for any freezable ingredient used on a day > `shelfLifeDays` (§3 "good through"), set `freeze: true` on its shopping entry ("freeze on shopping day") and add a note on the day before cooking: "move the chicken to the fridge tonight".
-- **Frozen cooked portions:** note on the cook day ("freeze 3 portions"), and on the day before each one is eaten ("move 1 portion of frittata to the fridge tonight"). Portions still frozen after day D−1 are listed as "in the freezer", not as waste.
+- **Frozen cooked portions:** note on the cook day ("freeze 3 portions"), and on the day before each one is eaten ("move 1 portion to the fridge tonight"). Portions still frozen after day D−1 are listed as "in the freezer", not as waste.
 
 This gives `proteinByDay` and the day rows. If a fresh portion would be eaten after `day + L − 1`, flag it (constraint 4 should prevent this; the flag catches bugs).
 
@@ -228,7 +228,7 @@ Pure functions only; the UI maps their output to tokens. No React or d3 imports 
 
 **Families (clusters).** Project to a recipe–recipe graph where edge weight = number of shared **perishable** ingredients (`shelfLifeDays ≤ 14`). Run **label propagation**, deterministic: nodes visited in id order, ties broken by smallest label, max 20 iterations. Name each family by its top 2 perishables by within-family degree ("cilantro–lime"). Families of size 1 are labelled "standalone".
 
-**Absorbers.** `absorbers(ingredientId, plan, constraints)` = **swaps**: replace a planned, unpinned batch with a recipe of the same meal type on the same day that uses the ingredient. Adding a batch would break constraint 4, so absorbers never add. Keep only swaps where constraints 2–6 still hold, ranked by Δ`wastePacks` from `preview.ts` (most negative first). The Waste lens shows the top one ("Swap in the tuna salad Thu → −0.6 packs").
+**Absorbers.** `absorbers(ingredientId, plan, constraints)` = **swaps**: replace a planned, unpinned batch with a recipe of the same meal type on the same day that uses the ingredient. Adding a batch would break constraint 4, so absorbers never add. Keep only swaps where constraints 2–6 still hold, ranked by Δ`wastePacks` from `preview.ts` (most negative first). The Waste lens shows the top one ("Swap in the steak fajita bowls Thu → −0.6 packs").
 
 **Lenses.** `lens(name, ctx)` returns:
 ```ts

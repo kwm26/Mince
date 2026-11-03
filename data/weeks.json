@@ -29,12 +29,12 @@
   {
     "id": "favourites",
     "name": "Favourites pinned",
-    "description": "Three pinned favourites and a higher protein target. May show the protein-short warning instead of a plan that hits 170 g.",
+    "description": "Steak fajita bowls on shopping day plus two more favourites, and a higher protein target. May show the protein-short warning instead of a plan that hits 170 g.",
     "fridgeId": "fresh-shop",
     "proteinPerDay": 170,
     "maxCookMinutes": [60, 60, 60, 60, 60, 60, 60],
     "pins": [
-      { "recipeId": "a01-greek-chicken-protein-bowl", "day": 0 },
+      { "recipeId": "a12-steak-fajita-bowls", "day": 0 },
       { "recipeId": "b01-greek-yogurt-parfait-bowl", "day": 1 },
       { "recipeId": "m04-cilantro-lime-salmon-bake", "day": 2 }
     ]

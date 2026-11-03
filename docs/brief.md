@@ -34,7 +34,7 @@ One node map of my data: **recipes** and **ingredients** as nodes, "uses" as edg
 | This week | How does my plan connect? | "Your 6 batches share 9 ingredients" |
 | Hubs | What's safe to buy? | "Garlic, lemon and broccoli link 6+ recipes" |
 | Freshness | What's about to turn? | "Spinach expires in 2 days; 3 recipes can use it" |
-| Waste | Where does my leftover go? | "Swap in the tuna salad Thu → −0.6 packs" |
+| Waste | Where does my leftover go? | "Swap in the steak fajita bowls Thu → −0.6 packs" |
 | Protein | What feeds my goal? | "14 recipes hit ≥ 30 g per serving" |
 | Families | What should I cook together? | "Cilantro–lime family: plan inside it to waste least" |
 
