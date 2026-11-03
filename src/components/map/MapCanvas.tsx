@@ -1,4 +1,5 @@
 import type { PointerEvent as ReactPointerEvent, Ref } from 'react';
+import type { Category } from '../../types';
 
 export type NodeKind = 'recipe' | 'shared' | 'single';
 export type Emphasis = 'high' | 'normal' | 'dim';
@@ -6,6 +7,7 @@ export type Emphasis = 'high' | 'normal' | 'dim';
 export interface CanvasNode {
   id: string;
   kind: NodeKind;
+  category?: Category; // ingredients only: the fill colour (design-spec §2)
   x: number;
   y: number;
   base: number;        // base radius for the kind (design-spec §5)
@@ -117,7 +119,7 @@ export function MapCanvas(props: Props) {
           <g
             key={n.id}
             data-id={n.id}
-            className={`map-node map-node--${n.kind} is-${n.emphasis}${n.selected ? ' is-selected' : ''}`}
+            className={`map-node map-node--${n.kind}${n.category ? ` map-cat--${n.category}` : ''} is-${n.emphasis}${n.selected ? ' is-selected' : ''}`}
             transform={`translate(${n.x} ${n.y})`}
             onClick={() => props.onNodeTap(n.id)}
           >

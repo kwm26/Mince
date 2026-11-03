@@ -1,7 +1,7 @@
 // Short, plain-word names for reasons, notes and infeasible messages.
 // Presentation only: never changes data. Pure: no React, no storage.
 
-import type { Ingredient, Recipe } from '../types';
+import type { Category, Ingredient, Recipe } from '../types';
 import { dayLabel } from './dates';
 
 const PROPER = new Set(['Greek', 'Italian', 'Italian-Style', 'Kalamata', 'Puy', 'Roma', 'Buddha']);
@@ -69,4 +69,24 @@ export function listNames(names: string[], max = 2): string {
 
 export function plural(n: number, one: string, many = `${one}s`): string {
   return `${n} ${n === 1 ? one : many}`;
+}
+
+/** Every ingredient category, in legend order (design-spec §2 "Ingredient categories"). */
+export const CATEGORIES: readonly Category[] = ['protein', 'produce', 'herb', 'fruit', 'dairy', 'grain', 'pantry', 'spice', 'other'];
+
+const CATEGORY_WORD: Record<Category, string> = {
+  protein: 'Protein',
+  produce: 'Produce',
+  herb: 'Herb',
+  fruit: 'Fruit',
+  dairy: 'Dairy',
+  grain: 'Grain',
+  pantry: 'Pantry',
+  spice: 'Spice',
+  other: 'Other',
+};
+
+/** "produce" → "Produce": the word that always accompanies a category colour. */
+export function categoryLabel(category: Category): string {
+  return CATEGORY_WORD[category];
 }

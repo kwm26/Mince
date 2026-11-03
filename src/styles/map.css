@@ -153,10 +153,23 @@
 }
 
 .map-node--recipe .map-dot { fill: var(--color-primary); }
-.map-node--shared .map-dot { fill: var(--color-accent); }
+
+/* Ingredient fill = category (design-spec §2). Shared-ness is size + outline, never colour:
+ * shared nodes are bigger with a 2px ink outline, single-use ones smaller with a 1px muted one. */
+.map-cat--protein { --cat: var(--color-cat-protein); }
+.map-cat--produce { --cat: var(--color-cat-produce); }
+.map-cat--herb { --cat: var(--color-cat-herb); }
+.map-cat--fruit { --cat: var(--color-cat-fruit); }
+.map-cat--dairy { --cat: var(--color-cat-dairy); }
+.map-cat--grain { --cat: var(--color-cat-grain); }
+.map-cat--pantry { --cat: var(--color-cat-pantry); }
+.map-cat--spice { --cat: var(--color-cat-spice); }
+.map-cat--other { --cat: var(--color-cat-other); }
+
+.map-node--shared .map-dot { fill: var(--cat, var(--color-cat-other)); }
 
 .map-node--single .map-dot {
-  fill: var(--color-surface-2);
+  fill: var(--cat, var(--color-cat-other));
   stroke: var(--color-text-muted);
   stroke-width: var(--stroke-rule);
 }
@@ -248,10 +261,11 @@
 
 .map-legend-recipe { fill: var(--color-primary); }
 .map-legend-recipe.is-dim { opacity: 0.25; }
-.map-legend-shared { fill: var(--color-accent); }
+.map-legend-shared { fill: var(--color-bg); }
+.map-legend-swatch .map-legend-cat { fill: var(--cat); }
 
 .map-legend-swatch .map-legend-single {
-  fill: var(--color-surface-2);
+  fill: var(--color-bg);
   stroke: var(--color-text-muted);
   stroke-width: var(--stroke-rule);
 }
