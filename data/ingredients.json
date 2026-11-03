@@ -1,0 +1,1042 @@
+[
+  {
+    "id": "chicken-breast",
+    "name": "Chicken breast, boneless skinless",
+    "category": "protein",
+    "shelfLifeDays": 2,
+    "packUnit": "lb",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "chicken-thigh",
+    "name": "Chicken thighs, boneless skinless",
+    "category": "protein",
+    "shelfLifeDays": 2,
+    "packUnit": "lb",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "ground-turkey",
+    "name": "Ground turkey, lean",
+    "category": "protein",
+    "shelfLifeDays": 2,
+    "packUnit": "lb",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "ground-beef-lean",
+    "name": "Ground beef, 95% lean",
+    "category": "protein",
+    "shelfLifeDays": 2,
+    "packUnit": "lb",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "flank-steak",
+    "name": "Flank steak",
+    "category": "protein",
+    "shelfLifeDays": 3,
+    "packUnit": "lb",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "pork-tenderloin",
+    "name": "Pork tenderloin",
+    "category": "protein",
+    "shelfLifeDays": 3,
+    "packUnit": "lb",
+    "packSize": 1.25,
+    "estimated": true
+  },
+  {
+    "id": "ham-diced",
+    "name": "Ham, diced",
+    "category": "protein",
+    "shelfLifeDays": 7,
+    "packUnit": "cup",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "salmon",
+    "name": "Salmon fillet",
+    "category": "protein",
+    "shelfLifeDays": 2,
+    "packUnit": "lb",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "cod",
+    "name": "Cod fillet",
+    "category": "protein",
+    "shelfLifeDays": 2,
+    "packUnit": "lb",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "shrimp",
+    "name": "Shrimp, raw, peeled",
+    "category": "protein",
+    "shelfLifeDays": 2,
+    "packUnit": "lb",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "tuna-canned",
+    "name": "Tuna, canned albacore",
+    "category": "pantry",
+    "shelfLifeDays": 730,
+    "packUnit": "can",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "tofu-extra-firm",
+    "name": "Tofu, extra-firm",
+    "category": "protein",
+    "shelfLifeDays": 5,
+    "packUnit": "oz",
+    "packSize": 14,
+    "estimated": true
+  },
+  {
+    "id": "puy-lentils-cooked",
+    "name": "Puy lentils, ready-cooked pouch",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "g",
+    "packSize": 250,
+    "estimated": true
+  },
+  {
+    "id": "eggs",
+    "name": "Eggs, large",
+    "category": "dairy",
+    "shelfLifeDays": 28,
+    "packUnit": "each",
+    "packSize": 12,
+    "estimated": true
+  },
+  {
+    "id": "greek-yogurt",
+    "name": "Greek yogurt, plain",
+    "category": "dairy",
+    "shelfLifeDays": 14,
+    "packUnit": "cup",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "cottage-cheese",
+    "name": "Cottage cheese",
+    "category": "dairy",
+    "shelfLifeDays": 10,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "feta",
+    "name": "Feta, crumbled",
+    "category": "dairy",
+    "shelfLifeDays": 7,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "parmesan",
+    "name": "Parmesan, grated",
+    "category": "dairy",
+    "shelfLifeDays": 30,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "cheddar",
+    "name": "Cheddar, shredded",
+    "category": "dairy",
+    "shelfLifeDays": 21,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "mozzarella",
+    "name": "Mozzarella, shredded",
+    "category": "dairy",
+    "shelfLifeDays": 21,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "butter",
+    "name": "Butter, unsalted",
+    "category": "dairy",
+    "shelfLifeDays": 30,
+    "packUnit": "tbsp",
+    "packSize": 16,
+    "estimated": true
+  },
+  {
+    "id": "milk",
+    "name": "Milk, low-fat",
+    "category": "dairy",
+    "shelfLifeDays": 7,
+    "packUnit": "cup",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "soy-milk",
+    "name": "Soy milk",
+    "category": "dairy",
+    "shelfLifeDays": 7,
+    "packUnit": "cup",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "sour-cream",
+    "name": "Sour cream",
+    "category": "dairy",
+    "shelfLifeDays": 14,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "spinach",
+    "name": "Baby spinach",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 5,
+    "estimated": true
+  },
+  {
+    "id": "broccoli",
+    "name": "Broccoli florets",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "bell-pepper",
+    "name": "Bell pepper",
+    "category": "produce",
+    "shelfLifeDays": 7,
+    "packUnit": "each",
+    "packSize": 3,
+    "estimated": true
+  },
+  {
+    "id": "sweet-potato",
+    "name": "Sweet potato",
+    "category": "produce",
+    "shelfLifeDays": 21,
+    "packUnit": "each",
+    "packSize": 3,
+    "estimated": true
+  },
+  {
+    "id": "zucchini",
+    "name": "Zucchini",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "each",
+    "packSize": 3,
+    "estimated": true
+  },
+  {
+    "id": "yellow-squash",
+    "name": "Yellow squash",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "each",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "mushrooms",
+    "name": "Mushrooms (baby bella/white)",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "oz",
+    "packSize": 8,
+    "estimated": true
+  },
+  {
+    "id": "cherry-tomatoes",
+    "name": "Cherry/grape tomatoes",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "tomato",
+    "name": "Tomato (Roma/medium)",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "each",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "cucumber",
+    "name": "Cucumber",
+    "category": "produce",
+    "shelfLifeDays": 7,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "red-onion",
+    "name": "Red onion",
+    "category": "produce",
+    "shelfLifeDays": 21,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "yellow-onion",
+    "name": "Yellow onion",
+    "category": "produce",
+    "shelfLifeDays": 30,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "shallot",
+    "name": "Shallot",
+    "category": "produce",
+    "shelfLifeDays": 30,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "garlic",
+    "name": "Garlic",
+    "category": "produce",
+    "shelfLifeDays": 30,
+    "packUnit": "clove",
+    "packSize": 10,
+    "estimated": true
+  },
+  {
+    "id": "ginger",
+    "name": "Fresh ginger",
+    "category": "produce",
+    "shelfLifeDays": 21,
+    "packUnit": "inch",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "carrot",
+    "name": "Carrot",
+    "category": "produce",
+    "shelfLifeDays": 21,
+    "packUnit": "each",
+    "packSize": 6,
+    "estimated": true
+  },
+  {
+    "id": "snow-peas",
+    "name": "Snow peas",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "cabbage",
+    "name": "Green cabbage, shredded",
+    "category": "produce",
+    "shelfLifeDays": 14,
+    "packUnit": "cup",
+    "packSize": 8,
+    "estimated": true
+  },
+  {
+    "id": "lettuce",
+    "name": "Lettuce, chopped",
+    "category": "produce",
+    "shelfLifeDays": 7,
+    "packUnit": "cup",
+    "packSize": 6,
+    "estimated": true
+  },
+  {
+    "id": "baby-potatoes",
+    "name": "Baby potatoes",
+    "category": "produce",
+    "shelfLifeDays": 14,
+    "packUnit": "lb",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "pineapple",
+    "name": "Pineapple, chopped",
+    "category": "produce",
+    "shelfLifeDays": 4,
+    "packUnit": "cup",
+    "packSize": 3,
+    "estimated": true
+  },
+  {
+    "id": "lemon",
+    "name": "Lemon",
+    "category": "produce",
+    "shelfLifeDays": 14,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "lime",
+    "name": "Lime",
+    "category": "produce",
+    "shelfLifeDays": 14,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "avocado",
+    "name": "Avocado",
+    "category": "produce",
+    "shelfLifeDays": 4,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "peach",
+    "name": "Peach",
+    "category": "produce",
+    "shelfLifeDays": 4,
+    "packUnit": "each",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "cherries",
+    "name": "Cherries",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "blueberries",
+    "name": "Blueberries, fresh",
+    "category": "produce",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "guacamole",
+    "name": "Guacamole",
+    "category": "produce",
+    "shelfLifeDays": 3,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "pico-de-gallo",
+    "name": "Pico de gallo / salsa",
+    "category": "produce",
+    "shelfLifeDays": 7,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "green-onion",
+    "name": "Green onion",
+    "category": "herb",
+    "shelfLifeDays": 7,
+    "packUnit": "each",
+    "packSize": 8,
+    "estimated": true
+  },
+  {
+    "id": "cilantro",
+    "name": "Cilantro",
+    "category": "herb",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "parsley",
+    "name": "Parsley",
+    "category": "herb",
+    "shelfLifeDays": 7,
+    "packUnit": "tbsp",
+    "packSize": 16,
+    "estimated": true
+  },
+  {
+    "id": "dill",
+    "name": "Dill",
+    "category": "herb",
+    "shelfLifeDays": 5,
+    "packUnit": "tbsp",
+    "packSize": 8,
+    "estimated": true
+  },
+  {
+    "id": "basil",
+    "name": "Basil",
+    "category": "herb",
+    "shelfLifeDays": 5,
+    "packUnit": "handful",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "sage",
+    "name": "Sage",
+    "category": "herb",
+    "shelfLifeDays": 7,
+    "packUnit": "tbsp",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "thyme",
+    "name": "Thyme",
+    "category": "herb",
+    "shelfLifeDays": 7,
+    "packUnit": "tsp",
+    "packSize": 6,
+    "estimated": true
+  },
+  {
+    "id": "frozen-mixed-veg",
+    "name": "Frozen mixed vegetables",
+    "category": "pantry",
+    "shelfLifeDays": 240,
+    "packUnit": "cup",
+    "packSize": 3,
+    "estimated": true
+  },
+  {
+    "id": "frozen-corn",
+    "name": "Frozen corn",
+    "category": "pantry",
+    "shelfLifeDays": 240,
+    "packUnit": "cup",
+    "packSize": 4,
+    "estimated": true
+  },
+  {
+    "id": "frozen-berries",
+    "name": "Frozen berries",
+    "category": "pantry",
+    "shelfLifeDays": 240,
+    "packUnit": "cup",
+    "packSize": 3,
+    "estimated": true
+  },
+  {
+    "id": "rice",
+    "name": "White/jasmine rice, uncooked",
+    "category": "grain",
+    "shelfLifeDays": 365,
+    "packUnit": "cup",
+    "packSize": 10,
+    "estimated": true
+  },
+  {
+    "id": "oats",
+    "name": "Old-fashioned oats",
+    "category": "grain",
+    "shelfLifeDays": 365,
+    "packUnit": "cup",
+    "packSize": 6,
+    "estimated": true
+  },
+  {
+    "id": "panko",
+    "name": "Panko / breadcrumbs",
+    "category": "grain",
+    "shelfLifeDays": 180,
+    "packUnit": "cup",
+    "packSize": 2,
+    "estimated": true
+  },
+  {
+    "id": "wraps",
+    "name": "Wholegrain wraps",
+    "category": "grain",
+    "shelfLifeDays": 10,
+    "packUnit": "each",
+    "packSize": 8,
+    "estimated": true
+  },
+  {
+    "id": "red-lentil-spaghetti",
+    "name": "Red lentil spaghetti",
+    "category": "grain",
+    "shelfLifeDays": 365,
+    "packUnit": "g",
+    "packSize": 250,
+    "estimated": true
+  },
+  {
+    "id": "chickpeas-canned",
+    "name": "Chickpeas, canned",
+    "category": "pantry",
+    "shelfLifeDays": 730,
+    "packUnit": "can",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "kalamata-olives",
+    "name": "Kalamata olives",
+    "category": "pantry",
+    "shelfLifeDays": 30,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "white-wine",
+    "name": "White wine (cooking)",
+    "category": "pantry",
+    "shelfLifeDays": 5,
+    "packUnit": "cup",
+    "packSize": 3,
+    "estimated": true
+  },
+  {
+    "id": "coconut-milk",
+    "name": "Coconut milk, full-fat",
+    "category": "pantry",
+    "shelfLifeDays": 5,
+    "packUnit": "tbsp",
+    "packSize": 26,
+    "estimated": true
+  },
+  {
+    "id": "avocado-mayo",
+    "name": "Avocado-oil mayonnaise",
+    "category": "pantry",
+    "shelfLifeDays": 60,
+    "packUnit": "cup",
+    "packSize": 1.5,
+    "estimated": true
+  },
+  {
+    "id": "tahini",
+    "name": "Tahini",
+    "category": "pantry",
+    "shelfLifeDays": 180,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "nutritional-yeast",
+    "name": "Nutritional yeast",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "tbsp",
+    "packSize": 20,
+    "estimated": true
+  },
+  {
+    "id": "chia-seeds",
+    "name": "Chia seeds",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "tbsp",
+    "packSize": 20,
+    "estimated": true
+  },
+  {
+    "id": "flax-ground",
+    "name": "Ground flax seed",
+    "category": "pantry",
+    "shelfLifeDays": 120,
+    "packUnit": "tbsp",
+    "packSize": 30,
+    "estimated": true
+  },
+  {
+    "id": "almonds",
+    "name": "Almonds",
+    "category": "pantry",
+    "shelfLifeDays": 180,
+    "packUnit": "oz",
+    "packSize": 12,
+    "estimated": true
+  },
+  {
+    "id": "pumpkin-seeds",
+    "name": "Pumpkin seeds",
+    "category": "pantry",
+    "shelfLifeDays": 180,
+    "packUnit": "tbsp",
+    "packSize": 20,
+    "estimated": true
+  },
+  {
+    "id": "seeds-or-nuts-topping",
+    "name": "Hemp hearts / peanuts / pumpkin seeds",
+    "category": "pantry",
+    "shelfLifeDays": 180,
+    "packUnit": "cup",
+    "packSize": 1,
+    "estimated": true
+  },
+  {
+    "id": "salt",
+    "name": "Salt",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "black-pepper",
+    "name": "Black pepper",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "olive-oil",
+    "name": "Olive oil",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "avocado-oil",
+    "name": "Avocado oil",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "neutral-oil",
+    "name": "Neutral oil (canola/peanut)",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "sesame-oil",
+    "name": "Sesame oil",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "ghee",
+    "name": "Ghee",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "soy-sauce",
+    "name": "Soy sauce / tamari",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "mirin",
+    "name": "Mirin",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "rice-vinegar",
+    "name": "Rice vinegar",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "honey",
+    "name": "Honey (incl. hot honey)",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "maple-syrup",
+    "name": "Maple/date syrup",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "brown-sugar",
+    "name": "Brown sugar (light/zero-cal)",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "ketchup",
+    "name": "Ketchup, reduced-sugar",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "chicken-broth",
+    "name": "Chicken/vegetable stock",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "flour",
+    "name": "Flour (any)",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "cornstarch",
+    "name": "Cornstarch / arrowroot / tapioca starch",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "baking-powder",
+    "name": "Baking powder",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "vanilla",
+    "name": "Vanilla extract",
+    "category": "pantry",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "oregano-dried",
+    "name": "Dried oregano",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "paprika",
+    "name": "Paprika",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "smoked-paprika",
+    "name": "Smoked paprika",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "cumin",
+    "name": "Cumin",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "chili-powder",
+    "name": "Chili powder",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "garlic-powder",
+    "name": "Garlic powder",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "turmeric",
+    "name": "Turmeric",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "red-pepper-flakes",
+    "name": "Red pepper flakes",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "italian-seasoning",
+    "name": "Italian seasoning",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "taco-seasoning",
+    "name": "Taco seasoning",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "cajun-seasoning",
+    "name": "Cajun seasoning",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "chili-seasoning",
+    "name": "Chili seasoning mix",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  },
+  {
+    "id": "hot-sauce",
+    "name": "Hot sauce",
+    "category": "spice",
+    "shelfLifeDays": 365,
+    "packUnit": "as-needed",
+    "packSize": 1,
+    "staple": true,
+    "estimated": true
+  }
+]

@@ -1,0 +1,2748 @@
+[
+  {
+    "id": "a01-greek-chicken-protein-bowl",
+    "title": "Greek Chicken Protein Bowl with Garlic Yogurt",
+    "mealType": "main",
+    "minutes": 38,
+    "difficulty": "medium",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 490,
+      "protein": 51,
+      "carbs": 32,
+      "fat": 16
+    },
+    "source": {
+      "name": "Moderately Messy RD",
+      "url": "https://moderatelymessyrd.com/greek-chicken-protein-bowl/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "chicken-breast",
+        "qty": 1.0,
+        "role": "core",
+        "qtyNote": "1\u20131.25 lb"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "1/2 marinade + 1/2 sauce"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 7,
+        "role": "core",
+        "qtyNote": "4 cloves marinade + 3 sauce"
+      },
+      {
+        "ingredientId": "kalamata-olives",
+        "qty": 0.5,
+        "role": "optional"
+      },
+      {
+        "ingredientId": "cucumber",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "1 English cucumber"
+      },
+      {
+        "ingredientId": "cherry-tomatoes",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "1 small carton"
+      },
+      {
+        "ingredientId": "feta",
+        "qty": 0.75,
+        "role": "core"
+      },
+      {
+        "ingredientId": "red-onion",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "1/2 large"
+      },
+      {
+        "ingredientId": "chickpeas-canned",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "15.5 oz can"
+      },
+      {
+        "ingredientId": "greek-yogurt",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "low-fat"
+      },
+      {
+        "ingredientId": "parsley",
+        "qty": 1,
+        "role": "garnish"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "1/4 cup; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Optional: marinate chicken in oil, lemon, garlic, salt and pepper.",
+        "timerSec": 1800
+      },
+      {
+        "text": "Air-fry chicken at 380\u00b0F to 165\u00b0F, flipping halfway.",
+        "timerSec": 1500
+      },
+      {
+        "text": "Meanwhile dice cucumber and onion, halve tomatoes, rinse chickpeas."
+      },
+      {
+        "text": "Stir yogurt, lemon and garlic into a sauce; let it sit."
+      },
+      {
+        "text": "Build bowls: ~4 oz chicken, chickpeas, vegetables, olives, feta, yogurt sauce."
+      }
+    ],
+    "dataFlags": [
+      "Post states both 50 g and 51 g protein",
+      "Total time excludes optional 30-min marinade"
+    ]
+  },
+  {
+    "id": "a02-chicken-fried-rice",
+    "title": "Chicken Fried Rice",
+    "mealType": "main",
+    "minutes": 45,
+    "difficulty": "medium",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 518,
+      "protein": 42,
+      "carbs": 46,
+      "fat": 17
+    },
+    "source": {
+      "name": "Eating Bird Food",
+      "url": "https://www.eatingbirdfood.com/chicken-fried-rice/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "chicken-breast",
+        "qty": 1.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "yellow-onion",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "ginger",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "2 tsp minced"
+      },
+      {
+        "ingredientId": "frozen-mixed-veg",
+        "qty": 3,
+        "role": "core",
+        "qtyNote": "12 oz bag"
+      },
+      {
+        "ingredientId": "eggs",
+        "qty": 4,
+        "role": "core"
+      },
+      {
+        "ingredientId": "rice",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "4 cups chilled cooked (~1 cup uncooked)"
+      },
+      {
+        "ingredientId": "butter",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "2 Tbsp"
+      },
+      {
+        "ingredientId": "green-onion",
+        "qty": 3,
+        "role": "garnish",
+        "qtyNote": "1/3\u20131/2 cup sliced"
+      },
+      {
+        "ingredientId": "avocado-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "soy-sauce",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "1/2 cup low-sodium; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Sear seasoned chicken in oil until cooked; set aside.",
+        "timerSec": 480
+      },
+      {
+        "text": "Soften onion, garlic and ginger in butter.",
+        "timerSec": 300
+      },
+      {
+        "text": "Add frozen vegetables and cook until tender.",
+        "timerSec": 300
+      },
+      {
+        "text": "Push veg aside, scramble eggs, move all to the chicken plate."
+      },
+      {
+        "text": "Fry rice in remaining butter undisturbed to crisp; repeat 2\u20133 rounds.",
+        "timerSec": 180
+      },
+      {
+        "text": "Return everything with green onion and soy sauce; toss hot."
+      }
+    ],
+    "dataFlags": [
+      "45 min assumes rice already cooked and chilled"
+    ]
+  },
+  {
+    "id": "a03-sheet-pan-chicken-broccoli-sweet-potato",
+    "title": "One-Pan Roasted Chicken, Broccoli & Sweet Potatoes",
+    "mealType": "main",
+    "minutes": 37,
+    "difficulty": "medium",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 478,
+      "protein": 53,
+      "carbs": 35,
+      "fat": 14
+    },
+    "source": {
+      "name": "Gimme Delicious",
+      "url": "https://gimmedelicious.com/chicken-broccoli-sweet-potatoes-meal-prep/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "chicken-breast",
+        "qty": 2.0,
+        "role": "core",
+        "qtyNote": "4 medium breasts, no weight given (est.)"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "2\u20133 cloves"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "1 Tbsp juice (or lime)"
+      },
+      {
+        "ingredientId": "sweet-potato",
+        "qty": 3,
+        "role": "core",
+        "qtyNote": "4 cups diced"
+      },
+      {
+        "ingredientId": "broccoli",
+        "qty": 4,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cajun-seasoning",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "2 Tbsp Cajun or taco; staple, amount not tracked"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat oven to 425\u00b0F; line a sheet pan."
+      },
+      {
+        "text": "Toss sweet potato with oil, salt, pepper; roast.",
+        "timerSec": 900
+      },
+      {
+        "text": "Coat chicken with seasoning, garlic, oil and lemon."
+      },
+      {
+        "text": "Add chicken and seasoned broccoli; roast until cooked.",
+        "timerSec": 900
+      },
+      {
+        "text": "Optional broil for color.",
+        "timerSec": 120
+      },
+      {
+        "text": "Cool, slice, divide into 4 containers.",
+        "timerSec": 300
+      }
+    ],
+    "dataFlags": [
+      "Stated times add to 40 min vs 37 listed",
+      "Chicken weight not given",
+      "Macros marked approximate"
+    ]
+  },
+  {
+    "id": "a04-italian-skillet-chicken-tomato-mushroom",
+    "title": "Italian-Style Skillet Chicken with Tomatoes and Mushrooms",
+    "mealType": "main",
+    "minutes": 30,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 306.7,
+      "protein": 39.2,
+      "carbs": 19.5,
+      "fat": 4.9
+    },
+    "source": {
+      "name": "The Mediterranean Dish",
+      "url": "https://www.themediterraneandish.com/italian-skillet-chicken-tomatoes-mushrooms/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "chicken-breast",
+        "qty": 1.5,
+        "role": "core",
+        "qtyNote": "4 large cutlets, no weight given (est.)"
+      },
+      {
+        "ingredientId": "mushrooms",
+        "qty": 8,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cherry-tomatoes",
+        "qty": 2.5,
+        "role": "core",
+        "qtyNote": "14 oz grape tomatoes"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 6,
+        "role": "core",
+        "qtyNote": "2 Tbsp chopped"
+      },
+      {
+        "ingredientId": "white-wine",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "1 Tbsp juice"
+      },
+      {
+        "ingredientId": "spinach",
+        "qty": 1,
+        "role": "optional",
+        "qtyNote": "1 handful, optional"
+      },
+      {
+        "ingredientId": "oregano-dried",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "flour",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "amount not stated; staple, amount not tracked"
+      },
+      {
+        "ingredientId": "chicken-broth",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "3/4 cup; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Season cutlets and dust lightly with flour."
+      },
+      {
+        "text": "Brown chicken in olive oil; set aside.",
+        "timerSec": 180
+      },
+      {
+        "text": "Saut\u00e9 mushrooms, add tomatoes, garlic, seasoning and a little flour.",
+        "timerSec": 240
+      },
+      {
+        "text": "Add wine to reduce, then lemon juice and broth."
+      },
+      {
+        "text": "Return chicken, boil, then cover on medium-low to 165\u00b0F.",
+        "timerSec": 600
+      },
+      {
+        "text": "Stir in spinach before serving, if using."
+      }
+    ],
+    "dataFlags": [
+      "Olive oil amount and chicken weight not stated",
+      "Macros auto-calculated"
+    ]
+  },
+  {
+    "id": "a05-chicken-zucchini-skillet",
+    "title": "Chicken and Zucchini Skillet",
+    "mealType": "main",
+    "minutes": 20,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 298,
+      "protein": 35,
+      "carbs": 9,
+      "fat": 15
+    },
+    "source": {
+      "name": "Low Carb with Jennifer",
+      "url": "https://jenniferbanz.com/chicken-and-zucchini-skillet"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "chicken-thigh",
+        "qty": 1.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "zucchini",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "2 medium"
+      },
+      {
+        "ingredientId": "cherry-tomatoes",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "2 tsp minced"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "feta",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "smoked-paprika",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "oregano-dried",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Season chicken and brown in a nonstick skillet until cooked; set aside.",
+        "timerSec": 360
+      },
+      {
+        "text": "Cook zucchini until slightly soft.",
+        "timerSec": 180
+      },
+      {
+        "text": "Add tomatoes until they begin to soften.",
+        "timerSec": 120
+      },
+      {
+        "text": "Stir in garlic, return chicken, add lemon juice.",
+        "timerSec": 30
+      },
+      {
+        "text": "Off heat, top with feta."
+      }
+    ],
+    "dataFlags": [
+      "No cooking oil listed (relies on nonstick pan)"
+    ]
+  },
+  {
+    "id": "a06-turkey-zucchini-meatballs",
+    "title": "Easiest Sheet Pan Turkey Zucchini Meatballs",
+    "mealType": "main",
+    "minutes": 28,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": null,
+      "protein": 30,
+      "carbs": null,
+      "fat": null
+    },
+    "source": {
+      "name": "Lindsay Pleskot, RD",
+      "url": "https://www.lindsaypleskot.com/turkey-zucchini-meatballs/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "ground-turkey",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "zucchini",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "1 medium, ~1 cup grated"
+      },
+      {
+        "ingredientId": "panko",
+        "qty": 0.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "parmesan",
+        "qty": 0.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "eggs",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "parsley",
+        "qty": 1,
+        "role": "garnish"
+      },
+      {
+        "ingredientId": "avocado-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "amount not stated; staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat oven to 400\u00b0F; line and oil a sheet pan."
+      },
+      {
+        "text": "Squeeze water from grated zucchini."
+      },
+      {
+        "text": "Mix all ingredients gently until just combined."
+      },
+      {
+        "text": "Roll 16 balls, brush with oil, season."
+      },
+      {
+        "text": "Bake until golden and 165\u00b0F.",
+        "timerSec": 960
+      }
+    ],
+    "dataFlags": [
+      "Only protein stated ('over 30 g in 4 meatballs')",
+      "Servings implied (4), not stated",
+      "Oil/salt/pepper amounts not listed"
+    ]
+  },
+  {
+    "id": "a07-greek-turkey-meatballs-tzatziki",
+    "title": "Greek Turkey Meatballs with Tzatziki",
+    "mealType": "main",
+    "minutes": 30,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 322,
+      "protein": 37,
+      "carbs": 10,
+      "fat": 15
+    },
+    "source": {
+      "name": "Healthy Fitness Meals",
+      "url": "https://healthyfitnessmeals.com/greek-turkey-meatballs/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "ground-turkey",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "panko",
+        "qty": 0.25,
+        "role": "core",
+        "qtyNote": "1/4 cup breadcrumbs"
+      },
+      {
+        "ingredientId": "feta",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "shallot",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "eggs",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "parsley",
+        "qty": 4,
+        "role": "core",
+        "qtyNote": "1/4 cup minced"
+      },
+      {
+        "ingredientId": "greek-yogurt",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "tzatziki"
+      },
+      {
+        "ingredientId": "cucumber",
+        "qty": 0.3,
+        "role": "core",
+        "qtyNote": "1/3 cup grated"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "1 Tbsp juice"
+      },
+      {
+        "ingredientId": "dill",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "oregano-dried",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "paprika",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "avocado-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "2 Tbsp; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Combine turkey, breadcrumbs, feta and shallot."
+      },
+      {
+        "text": "Beat egg with herbs and spices; mix into meat."
+      },
+      {
+        "text": "Optional: chill for easier shaping.",
+        "timerSec": 3600
+      },
+      {
+        "text": "Shape ~24 meatballs; pan-fry in oil until cooked.",
+        "timerSec": 480
+      },
+      {
+        "text": "Stir tzatziki ingredients; serve together."
+      }
+    ],
+    "dataFlags": [
+      "Servings blank on recipe card (4 is an assumption)",
+      "Macros auto-calculated; serving size unclear",
+      "Total time excludes optional 1-hr chill"
+    ]
+  },
+  {
+    "id": "a08-ginger-pork-stir-fry",
+    "title": "Ginger Pork Stir Fry",
+    "mealType": "main",
+    "minutes": 30,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 490,
+      "protein": 32,
+      "carbs": 72,
+      "fat": 7
+    },
+    "source": {
+      "name": "Stephanie Kay Nutrition",
+      "url": "https://kaynutrition.com/ginger-pork-stir-fry/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "ginger",
+        "qty": 4,
+        "role": "core",
+        "qtyNote": "4 inch, grated"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "pork-tenderloin",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "green-onion",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "carrot",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "snow-peas",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "broccoli",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "rice",
+        "qty": 1.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "soy-sauce",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "mirin",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "rice-vinegar",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "sesame-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Simmer rice, covered.",
+        "timerSec": 900
+      },
+      {
+        "text": "Slice pork thin; toss in whisked ginger sauce.",
+        "timerSec": 900
+      },
+      {
+        "text": "Sear pork in sesame oil; remove.",
+        "timerSec": 60
+      },
+      {
+        "text": "Stir-fry onion whites, carrot, snow peas and broccoli with 2 Tbsp water.",
+        "timerSec": 180
+      },
+      {
+        "text": "Return pork to heat through; serve over rice with onion greens.",
+        "timerSec": 30
+      }
+    ],
+    "dataFlags": [
+      "Listed 30 min excludes suggested 15\u201330 min marinade",
+      "Macros include rice"
+    ]
+  },
+  {
+    "id": "a09-sweet-and-sour-pork",
+    "title": "Healthy Sweet and Sour Pork Tenderloin Stir-Fry",
+    "mealType": "main",
+    "minutes": 35,
+    "difficulty": "medium",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 422,
+      "protein": 35.4,
+      "carbs": 53.6,
+      "fat": 8
+    },
+    "source": {
+      "name": "Burn The Fat Blog",
+      "url": "https://www.burnthefatblog.com/healthy-sweet-and-sour-pork/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "pork-tenderloin",
+        "qty": 1.25,
+        "role": "core",
+        "qtyNote": "20 oz"
+      },
+      {
+        "ingredientId": "yellow-onion",
+        "qty": 0.75,
+        "role": "core",
+        "qtyNote": "3/4 cup diced"
+      },
+      {
+        "ingredientId": "bell-pepper",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "1 red + 1 green"
+      },
+      {
+        "ingredientId": "pineapple",
+        "qty": 1.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 3,
+        "role": "core",
+        "qtyNote": "1 Tbsp minced"
+      },
+      {
+        "ingredientId": "ginger",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "2 Tbsp minced"
+      },
+      {
+        "ingredientId": "rice",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "soy-sauce",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "rice-vinegar",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "ketchup",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "chicken-broth",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "brown-sugar",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "neutral-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "cornstarch",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Start rice; mix the sauce."
+      },
+      {
+        "text": "Cut pork bite-size; chop vegetables, garlic, ginger."
+      },
+      {
+        "text": "Sear pork in hot oil until nearly cooked, then add onion.",
+        "timerSec": 180
+      },
+      {
+        "text": "Add garlic and ginger, then peppers and pineapple.",
+        "timerSec": 30
+      },
+      {
+        "text": "Add sauce and slurry; stir until glossy; serve over rice."
+      }
+    ],
+    "dataFlags": [
+      "Uses reduced-sugar ketchup and zero-cal sweetener (less whole-food)",
+      "Macros include rice"
+    ]
+  },
+  {
+    "id": "a10-pork-medallions-mushroom-sauce",
+    "title": "Pork Medallions with Mushroom Sauce",
+    "mealType": "main",
+    "minutes": 20,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 272,
+      "protein": 34,
+      "carbs": 5,
+      "fat": 13
+    },
+    "source": {
+      "name": "The Healthy Foodie",
+      "url": "https://thehealthyfoodie.com/pork-medallions-with-mushroom-sauce/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "pork-tenderloin",
+        "qty": 1.3,
+        "role": "core"
+      },
+      {
+        "ingredientId": "mushrooms",
+        "qty": 8,
+        "role": "core"
+      },
+      {
+        "ingredientId": "sage",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "thyme",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "ghee",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "chicken-broth",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "cornstarch",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "tapioca starch; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Season tenderloin; cut into 8 medallions."
+      },
+      {
+        "text": "Sear in ghee without moving; set aside.",
+        "timerSec": 240
+      },
+      {
+        "text": "Brown mushrooms in the same pan.",
+        "timerSec": 300
+      },
+      {
+        "text": "Add herbs, stock and slurry; simmer until thick.",
+        "timerSec": 60
+      },
+      {
+        "text": "Return pork, spoon sauce over, rest off heat.",
+        "timerSec": 300
+      }
+    ],
+    "dataFlags": [
+      "Card doesn't say nutrition is per serving",
+      "Title says 15 min, card says 20"
+    ]
+  },
+  {
+    "id": "a11-sweet-potato-beef-bowls",
+    "title": "Viral Sweet Potato Beef Bowls",
+    "mealType": "main",
+    "minutes": 45,
+    "difficulty": "medium",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 513,
+      "protein": 41,
+      "carbs": 39,
+      "fat": 22
+    },
+    "source": {
+      "name": "Slender Kitchen",
+      "url": "https://www.slenderkitchen.com/recipe/viral-sweet-potato-beef-bowls"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "sweet-potato",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "broccoli",
+        "qty": 4,
+        "role": "core"
+      },
+      {
+        "ingredientId": "ground-beef-lean",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cottage-cheese",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "avocado",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cilantro",
+        "qty": 0.25,
+        "role": "garnish"
+      },
+      {
+        "ingredientId": "lime",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "taco-seasoning",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "honey",
+        "qty": 0,
+        "role": "optional",
+        "qtyNote": "4 tsp hot honey; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat oven to 425\u00b0F; roast seasoned sweet potato.",
+        "timerSec": 900
+      },
+      {
+        "text": "Flip, add seasoned broccoli, roast again.",
+        "timerSec": 900
+      },
+      {
+        "text": "Meanwhile brown beef with taco seasoning.",
+        "timerSec": 420
+      },
+      {
+        "text": "Build bowls: sweet potato, broccoli, beef, cottage cheese, avocado."
+      },
+      {
+        "text": "Finish with hot honey, cilantro, lime."
+      }
+    ],
+    "dataFlags": [
+      "Servings not stated (4 inferred from 4 oz beef per bowl)"
+    ]
+  },
+  {
+    "id": "a12-steak-fajita-bowls",
+    "title": "Steak Fajita Bowls",
+    "mealType": "main",
+    "minutes": 45,
+    "difficulty": "medium",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 612,
+      "protein": 33,
+      "carbs": 59,
+      "fat": 28
+    },
+    "source": {
+      "name": "Stephanie Kay Nutrition",
+      "url": "https://kaynutrition.com/steak-fajita-bowls/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "flank-steak",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lime",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 4,
+        "role": "core"
+      },
+      {
+        "ingredientId": "bell-pepper",
+        "qty": 3,
+        "role": "core"
+      },
+      {
+        "ingredientId": "red-onion",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "rice",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "frozen-corn",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lettuce",
+        "qty": 4,
+        "role": "core"
+      },
+      {
+        "ingredientId": "pico-de-gallo",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "guacamole",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "sour-cream",
+        "qty": 0.25,
+        "role": "optional"
+      },
+      {
+        "ingredientId": "cilantro",
+        "qty": 0.25,
+        "role": "garnish"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "chili-powder",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "smoked-paprika",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "cumin",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "garlic-powder",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Marinate steak in lime, oil and garlic.",
+        "timerSec": 300
+      },
+      {
+        "text": "Simmer rice, covered.",
+        "timerSec": 900
+      },
+      {
+        "text": "Slice peppers and onion; toss with spices."
+      },
+      {
+        "text": "Sear steak, rest, slice against the grain.",
+        "timerSec": 300
+      },
+      {
+        "text": "Saut\u00e9 peppers and onion; microwave corn.",
+        "timerSec": 180
+      },
+      {
+        "text": "Build bowls with toppings."
+      }
+    ],
+    "dataFlags": [
+      "Card says 45 min, intro says 30",
+      "Uses guacamole rather than whole avocado"
+    ]
+  },
+  {
+    "id": "b01-greek-yogurt-parfait-bowl",
+    "title": "Greek Yogurt Parfait Bowl",
+    "mealType": "breakfast",
+    "minutes": 5,
+    "difficulty": "easy",
+    "servings": 1,
+    "tags": [
+      "high-protein",
+      "breakfast"
+    ],
+    "macrosPerServing": {
+      "kcal": 503,
+      "protein": 30,
+      "carbs": 41,
+      "fat": 27
+    },
+    "source": {
+      "name": "Dash of Jazz",
+      "url": "https://www.dashofjazz.com/wprm_print/greek-yogurt-parfait-bowl-for-breakfast"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "greek-yogurt",
+        "qty": 0.75,
+        "role": "core"
+      },
+      {
+        "ingredientId": "chia-seeds",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "peach",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cherries",
+        "qty": 0.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "almonds",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "blueberries",
+        "qty": 0.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "pumpkin-seeds",
+        "qty": 1,
+        "role": "optional"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Stir chia into yogurt and spread as the base."
+      },
+      {
+        "text": "Dice peach, pit cherries, chop almonds."
+      },
+      {
+        "text": "Top with fruit, almonds and pumpkin seeds."
+      },
+      {
+        "text": "Eat right away."
+      }
+    ],
+    "dataFlags": [
+      "Source URL is the print page"
+    ]
+  },
+  {
+    "id": "b02-protein-pancakes-yogurt-berries",
+    "title": "Protein Pancakes with Yogurt & Berries",
+    "mealType": "breakfast",
+    "minutes": 15,
+    "difficulty": "easy",
+    "servings": 2,
+    "tags": [
+      "high-protein",
+      "breakfast"
+    ],
+    "macrosPerServing": {
+      "kcal": 350,
+      "protein": 31,
+      "carbs": 35,
+      "fat": 9
+    },
+    "source": {
+      "name": "Diabetes Canada",
+      "url": "https://www.diabetes.ca/nutrition-and-recipes/recipes/protein-pancakes-with-yogurt-berries"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "oats",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cottage-cheese",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "1%"
+      },
+      {
+        "ingredientId": "milk",
+        "qty": 0.125,
+        "role": "core",
+        "qtyNote": "2 Tbsp"
+      },
+      {
+        "ingredientId": "eggs",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "flax-ground",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "greek-yogurt",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "0%"
+      },
+      {
+        "ingredientId": "frozen-berries",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "blueberries or raspberries, thawed"
+      },
+      {
+        "ingredientId": "baking-powder",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "vanilla",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "maple-syrup",
+        "qty": 0,
+        "role": "optional",
+        "qtyNote": "2 tsp optional; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Blend oats, cottage cheese, milk, eggs, flax, baking powder, vanilla.",
+        "timerSec": 30
+      },
+      {
+        "text": "Cook 1/3-cup portions until golden underneath.",
+        "timerSec": 120
+      },
+      {
+        "text": "Flip and finish; make 4 pancakes.",
+        "timerSec": 120
+      },
+      {
+        "text": "Stir maple syrup into yogurt if using."
+      },
+      {
+        "text": "Top 2 pancakes per plate with yogurt and berries."
+      }
+    ],
+    "dataFlags": []
+  },
+  {
+    "id": "b03-tofu-breakfast-burrito",
+    "title": "High-Protein Breakfast Burrito (Tofu Scramble)",
+    "mealType": "breakfast",
+    "minutes": 15,
+    "difficulty": "easy",
+    "servings": 2,
+    "tags": [
+      "high-protein",
+      "breakfast"
+    ],
+    "macrosPerServing": {
+      "kcal": 425,
+      "protein": 25,
+      "carbs": 46,
+      "fat": 19
+    },
+    "source": {
+      "name": "Plant Baes",
+      "url": "https://plantbaes.com/high-protein-breakfast-burrito/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "wraps",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "spinach",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cherry-tomatoes",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "6 tomatoes"
+      },
+      {
+        "ingredientId": "avocado",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "mushrooms",
+        "qty": 1.5,
+        "role": "core",
+        "qtyNote": "3 mushrooms"
+      },
+      {
+        "ingredientId": "tofu-extra-firm",
+        "qty": 7,
+        "role": "core",
+        "qtyNote": "200 g"
+      },
+      {
+        "ingredientId": "nutritional-yeast",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "soy-milk",
+        "qty": 0.33,
+        "role": "core"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "turmeric",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "garlic-powder",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "hot-sauce",
+        "qty": 0,
+        "role": "optional",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Saut\u00e9 mushrooms in oil until they release juices.",
+        "timerSec": 240
+      },
+      {
+        "text": "Crumble in tofu with spices, yeast and soy milk; cook off liquid.",
+        "timerSec": 180
+      },
+      {
+        "text": "Spread avocado on wraps; add spinach, scramble, tomatoes, hot sauce."
+      },
+      {
+        "text": "Roll burrito-style; eat or foil-wrap to reheat."
+      }
+    ],
+    "dataFlags": [
+      "Exactly at 25 g breakfast minimum"
+    ]
+  },
+  {
+    "id": "b04-cottage-cheese-frittata",
+    "title": "Ham & Cottage Cheese Frittata with Spinach",
+    "mealType": "breakfast",
+    "minutes": 35,
+    "difficulty": "medium",
+    "servings": 6,
+    "tags": [
+      "high-protein",
+      "breakfast"
+    ],
+    "macrosPerServing": {
+      "kcal": 286,
+      "protein": 25,
+      "carbs": 3,
+      "fat": 19
+    },
+    "source": {
+      "name": "Haute & Healthy Living",
+      "url": "https://www.hauteandhealthyliving.com/cottage-cheese-frittata/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "eggs",
+        "qty": 8,
+        "role": "core"
+      },
+      {
+        "ingredientId": "parmesan",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cottage-cheese",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "2%"
+      },
+      {
+        "ingredientId": "mushrooms",
+        "qty": 5,
+        "role": "core",
+        "qtyNote": "2 cups diced"
+      },
+      {
+        "ingredientId": "spinach",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "ham-diced",
+        "qty": 1.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "green-onion",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "1/4 cup sliced"
+      },
+      {
+        "ingredientId": "cheddar",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat oven to 350\u00b0F; blend eggs, cottage cheese, Parmesan, salt, pepper."
+      },
+      {
+        "text": "Cook mushrooms and spinach, then add ham.",
+        "timerSec": 180
+      },
+      {
+        "text": "Pour in eggs, scatter green onion, add cheddar and remaining ham.",
+        "timerSec": 60
+      },
+      {
+        "text": "Cook on stovetop, then bake until set.",
+        "timerSec": 300
+      },
+      {
+        "text": "Rest before slicing.",
+        "timerSec": 300
+      }
+    ],
+    "dataFlags": [
+      "Exactly at 25 g breakfast minimum",
+      "Contains ham (processed meat)",
+      "Excludes 5\u201310 min rest"
+    ]
+  },
+  {
+    "id": "m01-shrimp-broccoli-stir-fry",
+    "title": "Shrimp and Broccoli Stir Fry",
+    "mealType": "main",
+    "minutes": 30,
+    "difficulty": "easy",
+    "servings": 3,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 469,
+      "protein": 35,
+      "carbs": 45,
+      "fat": 20
+    },
+    "source": {
+      "name": "Well Plated by Erin Clarke",
+      "url": "https://www.wellplated.com/shrimp-and-broccoli-stir-fry/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "shrimp",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "broccoli",
+        "qty": 4.5,
+        "role": "core",
+        "qtyNote": "2 crowns, 4\u20135 cups"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 3,
+        "role": "core",
+        "qtyNote": "1 Tbsp minced"
+      },
+      {
+        "ingredientId": "ginger",
+        "qty": 1.5,
+        "role": "core",
+        "qtyNote": "1.5 Tbsp minced"
+      },
+      {
+        "ingredientId": "green-onion",
+        "qty": 4,
+        "role": "core"
+      },
+      {
+        "ingredientId": "rice",
+        "qty": 1,
+        "role": "optional",
+        "qtyNote": "to serve; quantity not given (est.)"
+      },
+      {
+        "ingredientId": "neutral-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "red-pepper-flakes",
+        "qty": 0,
+        "role": "optional",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "soy-sauce",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "honey",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "rice-vinegar",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "sesame-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "cornstarch",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Whisk the sauce and keep it by the stove."
+      },
+      {
+        "text": "Sear seasoned shrimp until pink; set aside.",
+        "timerSec": 180
+      },
+      {
+        "text": "Add broccoli undisturbed, then water, cover and steam.",
+        "timerSec": 120
+      },
+      {
+        "text": "Stir in garlic, ginger and onion whites.",
+        "timerSec": 120
+      },
+      {
+        "text": "Add sauce and shrimp; toss until glossy; serve over rice.",
+        "timerSec": 120
+      }
+    ],
+    "dataFlags": [
+      "Unclear whether nutrition includes rice"
+    ]
+  },
+  {
+    "id": "m02-sheet-pan-salmon-broccoli-potatoes",
+    "title": "Sheet Pan Salmon, Broccoli and Potatoes",
+    "mealType": "main",
+    "minutes": 30,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 488,
+      "protein": 40,
+      "carbs": 29,
+      "fat": 24
+    },
+    "source": {
+      "name": "Laura Fuentes",
+      "url": "https://www.laurafuentes.com/sheet-pan-salmon-broccoli/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "baby-potatoes",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "broccoli",
+        "qty": 4,
+        "role": "core",
+        "qtyNote": "1 lb"
+      },
+      {
+        "ingredientId": "salmon",
+        "qty": 1.5,
+        "role": "core",
+        "qtyNote": "4 fillets (est. weight)"
+      },
+      {
+        "ingredientId": "butter",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "garlic-powder",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "italian-seasoning",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "cajun-seasoning",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat oven to 425\u00b0F; toss potatoes with oil and seasonings."
+      },
+      {
+        "text": "Roast potatoes.",
+        "timerSec": 900
+      },
+      {
+        "text": "Toss broccoli; pat dry and season salmon."
+      },
+      {
+        "text": "Add salmon and broccoli; roast until fish flakes.",
+        "timerSec": 600
+      },
+      {
+        "text": "Top with butter; serve with lemon."
+      }
+    ],
+    "dataFlags": [
+      "Uses garlic powder, not fresh garlic",
+      "Fillet weight not given"
+    ]
+  },
+  {
+    "id": "m03-lemon-garlic-baked-cod",
+    "title": "Lemon Garlic Baked Cod",
+    "mealType": "main",
+    "minutes": 20,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 268,
+      "protein": 33,
+      "carbs": 16,
+      "fat": 8
+    },
+    "source": {
+      "name": "Healthy Fitness Meals",
+      "url": "https://healthyfitnessmeals.com/lemon-garlic-baked-cod"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "cod",
+        "qty": 1.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 3,
+        "role": "core",
+        "qtyNote": "3\u20134 cloves"
+      },
+      {
+        "ingredientId": "cherry-tomatoes",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cilantro",
+        "qty": 0.25,
+        "role": "garnish"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "italian-seasoning",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "flour",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat oven to 400\u00b0F; season cod and dredge in flour."
+      },
+      {
+        "text": "Sear cod in batches.",
+        "timerSec": 120
+      },
+      {
+        "text": "Deglaze with lemon juice; stir in garlic and tomatoes."
+      },
+      {
+        "text": "Return cod; bake until flaky.",
+        "timerSec": 600
+      },
+      {
+        "text": "Garnish and serve."
+      }
+    ],
+    "dataFlags": [
+      "Intro says under 30 min, card says 20",
+      "Ingredients list cilantro, steps say parsley"
+    ]
+  },
+  {
+    "id": "m04-cilantro-lime-salmon-bake",
+    "title": "Cilantro Lime Salmon Bake with Tomato Avocado Salsa",
+    "mealType": "main",
+    "minutes": 25,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 617,
+      "protein": 37,
+      "carbs": 11,
+      "fat": 48
+    },
+    "source": {
+      "name": "Fed & Fit",
+      "url": "https://fedandfit.com/wprm_print/cilantro-lime-salmon-bake-with-tomato-avocado-salsa"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "avocado-mayo",
+        "qty": 0.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cilantro",
+        "qty": 0.75,
+        "role": "core",
+        "qtyNote": "sauce amount missing on page + 1/4 cup salsa (est.)"
+      },
+      {
+        "ingredientId": "green-onion",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "2 Tbsp sliced"
+      },
+      {
+        "ingredientId": "lime",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "coconut-milk",
+        "qty": 2,
+        "role": "optional",
+        "qtyNote": "or water"
+      },
+      {
+        "ingredientId": "salmon",
+        "qty": 1.5,
+        "role": "core"
+      },
+      {
+        "ingredientId": "avocado",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cherry-tomatoes",
+        "qty": 2,
+        "role": "core",
+        "qtyNote": "1 pint"
+      },
+      {
+        "ingredientId": "red-onion",
+        "qty": 0.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat oven to 375\u00b0F; blend the sauce."
+      },
+      {
+        "text": "Season salmon on a rimmed sheet; cover with sauce."
+      },
+      {
+        "text": "Bake until it flakes.",
+        "timerSec": 780
+      },
+      {
+        "text": "Toss avocado, tomatoes, cilantro, red onion, oil, salt."
+      },
+      {
+        "text": "Spoon salsa over salmon."
+      }
+    ],
+    "dataFlags": [
+      "Cilantro amount for sauce missing on page",
+      "High fat (48 g) from mayo sauce",
+      "Source URL is the print page"
+    ]
+  },
+  {
+    "id": "m05-tofu-buddha-bowl",
+    "title": "High-Protein Tofu Buddha Bowl",
+    "mealType": "main",
+    "minutes": 45,
+    "difficulty": "medium",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 499,
+      "protein": 30,
+      "carbs": 44,
+      "fat": 24
+    },
+    "source": {
+      "name": "Cooking for Peanuts",
+      "url": "https://cookingforpeanuts.com/high-protein-tofu-buddha-bowl/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "tofu-extra-firm",
+        "qty": 14,
+        "role": "core",
+        "qtyNote": "14\u201316 oz"
+      },
+      {
+        "ingredientId": "sweet-potato",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "broccoli",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cabbage",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "carrot",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "1/2 cup grated"
+      },
+      {
+        "ingredientId": "green-onion",
+        "qty": 3,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cilantro",
+        "qty": 0.25,
+        "role": "garnish"
+      },
+      {
+        "ingredientId": "seeds-or-nuts-topping",
+        "qty": 0.25,
+        "role": "optional"
+      },
+      {
+        "ingredientId": "tahini",
+        "qty": 0.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lime",
+        "qty": 1.5,
+        "role": "core",
+        "qtyNote": "3 Tbsp juice"
+      },
+      {
+        "ingredientId": "ginger",
+        "qty": 0.5,
+        "role": "core",
+        "qtyNote": "1 tsp grated"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "cornstarch",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "soy-sauce",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "maple-syrup",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "red-pepper-flakes",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss tofu with arrowroot and tamari; bake at 400\u00b0F until crisp.",
+        "timerSec": 900
+      },
+      {
+        "text": "Simmer sweet potatoes until tender; cool and cube.",
+        "timerSec": 1500
+      },
+      {
+        "text": "Steam broccoli; rinse cold.",
+        "timerSec": 180
+      },
+      {
+        "text": "Whisk dressing with warm water until creamy."
+      },
+      {
+        "text": "Assemble bowls; drizzle dressing."
+      }
+    ],
+    "dataFlags": [
+      "Macros estimated",
+      "Real time likely >45 min (sweet potatoes must cool)"
+    ]
+  },
+  {
+    "id": "m06-shrimp-vegetable-skillet",
+    "title": "Shrimp and Vegetables Skillet",
+    "mealType": "main",
+    "minutes": 20,
+    "difficulty": "easy",
+    "servings": 4,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 333,
+      "protein": 47.3,
+      "carbs": 11.1,
+      "fat": 12.3
+    },
+    "source": {
+      "name": "Cookin' with Mima",
+      "url": "https://www.cookinwithmima.com/wprm_print/shrimp-and-vegetables-skillet"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "shrimp",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "lime",
+        "qty": 1.5,
+        "role": "core",
+        "qtyNote": "3 Tbsp juice"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "red-onion",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "1 small"
+      },
+      {
+        "ingredientId": "zucchini",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "1 large"
+      },
+      {
+        "ingredientId": "yellow-squash",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "bell-pepper",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "1 large red"
+      },
+      {
+        "ingredientId": "parsley",
+        "qty": 2,
+        "role": "garnish",
+        "qtyNote": "optional"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "chili-seasoning",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "paprika",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "cumin",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Pat shrimp dry; toss with marinade (optional rest up to 30 min)."
+      },
+      {
+        "text": "Cut vegetables."
+      },
+      {
+        "text": "Cook vegetables until golden; set aside."
+      },
+      {
+        "text": "Cook shrimp in same pan, flipping halfway.",
+        "timerSec": 360
+      },
+      {
+        "text": "Return vegetables; heat together.",
+        "timerSec": 60
+      }
+    ],
+    "dataFlags": [
+      "Uses packaged chili seasoning",
+      "Source URL is the print page"
+    ]
+  },
+  {
+    "id": "m07-lentil-mushroom-ragu",
+    "title": "Lentil and Mushroom Ragu",
+    "mealType": "main",
+    "minutes": 45,
+    "difficulty": "medium",
+    "servings": 2,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 515,
+      "protein": 30,
+      "carbs": null,
+      "fat": null
+    },
+    "source": {
+      "name": "Get The Gloss (Emma Bardwell)",
+      "url": "https://www.getthegloss.com/health/recipe/emma-bardwell-recipe-lentil-and-mushroom-ragu/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "red-lentil-spaghetti",
+        "qty": 125,
+        "role": "core"
+      },
+      {
+        "ingredientId": "mushrooms",
+        "qty": 10.5,
+        "role": "core",
+        "qtyNote": "300 g"
+      },
+      {
+        "ingredientId": "red-onion",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "garlic",
+        "qty": 2,
+        "role": "core"
+      },
+      {
+        "ingredientId": "tomato",
+        "qty": 3,
+        "role": "core"
+      },
+      {
+        "ingredientId": "puy-lentils-cooked",
+        "qty": 250,
+        "role": "core"
+      },
+      {
+        "ingredientId": "basil",
+        "qty": 1,
+        "role": "garnish"
+      },
+      {
+        "ingredientId": "olive-oil",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "chicken-broth",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "2 tsp vegetable stock powder; staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Brown mushrooms in oil; set aside.",
+        "timerSec": 600
+      },
+      {
+        "text": "Cook pasta; keep a mug of pasta water."
+      },
+      {
+        "text": "Soften onion, then garlic, then tomatoes.",
+        "timerSec": 300
+      },
+      {
+        "text": "Add mushrooms, lentils, stock and ~200 ml pasta water; simmer thick.",
+        "timerSec": 300
+      },
+      {
+        "text": "Serve over pasta with basil."
+      }
+    ],
+    "dataFlags": [
+      "Carbs and fat not stated",
+      "Relies on packaged red lentil spaghetti"
+    ]
+  },
+  {
+    "id": "m08-spinach-tomato-tuna-salad",
+    "title": "Spinach and Tomato Tuna Salad with Greek Yogurt",
+    "mealType": "main",
+    "minutes": 10,
+    "difficulty": "easy",
+    "servings": 2,
+    "tags": [
+      "high-protein",
+      "main"
+    ],
+    "macrosPerServing": {
+      "kcal": 256,
+      "protein": 34,
+      "carbs": 3,
+      "fat": 11
+    },
+    "source": {
+      "name": "4 Sons 'R' Us",
+      "url": "https://4sonrus.com/spinach-tomato-tuna-salad-sandwiches/"
+    },
+    "ingredients": [
+      {
+        "ingredientId": "tuna-canned",
+        "qty": 1,
+        "role": "core",
+        "qtyNote": "7 oz can"
+      },
+      {
+        "ingredientId": "spinach",
+        "qty": 1,
+        "role": "core"
+      },
+      {
+        "ingredientId": "greek-yogurt",
+        "qty": 0.33,
+        "role": "core"
+      },
+      {
+        "ingredientId": "mozzarella",
+        "qty": 0.25,
+        "role": "core"
+      },
+      {
+        "ingredientId": "tomato",
+        "qty": 1.5,
+        "role": "core",
+        "qtyNote": "1\u20132 Roma"
+      },
+      {
+        "ingredientId": "lemon",
+        "qty": 0.15,
+        "role": "core",
+        "qtyNote": "1 tsp juice"
+      },
+      {
+        "ingredientId": "salt",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      },
+      {
+        "ingredientId": "black-pepper",
+        "qty": 0,
+        "role": "core",
+        "qtyNote": "staple, amount not tracked"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Whisk yogurt with lemon juice."
+      },
+      {
+        "text": "Mix tuna, spinach, mozzarella, tomatoes."
+      },
+      {
+        "text": "Fold in dressing; season."
+      },
+      {
+        "text": "Serve in lettuce wraps, bread or crackers."
+      }
+    ],
+    "dataFlags": [
+      "Small family blog \u2014 consider Born Fitness backup"
+    ]
+  }
+]
