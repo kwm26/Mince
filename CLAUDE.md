@@ -10,7 +10,7 @@ Favor clarity, polish and a working optimizer over breadth.
 ## Core workflow: Pin → Solve → Steer
 1. **Pin:** the user pins meals they want on specific days and sets constraints (busy days / max cooking minutes, a daily protein target).
 2. **Solve:** the optimizer fills the rest of the week, minimizing waste while hitting macro targets. Shown as week day rows with stats (protein per day, packs wasted, reuse rate).
-3. **Steer:** dragging or swapping a meal previews its cost **before** committing (waste Δ, protein Δ, cooking-time Δ). Every chosen meal can explain why it's there.
+3. **Steer:** moving, swapping or removing a meal previews its cost **before** committing (waste Δ, protein Δ, cooking-time Δ); priority sliders (waste, protein, cooking time) re-solve. Every chosen meal can explain why it's there.
 
 ## Source of truth
 - Product: `docs/brief.md`
@@ -33,7 +33,7 @@ Favor clarity, polish and a working optimizer over breadth.
 ```
 data/            ingredients.json, recipes.json
 src/types.ts     types mirroring docs/data-model.md
-src/lib/         model.ts (builds the MILP), solve.worker.ts, greedy.ts, waste.ts, schedule.ts, preview.ts, explain.ts, graph.ts, lenses.ts (+ *.test.ts)
+src/lib/         model.ts (builds the MILP), solve.ts (+ solve.worker.ts, a thin wrapper), greedy.ts, waste.ts, schedule.ts, preview.ts, explain.ts, graph.ts, lenses.ts, kitchen.ts (+ *.test.ts)
 src/screens/     Kitchen.tsx, Plan.tsx (Pin → Solve → Steer; Week / Map toggle with lenses), Cook.tsx
 src/components/  small, presentational
 src/styles/      tokens.css, base.css
@@ -44,7 +44,7 @@ src/styles/      tokens.css, base.css
 - **Preview before commit:** any edit to the plan shows its cost delta before it's applied.
 - **Kitchen-first UX:** tap targets ≥ 48px, body ≥ 17px in Cook mode, primary actions in the thumb zone, screen wake lock in Cook mode (fail silently).
 - Light and dark themes via tokens; WCAG AA contrast.
-- Every list has an empty state; solving has loading, infeasible ("can't hit 180 g protein with these pins") and error states.
+- Every list has an empty state; solving has loading, infeasible (a pin conflict, e.g. "Mon: pinned meals need 75 min, limit is 60"), protein-short ("12 g/day short of 150 g": a warning on a valid plan, never infeasible) and error states.
 - Pure functions in `src/lib/`; no React imports there.
 - Macros come only from the recipe data. Never invent nutrition values, recipes or URLs.
 - No new dependencies without saying why in the commit message.

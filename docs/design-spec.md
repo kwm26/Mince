@@ -80,6 +80,7 @@ Terracotta (action) and green (shared) are close in visual weight. Every coloure
 | Big numbers (stat, timer, step counter, day date) | Playfair Display | 40–44px, *italic* | `font-variant-numeric: tabular-nums` on the timer |
 | Body | Public Sans | 16px / 400, line-height 1.5 | — |
 | Buttons | Public Sans | 17px / 700 | — |
+| Chip label (on-hand chips, lens chips) | Public Sans | 15px / 500–600 | On-hand 500, lens chips 600 |
 | Metadata | Public Sans | 13px / 400–600 | `--color-text-muted` |
 | Labels (eyebrows, tab names, day names) | Public Sans | 12px / 700, uppercase, +0.12em tracking | Never smaller than 12px |
 
@@ -156,14 +157,18 @@ A 1px rule on top. A 48px date column holds the label (MON) and an italic serif 
 A muted label, the big number in italic serif, and a meter: 14px tall, 2px ink border, accent fill with a 2px ink right edge.
 
 ### Shared-ingredient graph
-Drawn by `d3-force` to SVG.
+Drawn by `d3-force` to SVG. These are the base node styles; the full Plan map, its lenses and its text list are in §11. Single-use ingredient nodes only appear when the map includes them (off by default).
 - **Recipe node:** radius 17, primary fill, 2.5px ink stroke.
 - **Shared ingredient node:** radius 10, accent fill, 2px ink stroke.
 - **Single-use ingredient node:** radius 8, surface-2 fill, 1.5px muted stroke.
 - **Edges:** to a shared ingredient, 2px in `--color-text`; to a single-use one, 2px in `--color-graph-link`.
-- **Labels:** Public Sans, 11–12px / 600, in `--color-text`. This is the one exception to the 12px floor, and only because the graph is supplementary: every fact in it is also listed in the day rows.
+- **Labels:** Public Sans, 11–12px / 600, in `--color-text`. This is the one exception to the 12px floor, and only because the graph is supplementary: every fact in it is also in text (the day rows, or the lens list under the map).
 - **Legend:** always visible, swatches with 2px ink borders.
 - **Accessibility:** give the SVG `role="img"` and an `aria-label` sentence describing what is shared.
+
+### Steer: preview sheet and priorities
+- **Preview sheet** (move, swap or remove): reading layer, h3 title naming the edit, then three Stat-style rows: Δ waste (packs), Δ protein (on the affected days), Δ cooking time. Each Δ shows a sign and a word ("−0.4 packs, less waste"), never colour alone. Primary "Apply" and secondary "Cancel" in the bottom dock. After Apply re-solves, the sheet shows "Re-solved:" with the final Δs under the preview's.
+- **Priorities:** three sliders (Waste, Protein, Cooking time) in a collapsible "Priorities" section above the day rows. Track 14px tall with a 2px ink border (like the meter), thumb 28px with a 3px ink outline and `--shadow-control`, and a 48px-tall hit area. Each slider has a visible label and its value in words (Low / Medium / High). Releasing a slider re-solves; the Plan button shows the loading state meanwhile.
 
 ### Tab bar
 Three items (Kitchen, Plan, Cook), each 56px tall, on `--color-bg` with a 1px rule on top.
@@ -185,6 +190,8 @@ Every list needs all three. They use the reading layer: an h2, one muted sentenc
 - **Kitchen empty:** "Nothing on hand yet", then "Add what's in your fridge" with an Add button.
 - **Planner empty:** "No meals planned", with a button to pick recipes.
 - **Error:** say what failed and offer Retry. The error colour is text in `--color-warn-text` with an icon, never colour alone.
+- **Infeasible (Plan):** h2 "These pins don't fit", the solver's reason as the muted sentence ("Mon: pinned meals need 75 min, limit is 60"), and a primary button to edit pins.
+- **Protein short (Plan):** not an error. The plan shows as normal, with a use-soon-style warn tag on the protein stat ("12 g/day short") and one muted sentence suggesting a lever (raise the Protein priority, or unpin a low-protein meal).
 
 ---
 

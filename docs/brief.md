@@ -17,12 +17,12 @@ Me: someone who lifts, cooks for one, and is still learning to cook. Pack sizes 
 Recipes come one at a time, but ingredients come in packs, and each pack has an expiry date. Planning a week is an **optimization problem**: choose meals and cook days so every pack gets used before it expires, while still hitting macro targets. People do this badly in their heads; a solver does it well, *if* it explains itself and lets you overrule it.
 
 ## Core workflow: Pin → Solve → Steer (lives on the Plan tab)
-1. **Pin:** pin meals you want on specific days, and set constraints: a daily protein target, busy days (max cooking minutes), and what's already in the kitchen.
-2. **Solve:** Mince picks and schedules the remaining batches to minimize waste while hitting protein. Results show as day rows, plus stats: protein per day, packs wasted, reuse rate.
-3. **Steer:** move, swap or remove a meal and see the cost (Δ waste, Δ protein) **before** committing. Every meal shows *why* it was chosen.
+1. **Pin:** pin meals you want on specific days, and set constraints: a daily protein target (default 150 g), busy days (max cooking minutes), and what's already in the kitchen.
+2. **Solve:** Mince picks and schedules the remaining batches to minimize waste while hitting protein. Results show as day rows, plus stats: protein per day, packs wasted, reuse rate. If the protein target can't be reached, the plan still shows, with how far short it is.
+3. **Steer:** move, swap or remove a meal and see the cost (Δ waste, Δ protein, Δ cooking time) **before** committing. Priority sliders (waste, protein, cooking time) re-solve the week. Every meal shows *why* it was chosen.
 
 ## Screens (match the design spec's tab bar)
-- **Kitchen:** what I have, with use-soon tags; recipes ranked by overlap with my kitchen.
+- **Kitchen:** what I have, with use-soon tags; recipes ranked by how many of my perishables they use, soonest-expiring first.
 - **Plan:** Pin → Solve → Steer; **Week / Map** toggle (week day rows + stats, or the ingredient map with lenses).
 - **Cook:** focus mode with steps, timers, wake lock.
 
@@ -34,7 +34,7 @@ One node map of my data: **recipes** and **ingredients** as nodes, "uses" as edg
 | This week | How does my plan connect? | "Your 6 batches share 9 ingredients" |
 | Hubs | What's safe to buy? | "Garlic, lemon and broccoli link 6+ recipes" |
 | Freshness | What's about to turn? | "Spinach expires in 2 days; 3 recipes can use it" |
-| Waste | Where does my leftover go? | "Add the frittata Thu → −0.6 packs" |
+| Waste | Where does my leftover go? | "Swap in the frittata Thu → −0.6 packs" |
 | Protein | What feeds my goal? | "14 recipes hit ≥ 30 g per serving" |
 | Families | What should I cook together? | "Cilantro–lime family: plan inside it to waste least" |
 
@@ -43,8 +43,8 @@ Interactions: tap a node to focus it and its neighbours (facts in a bottom sheet
 **Where it lives:** the Plan tab has a **Week / Map** toggle; Kitchen links into the map ("See on map").
 
 ## Success metric
-**Ingredient reuse rate:** share of purchased perishables used in ≥ 2 planned batches. Supporting metrics: packs wasted per week, and days the protein target is hit.
-**Demo proof:** the optimal plan vs. the greedy baseline vs. "pick 3 recipes yourself" on the same week.
+**Ingredient reuse rate:** share of the perishables a plan uses (bought or already on hand) that go into ≥ 2 different recipes. Supporting metrics: packs wasted per week, and days the protein target is hit.
+**Demo proof:** the optimal plan vs. the greedy baseline on the same week. "Pick 3 recipes yourself" is the story told around it, not a feature.
 
 ## Data
 24 real recipes (4 breakfasts, 20 mains) from dietitian, fitness and recipe sites, with macros as published and sources linked. See `docs/recipes-research.md`. Shelf lives and pack sizes are **estimates** (flagged in the data).
@@ -58,5 +58,5 @@ Accounts, sync, a backend, prices or cost optimization, recipe import or scrapin
 3. Ingredient map with **This week, Hubs and Waste** lenses ← core insight layer
 4. Remaining lenses: Freshness, Protein, Families
 5. Cook mode timers
-6. Greedy-vs-optimal comparison view
+6. Greedy-vs-optimal comparison view (if cut, the demo shows the two plans' stats side by side)
 7. Dark mode polish
