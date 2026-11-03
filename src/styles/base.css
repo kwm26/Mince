@@ -1,0 +1,70 @@
+/* Base element styles. Values come from tokens.css only. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  transition: background-color var(--duration-theme) ease, color var(--duration-theme) ease;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--leading-snug);
+}
+
+h1 { font-size: var(--text-h1); line-height: var(--leading-tight); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+
+p {
+  margin: 0;
+}
+
+/* Layout (design-spec §6): mobile first, 20px gutter, 480px column above 768px. */
+.screen {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+}
+
+.eyebrow {
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.accent {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.muted {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+:focus-visible {
+  outline: var(--stroke-control) solid var(--color-ring);
+  outline-offset: 2px;
+}
