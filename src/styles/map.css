@@ -1,0 +1,464 @@
+/* Ingredient map & lenses (design-spec §5 "Shared-ingredient graph", §11).
+ * Tokens only: no raw hex, no px font sizes; strokes are 1 / 2 / 3px only. */
+
+.map-view {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+/* ── Key sentence: the insight ── */
+.map-key {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.map-sentence {
+  font-size: var(--text-h2);
+  font-variant-numeric: lining-nums;
+}
+
+.map-how {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+/* ── Focus bar ── */
+.map-focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: var(--stroke-rule) solid var(--color-rule);
+}
+
+.map-focus p {
+  min-width: 0;
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+}
+
+.map-focus .eyebrow {
+  margin-right: var(--space-1);
+}
+
+/* ── Canvas ── */
+.map-frame {
+  position: relative;
+}
+
+.map-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  touch-action: pan-y;               /* the page scrolls until you zoom in */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.map-canvas.is-zoomed {
+  touch-action: none;
+}
+
+.map-canvas circle,
+.map-canvas line,
+.map-canvas path,
+.map-canvas rect {
+  vector-effect: non-scaling-stroke;
+}
+
+.map-bg {
+  fill: transparent;
+}
+
+.map-reset {
+  position: absolute;
+  top: var(--space-2);
+  right: 0;
+}
+
+/* Family hulls */
+.map-hull path {
+  fill: var(--color-surface-2);
+  stroke: var(--color-rule);
+  stroke-width: var(--stroke-rule);
+  opacity: 0.6;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.map-hull.is-high path {
+  opacity: 1;
+}
+
+.map-hull-label {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  fill: var(--color-text-muted);
+  paint-order: stroke;
+  stroke: var(--color-bg);
+  stroke-width: var(--stroke-control);
+  stroke-linejoin: round;
+}
+
+/* Edges */
+.map-edge {
+  stroke: var(--color-text);
+  stroke-width: var(--stroke-tag);
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.map-edge--single {
+  stroke: var(--color-graph-link);
+}
+
+.map-edge--high { opacity: 0.9; }
+.map-edge--normal { opacity: 0.22; }
+.map-edge--dim { opacity: 0.08; }
+
+.map-ghost {
+  stroke: var(--color-primary);
+  stroke-width: var(--stroke-tag);
+  stroke-dasharray: 6 4;
+}
+
+/* Nodes */
+.map-node {
+  cursor: pointer;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.map-node.is-dim {
+  opacity: 0.25;
+}
+
+.map-hit {
+  fill: transparent;
+}
+
+.map-node-body {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.map-dot {
+  stroke: var(--color-ink);
+  stroke-width: var(--stroke-tag);
+}
+
+.map-node--recipe .map-dot { fill: var(--color-primary); }
+.map-node--shared .map-dot { fill: var(--color-accent); }
+
+.map-node--single .map-dot {
+  fill: var(--color-surface-2);
+  stroke: var(--color-text-muted);
+  stroke-width: var(--stroke-rule);
+}
+
+.map-node.is-selected .map-dot {
+  stroke: var(--color-ink);
+  stroke-width: var(--stroke-control);
+}
+
+.map-ring {
+  fill: none;
+  stroke: var(--color-ring);
+  stroke-width: var(--stroke-tag);
+}
+
+/* Labels, badges and pills sit above every node */
+.map-labels {
+  pointer-events: none;
+}
+
+.map-label,
+.map-badge text,
+.map-ghost-pill text {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--weight-strong);
+}
+
+.map-label {
+  fill: var(--color-text);
+  paint-order: stroke;
+  stroke: var(--color-bg);
+  stroke-width: var(--stroke-control);
+  stroke-linejoin: round;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.map-badge rect {
+  fill: var(--color-warn-bg);
+  stroke: var(--color-ink);
+  stroke-width: var(--stroke-tag);
+}
+
+.map-badge text {
+  fill: var(--color-warn-text);
+}
+
+.map-ghost-pill rect {
+  fill: var(--color-bg);
+  stroke: var(--color-ink);
+  stroke-width: var(--stroke-tag);
+}
+
+.map-ghost-pill text {
+  fill: var(--color-text);
+  font-variant-numeric: lining-nums;
+}
+
+/* ── Legend: always visible ── */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-small);
+  color: var(--color-text);
+}
+
+.map-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.map-legend-swatch {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.map-legend-swatch circle,
+.map-legend-swatch rect,
+.map-legend-swatch line {
+  stroke: var(--color-ink);
+  stroke-width: var(--stroke-tag);
+}
+
+.map-legend-recipe { fill: var(--color-primary); }
+.map-legend-recipe.is-dim { opacity: 0.25; }
+.map-legend-shared { fill: var(--color-accent); }
+
+.map-legend-swatch .map-legend-single {
+  fill: var(--color-surface-2);
+  stroke: var(--color-text-muted);
+  stroke-width: var(--stroke-rule);
+}
+
+.map-legend-size { fill: var(--color-surface-2); }
+
+.map-legend-swatch .map-legend-ghost {
+  stroke: var(--color-primary);
+  stroke-dasharray: 4 3;
+}
+
+.map-legend-swatch .map-legend-hull {
+  fill: var(--color-surface-2);
+  stroke: var(--color-rule);
+  stroke-width: var(--stroke-rule);
+}
+
+.map-legend-tag {
+  padding: 0 var(--space-1);
+  font-size: var(--text-label);
+  font-weight: var(--weight-strong);
+  color: var(--color-warn-text);
+  background: var(--color-warn-bg);
+  border: var(--stroke-tag) solid var(--color-ink);
+  border-radius: var(--radius-xs);
+}
+
+/* ── Text list: the accessible equivalent ── */
+.map-words {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.map-list,
+.map-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map-list li {
+  padding: var(--space-3) 0;
+  border-top: var(--stroke-rule) solid var(--color-rule);
+  overflow-wrap: anywhere;
+}
+
+/* ── Bottom sheet: reading layer ── */
+.map-sheet {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: grid;
+  gap: var(--space-3);
+  max-width: 480px;
+  max-height: 60vh;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-bg);
+  border-top: var(--stroke-rule) solid var(--color-rule);
+}
+
+.map-sheet h3 {
+  padding-right: calc(var(--tap-min) + var(--space-2));
+}
+
+.map-sheet h3:focus {
+  outline: none;
+}
+
+.map-sheet h3:focus-visible {
+  outline: var(--stroke-control) solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+.map-sheet-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-5);
+}
+
+.map-sheet-sub {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-label);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.map-rows li {
+  display: grid;
+  gap: 0;
+  padding: var(--space-2) 0;
+  border-top: var(--stroke-rule) solid var(--color-rule);
+}
+
+.map-row-title {
+  font-weight: var(--weight-medium);
+}
+
+.map-add {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.map-warn {
+  font-size: var(--text-small);
+  font-weight: var(--weight-strong);
+  color: var(--color-warn-text);
+}
+
+.map-preview {
+  display: grid;
+  margin: 0;
+}
+
+.map-preview div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: var(--stroke-rule) solid var(--color-rule);
+}
+
+.map-preview dt {
+  font-size: var(--text-label);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.map-preview dd {
+  margin: 0;
+  text-align: right;
+  font-weight: var(--weight-medium);
+  font-variant-numeric: lining-nums;
+}
+
+/* ── Buttons (signal layer, design-spec §5) ── */
+.map-actions {
+  display: grid;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+}
+
+.map-actions--split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+}
+
+.map-btn,
+.map-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-strong);
+  border: var(--stroke-control) solid var(--color-ink);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-control);
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.map-btn {
+  min-height: var(--button-height);
+  padding: 0 var(--space-4);
+}
+
+.map-btn--small {
+  min-height: var(--tap-min);
+  font-size: var(--text-chip);
+  white-space: nowrap;
+}
+
+.map-btn--primary {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+}
+
+.map-btn--secondary,
+.map-icon-btn {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.map-icon-btn {
+  width: var(--tap-min);
+  height: var(--tap-min);
+  padding: 0;
+}
+
+.map-btn:active:not(:disabled),
+.map-icon-btn:active {
+  transform: translate(var(--press-offset), var(--press-offset));
+  box-shadow: var(--shadow-control-pressed);
+}
+
+.map-btn:disabled {
+  opacity: 0.4;
+  box-shadow: none;
+  cursor: not-allowed;
+}
