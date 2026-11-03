@@ -29,6 +29,7 @@
   --color-ring: #9A3412;          /* focus ring */
   --color-track: #EFE5D9;         /* empty progress / meter */
   --color-graph-link: #E3D6C8;    /* graph edge to a single-use ingredient */
+  --color-scrim: rgb(31 26 23 / 0.45); /* behind a bottom sheet */
 
   /* ── Colour: recipe thumbnails (decorative tints) ── */
   --color-thumb-1: #FBE3CF;
@@ -123,6 +124,7 @@
     --color-ring: #FDBA74;
     --color-track: #33281F;
     --color-graph-link: #43362D;
+    --color-scrim: rgb(0 0 0 / 0.6);
     --color-thumb-1: #4A2614;
     --color-thumb-2: #123D2C;
     --color-thumb-3: #45350F;
@@ -148,6 +150,7 @@
   --color-ring: #FDBA74;
   --color-track: #33281F;
   --color-graph-link: #43362D;
+  --color-scrim: rgb(0 0 0 / 0.6);
   --color-thumb-1: #4A2614;
   --color-thumb-2: #123D2C;
   --color-thumb-3: #45350F;
