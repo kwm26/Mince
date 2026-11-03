@@ -5,12 +5,12 @@ Context for Claude Code. Read this before every task.
 ## What this is
 Mince plans a week of **healthy, high-protein meals for bodybuilding** around **shared ingredients**, so perishables get used before they expire and nothing goes to waste. The core is an **optimizer**: the user pins what they want, Mince solves the rest of the week, and the user steers it with live trade-off feedback.
 
-Built for a 3-hour design challenge: favor clarity, polish and a working optimizer over breadth.
+Favor clarity, polish and a working optimizer over breadth.
 
 ## Core workflow: Pin → Solve → Steer
-1. **Pin:** the user pins meals they want on specific days and sets constraints (busy nights / max minutes, daily protein and calorie targets).
+1. **Pin:** the user pins meals they want on specific days and sets constraints (busy days / max cooking minutes, a daily protein target).
 2. **Solve:** the optimizer fills the rest of the week, minimizing waste while hitting macro targets. Shown as week day rows with stats (protein per day, packs wasted, reuse rate).
-3. **Steer:** dragging or swapping a meal previews its cost **before** committing (waste Δ, protein Δ, cost Δ). Every chosen meal can explain why it's there.
+3. **Steer:** dragging or swapping a meal previews its cost **before** committing (waste Δ, protein Δ, cooking-time Δ). Every chosen meal can explain why it's there.
 
 ## Source of truth
 - Product: `docs/brief.md`

@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="en" data-style="clay" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mince Style Explorations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&family=Lexend+Mega:wght@500;700;800&family=Public+Sans:wght@400;600;700;800&family=Outfit:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+  Mince — UI style explorations (reference only, see CLAUDE.md: rebuild as React, never paste in).
+  Directions sourced from the ui-ux-pro-max skill databases (styles.csv, typography.csv, colors.csv).
+  Recipe names and quantities are placeholder copy for layout only — real data comes from data/.
+-->
+<style>
+/* ───────────────────────── Page chrome (neutral, not part of any style) ───────────────────────── */
+:root {
+  --chrome-bg: #ECEAE6;
+  --chrome-surface: #FFFFFF;
+  --chrome-text: #1C1B1A;
+  --chrome-muted: #5E5A55;
+  --chrome-border: #D8D4CE;
+  --chrome-bezel: #1C1B1A;
+}
+:root[data-theme="dark"] {
+  --chrome-bg: #0E0E0E;
+  --chrome-surface: #1A1A1A;
+  --chrome-text: #EDEDED;
+  --chrome-muted: #A3A3A3;
+  --chrome-border: #2E2E2E;
+  --chrome-bezel: #3A3A3A;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--chrome-bg);
+  color: var(--chrome-text);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  transition: background-color .25s ease;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--ring, #2563EB); outline-offset: 2px; }
+
+.page { max-width: 1280px; margin: 0 auto; padding: 24px 16px 64px; }
+.page-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between; margin-bottom: 20px; }
+.page-head h1 { margin: 0; font-size: 22px; letter-spacing: -0.01em; }
+.page-head p { margin: 4px 0 0; color: var(--chrome-muted); max-width: 60ch; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.style-tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; background: var(--chrome-surface); border: 1px solid var(--chrome-border); border-radius: 12px; }
+.style-tab { min-height: 44px; padding: 0 14px; border: 0; border-radius: 9px; background: transparent; color: var(--chrome-muted); font-weight: 600; }
+.style-tab[aria-selected="true"] { background: var(--chrome-text); color: var(--chrome-bg); }
+.theme-toggle { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; background: var(--chrome-surface); border: 1px solid var(--chrome-border); border-radius: 12px; font-weight: 600; }
+.theme-toggle svg { width: 18px; height: 18px; }
+
+.brief { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 20px; background: var(--chrome-surface); border: 1px solid var(--chrome-border); border-radius: 16px; padding: 20px; margin-bottom: 28px; }
+.brief h2 { margin: 0 0 4px; font-size: 20px; }
+.brief .source { margin: 0 0 12px; color: var(--chrome-muted); font-size: 13px; }
+.brief h3 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--chrome-muted); }
+.brief ul { margin: 0; padding-left: 18px; }
+.brief li { margin-bottom: 4px; }
+.swatches { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.swatch { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--chrome-border); position: relative; }
+.swatch span { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--chrome-muted); white-space: nowrap; }
+.type-sample { margin-top: 30px; font-size: 13px; color: var(--chrome-muted); }
+.type-sample b { display: block; color: var(--chrome-text); font-size: 22px; font-weight: 600; font-family: var(--font-head); line-height: 1.2; }
+@media (max-width: 900px) { .brief { grid-template-columns: 1fr; } }
+
+.phones { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+.phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.phone-label { font-size: 13px; font-weight: 600; color: var(--chrome-muted); text-transform: uppercase; letter-spacing: .08em; }
+.phone { width: 375px; max-width: 100%; height: 780px; border-radius: 44px; padding: 10px; background: var(--chrome-bezel); box-shadow: 0 24px 48px -16px rgba(0,0,0,.35); }
+
+/* ───────────────────────── Style tokens ───────────────────────── */
+
+/* 1 · Warm Clay — Claymorphism + "Recipe & Cooking App" palette + Varela Round / Nunito Sans */
+[data-style="clay"] {
+  --font-head: "Varela Round", system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+  --head-weight: 400; --head-tracking: -0.01em; --head-transform: none;
+  --h1: 28px;
+  --bg: #FFFBEB; --surface: #FFFFFF; --surface-2: #F8F2F0;
+  --text: #0F172A; --text-muted: #57534E;
+  --primary: #9A3412; --on-primary: #FFFFFF;
+  --accent: #059669; --on-accent: #03140E;
+  --warn-bg: #FFEDD5; --warn-text: #7C2D12;
+  --border: #F2E6E2; --border-w: 3px; --ring: #9A3412;
+  --radius: 24px; --radius-sm: 16px; --radius-btn: 20px;
+  --shadow: 8px 8px 18px rgba(154, 52, 18, .12), -6px -6px 14px rgba(255, 255, 255, .9), inset 0 -3px 0 rgba(154, 52, 18, .06);
+  --btn-shadow: 0 6px 0 #6C240C, 0 10px 20px rgba(154, 52, 18, .25);
+  --btn-border: 0;
+  --thumb-1: #FED7AA; --thumb-2: #BBF7D0; --thumb-3: #FDE68A; --thumb-ink: #7C2D12;
+  --graph-link: #E7D5CC; --track: #F2E6E2;
+}
+[data-style="clay"][data-theme="dark"] {
+  --bg: #1C120E; --surface: #2A1C16; --surface-2: #35241C;
+  --text: #FDF2E9; --text-muted: #D6C3B6;
+  --primary: #FDBA74; --on-primary: #2A1508;
+  --accent: #34D399; --on-accent: #03140E;
+  --warn-bg: #4A2512; --warn-text: #FED7AA;
+  --border: #3E2A20; --ring: #FDBA74;
+  --shadow: 6px 6px 16px rgba(0, 0, 0, .45), -4px -4px 12px rgba(255, 220, 200, .04), inset 0 -3px 0 rgba(0, 0, 0, .25);
+  --btn-shadow: 0 6px 0 #B45309, 0 10px 20px rgba(0, 0, 0, .4);
+  --thumb-1: #5A2D17; --thumb-2: #12432F; --thumb-3: #4D3A0E; --thumb-ink: #FED7AA;
+  --graph-link: #4A3328; --track: #3E2A20;
+}
+
+/* 2 · Cookbook — Minimalism & Swiss + "Classic Elegant" (Playfair Display / Inter) */
+[data-style="editorial"] {
+  --font-head: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --head-weight: 500; --head-tracking: -0.015em; --head-transform: none;
+  --h1: 34px;
+  --bg: #FAF7F2; --surface: transparent; --surface-2: #F0EBE3;
+  --text: #1A1917; --text-muted: #5C5750;
+  --primary: #1A1917; --on-primary: #FAF7F2;
+  --accent: #B91C1C; --on-accent: #FFFFFF;
+  --warn-bg: transparent; --warn-text: #B91C1C;
+  --border: #1A1917; --border-w: 1px; --ring: #B91C1C;
+  --radius: 0px; --radius-sm: 0px; --radius-btn: 2px;
+  --shadow: none; --btn-shadow: none; --btn-border: 0;
+  --thumb-1: #E9E1D5; --thumb-2: #E9E1D5; --thumb-3: #E9E1D5; --thumb-ink: #1A1917;
+  --graph-link: #C9C1B5; --track: #E2DBD0;
+}
+[data-style="editorial"][data-theme="dark"] {
+  --bg: #141210; --surface: transparent; --surface-2: #211E1A;
+  --text: #F3EEE6; --text-muted: #B3AA9D;
+  --primary: #F3EEE6; --on-primary: #141210;
+  --accent: #F87171; --on-accent: #1A0A0A;
+  --warn-text: #F87171;
+  --border: #F3EEE6; --ring: #F87171;
+  --thumb-1: #2A2622; --thumb-2: #2A2622; --thumb-3: #2A2622; --thumb-ink: #F3EEE6;
+  --graph-link: #4A443C; --track: #2E2A25;
+}
+
+/* 3 · Market Stall — Neubrutalism + "Neubrutalist Bold" (Lexend Mega / Public Sans) */
+[data-style="brutal"] {
+  --font-head: "Lexend Mega", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, sans-serif;
+  --head-weight: 800; --head-tracking: -0.06em; --head-transform: none;
+  --h1: 24px;
+  --bg: #FFF4D6; --surface: #FFFFFF; --surface-2: #FFFFFF;
+  --text: #000000; --text-muted: #3A3A3A;
+  --primary: #FFD23F; --on-primary: #000000;
+  --accent: #FF6B6B; --on-accent: #000000;
+  --herb: #4ECDC4;
+  --warn-bg: #FF6B6B; --warn-text: #000000;
+  --border: #000000; --border-w: 3px; --ring: #2563EB;
+  --radius: 8px; --radius-sm: 6px; --radius-btn: 8px;
+  --shadow: 4px 4px 0 #000000;
+  --btn-shadow: 5px 5px 0 #000000;
+  --btn-border: 3px solid #000000;
+  --thumb-1: #FF6B6B; --thumb-2: #4ECDC4; --thumb-3: #FFD23F; --thumb-ink: #000000;
+  --graph-link: #000000; --track: #FFFFFF;
+}
+[data-style="brutal"][data-theme="dark"] {
+  --bg: #121212; --surface: #1E1E1E; --surface-2: #1E1E1E;
+  --text: #F5F5F5; --text-muted: #CFCFCF;
+  --border: #F5F5F5; --ring: #FFD23F;
+  --shadow: 4px 4px 0 #F5F5F5;
+  --btn-shadow: 5px 5px 0 #F5F5F5;
+  --btn-border: 3px solid #F5F5F5;
+  --graph-link: #F5F5F5; --track: #121212;
+}
+
+/* 4 · Night Shift — Bento Box Grid + Dark Mode (OLED) + "Geometric Modern" (Outfit / Work Sans) */
+[data-style="bento"] {
+  --font-head: "Outfit", system-ui, sans-serif;
+  --font-body: "Work Sans", system-ui, sans-serif;
+  --head-weight: 600; --head-tracking: -0.02em; --head-transform: none;
+  --h1: 30px;
+  --bg: #F5F5F7; --surface: #FFFFFF; --surface-2: #EEF0EC;
+  --text: #111412; --text-muted: #52605A;
+  --primary: #3F6212; --on-primary: #FFFFFF;
+  --accent: #C2410C; --on-accent: #FFFFFF;
+  --warn-bg: #FFEDD5; --warn-text: #9A3412;
+  --border: rgba(0, 0, 0, .06); --border-w: 1px; --ring: #3F6212;
+  --radius: 26px; --radius-sm: 16px; --radius-btn: 999px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 8px 24px rgba(0, 0, 0, .05);
+  --btn-shadow: none; --btn-border: 0;
+  --thumb-1: #ECFCCB; --thumb-2: #FFEDD5; --thumb-3: #E0F2FE; --thumb-ink: #1A2E05;
+  --graph-link: #D4D9D2; --track: #EEF0EC;
+}
+[data-style="bento"][data-theme="dark"] {
+  --bg: #0A0D0B; --surface: #151B17; --surface-2: #1E2621;
+  --text: #E8F0EA; --text-muted: #9AA8A0;
+  --primary: #A3E635; --on-primary: #0A0D0B;
+  --accent: #FB923C; --on-accent: #0A0D0B;
+  --warn-bg: #3A1F0E; --warn-text: #FDBA74;
+  --border: rgba(255, 255, 255, .07); --ring: #A3E635;
+  --shadow: none;
+  --thumb-1: #1F2E10; --thumb-2: #3A1F0E; --thumb-3: #0C2A3A; --thumb-ink: #E8F0EA;
+  --graph-link: #2D3832; --track: #1E2621;
+}
+
+/* 5 · Cookbook × Clay — Cookbook's serif + paper + restraint, Clay's warm palette + soft rounded controls */
+[data-style="blend"] {
+  --font-head: "Playfair Display", Georgia, serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+  --head-weight: 500; --head-tracking: -0.015em; --head-transform: none;
+  --h1: 32px;
+  --bg: #FAF6EF; --surface: #FFFFFF; --surface-2: #F4ECE2;
+  --text: #1F1A17; --text-muted: #5E564F;
+  --primary: #9A3412; --on-primary: #FFFFFF;
+  --accent: #047857; --on-accent: #FFFFFF;
+  --warn-bg: #FFEDD5; --warn-text: #7C2D12;
+  --border: #E7DDD1; --border-w: 1px; --ring: #9A3412;
+  --radius: 20px; --radius-sm: 14px; --radius-btn: 18px;
+  --shadow: 0 1px 0 rgba(154, 52, 18, .04), 0 12px 24px -14px rgba(154, 52, 18, .22);
+  --btn-shadow: 0 4px 0 #6C240C, 0 8px 16px -6px rgba(154, 52, 18, .35);
+  --btn-border: 0;
+  --thumb-1: #FBE3CF; --thumb-2: #D8F0E3; --thumb-3: #F6E7C1; --thumb-ink: #7C2D12;
+  --graph-link: #E3D6C8; --track: #EFE5D9;
+}
+[data-style="blend"][data-theme="dark"] {
+  --bg: #17120F; --surface: #221A16; --surface-2: #2D231D;
+  --text: #F5EDE4; --text-muted: #C3B5A8;
+  --primary: #FDBA74; --on-primary: #2A1508;
+  --accent: #34D399; --on-accent: #03140E;
+  --warn-bg: #4A2512; --warn-text: #FED7AA;
+  --border: #3A2E27; --ring: #FDBA74;
+  --shadow: 0 12px 24px -14px rgba(0, 0, 0, .6);
+  --btn-shadow: 0 4px 0 #B45309, 0 8px 16px -6px rgba(0, 0, 0, .5);
+  --thumb-1: #4A2614; --thumb-2: #123D2C; --thumb-3: #45350F; --thumb-ink: #FED7AA;
+  --graph-link: #43362D; --track: #33281F;
+}
+
+/* 6 · Cookbook × Market Stall — Cookbook's rules + serif layout; Market Stall's outlines + hard shadows on what you tap;
+   colours from 5 · Cookbook × Clay */
+[data-style="cookstall"] {
+  --font-head: "Playfair Display", Georgia, serif;
+  --font-body: "Public Sans", system-ui, sans-serif;
+  --head-weight: 700; --head-tracking: -0.015em; --head-transform: none;
+  --h1: 34px;
+  --bg: #FAF6EF; --surface: transparent; --surface-2: #F4ECE2;
+  --text: #1F1A17; --text-muted: #5E564F;
+  --primary: #9A3412; --on-primary: #FFFFFF;
+  --accent: #047857; --on-accent: #FFFFFF;
+  --warn-bg: #FFEDD5; --warn-text: #7C2D12;
+  --border: #1F1A17; --border-w: 1px; --ring: #9A3412;
+  --radius: 0px; --radius-sm: 8px; --radius-btn: 8px;
+  --shadow: none;
+  --hard-border: 3px solid #1F1A17; --hard-shadow: 4px 4px 0 #1F1A17;
+  --btn-border: 3px solid #1F1A17; --btn-shadow: 4px 4px 0 #1F1A17;
+  --thumb-1: #FBE3CF; --thumb-2: #D8F0E3; --thumb-3: #F6E7C1; --thumb-ink: #7C2D12;
+  --graph-link: #E3D6C8; --track: #EFE5D9;
+}
+[data-style="cookstall"][data-theme="dark"] {
+  --bg: #17120F; --surface-2: #2D231D;
+  --text: #F5EDE4; --text-muted: #C3B5A8;
+  --primary: #FDBA74; --on-primary: #2A1508;
+  --accent: #34D399; --on-accent: #03140E;
+  --warn-bg: #4A2512; --warn-text: #FED7AA;
+  --border: #F5EDE4; --ring: #FDBA74;
+  --hard-border: 3px solid #F5EDE4; --hard-shadow: 4px 4px 0 #F5EDE4;
+  --btn-border: 3px solid #F5EDE4; --btn-shadow: 4px 4px 0 #F5EDE4;
+  --thumb-1: #4A2614; --thumb-2: #123D2C; --thumb-3: #45350F; --thumb-ink: #FED7AA;
+  --graph-link: #43362D; --track: #33281F;
+}
+
+/* ───────────────────────── App components (shared markup, token-driven) ───────────────────────── */
+.screen {
+  position: relative; height: 100%; border-radius: 34px; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.45;
+  transition: background-color .25s ease, color .25s ease;
+}
+.statusbar { height: 40px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; font-size: 13px; font-weight: 600; }
+.statusbar .dots { display: flex; gap: 4px; }
+.statusbar .dots i { width: 16px; height: 9px; border-radius: 2px; background: currentColor; opacity: .85; }
+.statusbar .dots i:first-child { width: 10px; opacity: .5; }
+
+.appbar { flex: none; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 8px 20px 14px; }
+.eyebrow { margin: 0 0 2px; font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.h1 { margin: 0; font-family: var(--font-head); font-weight: var(--head-weight); font-size: var(--h1); letter-spacing: var(--head-tracking); line-height: 1.1; }
+.h1 em { font-style: normal; }
+.h2 { margin: 0; font-family: var(--font-head); font-weight: var(--head-weight); font-size: 18px; letter-spacing: var(--head-tracking); line-height: 1.2; }
+.muted { color: var(--text-muted); font-size: 14px; }
+
+.icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.icon-sm { width: 16px; height: 16px; }
+
+.icon-btn {
+  width: 48px; height: 48px; flex: none; display: inline-flex; align-items: center; justify-content: center;
+  border: var(--border-w) solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+  transition: transform .15s ease;
+}
+.icon-btn:active { transform: scale(.96); }
+
+.scroll { flex: 1; overflow-y: auto; padding: 4px 20px 20px; display: flex; flex-direction: column; gap: 18px; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+
+.card { background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+
+.chips { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border-radius: 999px; background: var(--surface-2); font-size: 15px; font-weight: 600; }
+.chip .tag { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--warn-bg); color: var(--warn-text); }
+.chip.shared { background: var(--accent); color: var(--on-accent); }
+
+.recipes { display: flex; flex-direction: column; gap: 12px; }
+.recipe { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+.thumb { width: 64px; height: 64px; flex: none; border-radius: var(--radius-sm); display: grid; place-items: center; color: var(--thumb-ink); }
+.thumb.t1 { background: var(--thumb-1); } .thumb.t2 { background: var(--thumb-2); } .thumb.t3 { background: var(--thumb-3); }
+.thumb .icon { width: 28px; height: 28px; }
+.recipe-body { flex: 1; min-width: 0; }
+.recipe h3 { margin: 0; font-family: var(--font-head); font-weight: var(--head-weight); font-size: 17px; letter-spacing: var(--head-tracking); line-height: 1.25; }
+.meta { margin: 2px 0 6px; display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--text-muted); }
+.overlap { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.pips { display: flex; gap: 3px; }
+.pips i { width: 8px; height: 8px; border-radius: 50%; background: var(--track); }
+.pips i.on { background: var(--accent); }
+.add-btn { width: 48px; height: 48px; flex: none; display: grid; place-items: center; border-radius: var(--radius-btn); border: var(--btn-border); background: var(--primary); color: var(--on-primary); box-shadow: var(--btn-shadow); }
+.add-btn[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+
+.dock { flex: none; padding: 12px 20px 14px; background: linear-gradient(to top, var(--bg) 70%, transparent); }
+.btn { width: 100%; min-height: 56px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: var(--radius-btn); font-family: var(--font-body); font-size: 17px; font-weight: 700; transition: transform .15s ease, box-shadow .15s ease; }
+.btn-primary { background: var(--primary); color: var(--on-primary); border: var(--btn-border); box-shadow: var(--btn-shadow); }
+.btn-primary:active { transform: translateY(2px); }
+.btn-secondary { background: var(--surface); color: var(--text); border: var(--border-w) solid var(--border); box-shadow: var(--shadow); }
+
+.tabbar { flex: none; display: grid; grid-template-columns: repeat(3, 1fr); padding: 6px 12px 18px; border-top: 1px solid var(--border); background: var(--surface); }
+.tab { min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: none; color: var(--text-muted); font-size: 12px; font-weight: 700; border-radius: var(--radius-sm); }
+.tab[aria-current="page"] { color: var(--primary); }
+
+/* Planner tiles */
+.tiles { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.stat { display: flex; flex-direction: column; gap: 6px; }
+.stat-num { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 40px; letter-spacing: -0.03em; line-height: 1; }
+.bar { height: 10px; border-radius: 999px; background: var(--track); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 94%; background: var(--accent); border-radius: inherit; }
+.leftover { display: flex; gap: 12px; align-items: flex-start; }
+.leftover .badge { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: var(--radius-sm); background: var(--warn-bg); color: var(--warn-text); }
+.leftover p { margin: 0; }
+.leftover strong { display: block; }
+.link-btn { margin-top: 6px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--primary); font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+
+.graph svg { display: block; width: 100%; height: auto; margin-top: 8px; }
+.g-link { stroke: var(--graph-link); stroke-width: 2; }
+.g-link.hot { stroke: var(--accent); stroke-width: 2.5; }
+.g-recipe { fill: var(--primary); }
+.g-shared { fill: var(--accent); }
+.g-single { fill: var(--surface-2); stroke: var(--text-muted); stroke-width: 1.5; }
+.g-label { fill: var(--text); font: 600 11px var(--font-body); }
+.g-label.r { font-size: 12px; font-weight: 700; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; font-size: 12px; color: var(--text-muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 50%; }
+
+.days { display: flex; flex-direction: column; gap: 10px; }
+.day { display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: var(--surface); border: var(--border-w) solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+.day-tag { width: 48px; flex: none; text-align: center; }
+.day-tag b { display: block; font-family: var(--font-head); font-weight: var(--head-weight); font-size: 20px; line-height: 1; }
+.day-tag small { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+.day h3 { margin: 0 0 4px; font-family: var(--font-head); font-weight: var(--head-weight); font-size: 16px; letter-spacing: var(--head-tracking); }
+.mini-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.mini-chips span { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); }
+.mini-chips span.s { background: var(--accent); color: var(--on-accent); }
+
+/* Cook mode */
+.cook-top { flex: none; display: flex; align-items: center; gap: 12px; padding: 4px 20px 0; }
+.cook-top .title { flex: 1; min-width: 0; }
+.cook-top .title p { margin: 0; font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.cook-top .title h2 { margin: 0; font-family: var(--font-head); font-weight: var(--head-weight); font-size: 17px; letter-spacing: var(--head-tracking); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.progress { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; padding: 14px 20px 0; }
+.progress i { height: 6px; border-radius: 999px; background: var(--track); }
+.progress i.done { background: var(--primary); }
+.progress i.now { background: var(--accent); }
+.awake { display: inline-flex; align-items: center; gap: 6px; margin: 12px 20px 0; align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); font-size: 12px; font-weight: 700; color: var(--text-muted); }
+.awake::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.step { flex: 1; padding: 18px 20px 0; display: flex; flex-direction: column; gap: 18px; overflow-y: auto; }
+.step-num { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 15px; color: var(--text-muted); letter-spacing: var(--head-tracking); }
+.step-text { margin: 0; font-family: var(--font-body); font-size: 26px; line-height: 1.35; font-weight: 600; letter-spacing: -0.01em; }
+.step-text mark { background: none; color: inherit; box-shadow: inset 0 -0.35em 0 color-mix(in srgb, var(--accent) 35%, transparent); }
+.timer { display: flex; align-items: center; gap: 14px; }
+.timer-num { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 44px; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.timer .btn { width: auto; flex: 1; }
+.cook-nav { flex: none; display: grid; grid-template-columns: 1fr 1.6fr; gap: 12px; padding: 14px 20px 22px; }
+
+/* ───────────────────────── Per-style flourishes beyond tokens ───────────────────────── */
+
+/* Clay: chunky, pillowy, thick borders */
+[data-style="clay"] .chip { border: 2px solid var(--border); }
+[data-style="clay"] .tabbar { margin: 0 12px 14px; border: var(--border-w) solid var(--border); border-radius: 28px; box-shadow: var(--shadow); padding-bottom: 6px; }
+[data-style="clay"] .tab[aria-current="page"] { background: var(--surface-2); }
+[data-style="clay"] .progress i { height: 10px; }
+[data-style="clay"] .step-text { font-family: var(--font-head); font-weight: 400; }
+
+/* Editorial: rules instead of boxes, serif display, italic numerals */
+[data-style="editorial"] .card,
+[data-style="editorial"] .recipe,
+[data-style="editorial"] .day { border-width: 1px 0 0; padding-left: 0; padding-right: 0; }
+[data-style="editorial"] .recipe .thumb { width: 56px; height: 72px; }
+[data-style="editorial"] .eyebrow,
+[data-style="editorial"] .day-tag small,
+[data-style="editorial"] .tab { text-transform: uppercase; letter-spacing: .12em; font-size: 11px; }
+[data-style="editorial"] .chip { background: transparent; border: 1px solid var(--border); border-radius: 0; font-weight: 500; }
+[data-style="editorial"] .chip.shared { background: var(--text); color: var(--bg); }
+[data-style="editorial"] .chip .tag { background: none; padding: 0; }
+[data-style="editorial"] .mini-chips span { background: none; padding: 0; color: var(--text-muted); }
+[data-style="editorial"] .mini-chips span.s { background: none; color: var(--accent); }
+[data-style="editorial"] .mini-chips span + span::before { content: "· "; color: var(--text-muted); }
+[data-style="editorial"] .stat-num,
+[data-style="editorial"] .day-tag b,
+[data-style="editorial"] .timer-num,
+[data-style="editorial"] .step-num { font-style: italic; }
+[data-style="editorial"] .step-num { font-size: 22px; color: var(--accent); }
+[data-style="editorial"] .step-text { font-family: var(--font-head); font-weight: 500; font-size: 28px; }
+[data-style="editorial"] .step-text mark { box-shadow: none; color: var(--accent); font-style: italic; }
+[data-style="editorial"] .add-btn { background: transparent; color: var(--text); border: 1px solid var(--border); }
+[data-style="editorial"] .add-btn[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+[data-style="editorial"] .icon-btn { border-radius: 50%; }
+[data-style="editorial"] .tabbar { background: var(--bg); border-top: 1px solid var(--border); }
+[data-style="editorial"] .tab[aria-current="page"] { color: var(--accent); }
+[data-style="editorial"] .progress i { height: 2px; border-radius: 0; }
+[data-style="editorial"] .bar { height: 2px; border-radius: 0; }
+[data-style="editorial"] .bar > i { background: var(--accent); }
+[data-style="editorial"] .h1 em { font-style: italic; color: var(--accent); }
+[data-style="editorial"] .leftover .badge { border: 1px solid var(--accent); border-radius: 50%; }
+[data-style="editorial"] .awake { background: none; padding-left: 0; }
+
+/* Brutal: hard outlines everywhere, offset shadows, sticker labels */
+[data-style="brutal"] .chip { background: var(--surface); border: 3px solid var(--border); border-radius: 6px; font-weight: 700; }
+[data-style="brutal"] .chip.shared { background: var(--herb); color: #000; }
+[data-style="brutal"] .chip .tag { border: 2px solid #000; border-radius: 4px; }
+[data-style="brutal"] .thumb { border: 3px solid var(--border); }
+[data-style="brutal"] .pips i { border-radius: 2px; border: 2px solid var(--border); width: 10px; height: 10px; background: transparent; }
+[data-style="brutal"] .pips i.on { background: var(--herb); }
+[data-style="brutal"] .tabbar { border-top: 3px solid var(--border); }
+[data-style="brutal"] .tab[aria-current="page"] { background: var(--primary); color: #000; border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--border); }
+[data-style="brutal"] .progress i { height: 12px; border: 2px solid var(--border); border-radius: 2px; }
+[data-style="brutal"] .bar { height: 18px; border: 3px solid var(--border); border-radius: 4px; }
+[data-style="brutal"] .bar > i { background: var(--herb); border-radius: 0; border-right: 3px solid var(--border); }
+[data-style="brutal"] .mini-chips span { border: 2px solid var(--border); border-radius: 4px; }
+[data-style="brutal"] .mini-chips span.s { background: var(--herb); color: #000; }
+[data-style="brutal"] .leftover .badge { border: 3px solid var(--border); }
+[data-style="brutal"] .add-btn[aria-pressed="true"] { background: var(--herb); color: #000; }
+[data-style="brutal"] .g-shared { fill: var(--herb); stroke: var(--border); stroke-width: 2.5; }
+[data-style="brutal"] .g-recipe { fill: var(--accent); stroke: var(--border); stroke-width: 2.5; }
+[data-style="brutal"] .g-link.hot { stroke: var(--border); stroke-width: 3; }
+[data-style="brutal"] .legend i { border: 2px solid var(--border); }
+[data-style="brutal"] .awake { border: 2px solid var(--border); background: var(--surface); color: var(--text); }
+[data-style="brutal"] .awake::before { background: var(--herb); border: 2px solid var(--border); }
+[data-style="brutal"] .step-text { font-weight: 800; }
+[data-style="brutal"] .step-text mark { box-shadow: none; background: var(--primary); color: #000; padding: 0 4px; }
+[data-style="brutal"] .sticker { display: inline-block; transform: rotate(-3deg); background: var(--accent); color: #000; border: 3px solid var(--border); padding: 0 6px; }
+[data-style="brutal"] .stat-num { font-size: 34px; }
+[data-style="brutal"] .link-btn { color: var(--text); text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--accent); text-underline-offset: 4px; }
+
+/* Bento: modular tile grid on planner, pill controls, quiet surfaces */
+[data-style="bento"] .tiles { grid-template-columns: 1fr 1fr; }
+[data-style="bento"] .tiles .span-2 { grid-column: span 2; }
+[data-style="bento"] .tiles .stat { justify-content: space-between; min-height: 150px; }
+[data-style="bento"] .tiles .stat-num { font-size: 44px; }
+[data-style="bento"] .leftover { flex-direction: column; justify-content: space-between; min-height: 150px; }
+[data-style="bento"] .leftover .link-btn { margin-top: auto; }
+[data-style="bento"] .chip { background: var(--surface); border: 1px solid var(--border); }
+[data-style="bento"] .chip.shared { background: var(--primary); color: var(--on-primary); }
+[data-style="bento"] .pips i.on,
+[data-style="bento"] .bar > i { background: var(--primary); }
+[data-style="bento"] .mini-chips span.s { background: var(--primary); color: var(--on-primary); }
+[data-style="bento"] .g-shared { fill: var(--primary); }
+[data-style="bento"] .g-recipe { fill: var(--accent); }
+[data-style="bento"] .g-link.hot { stroke: var(--primary); }
+[data-style="bento"] .tabbar { margin: 0 16px 16px; border-radius: 999px; border: 1px solid var(--border); padding: 4px; box-shadow: var(--shadow); }
+[data-style="bento"] .tab { border-radius: 999px; min-height: 52px; }
+[data-style="bento"] .tab[aria-current="page"] { background: var(--primary); color: var(--on-primary); }
+[data-style="bento"] .progress i.now { background: var(--primary); }
+[data-style="bento"] .progress i.done { background: color-mix(in srgb, var(--primary) 45%, var(--track)); }
+[data-style="bento"] .awake::before { background: var(--primary); }
+[data-style="bento"] .step-text mark { box-shadow: inset 0 -0.35em 0 color-mix(in srgb, var(--primary) 35%, transparent); }
+[data-style="bento"] .timer-card { background: var(--surface-2); border-color: transparent; box-shadow: none; }
+[data-style="bento"] .leftover .badge { border-radius: 50%; }
+
+/* Blend: Cookbook typography (tracked caps, italic serif accents) on Clay's warm, rounded surfaces */
+[data-style="blend"] .eyebrow,
+[data-style="blend"] .day-tag small { text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 700; }
+[data-style="blend"] .h1 em { font-style: italic; color: var(--primary); }
+[data-style="blend"] .stat-num,
+[data-style="blend"] .day-tag b,
+[data-style="blend"] .timer-num,
+[data-style="blend"] .step-num { font-style: italic; }
+[data-style="blend"] .step-num { font-size: 20px; color: var(--primary); }
+[data-style="blend"] .step-text { font-family: var(--font-head); font-weight: 500; font-size: 28px; }
+[data-style="blend"] .step-text mark { box-shadow: none; color: var(--accent); font-style: italic; }
+[data-style="blend"] .chip { border: 1px solid var(--border); }
+[data-style="blend"] .chip.shared { border-color: transparent; }
+[data-style="blend"] .tabbar { margin: 0 12px 14px; border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); padding-bottom: 6px; }
+[data-style="blend"] .tab { text-transform: uppercase; letter-spacing: .1em; font-size: 10px; }
+[data-style="blend"] .tab[aria-current="page"] { background: var(--surface-2); }
+[data-style="blend"] .progress i { height: 6px; }
+[data-style="blend"] .icon-btn { border-radius: 50%; box-shadow: none; }
+[data-style="blend"] .leftover .badge { border-radius: 50%; }
+[data-style="blend"] .section-head .h2 { font-size: 20px; }
+
+/* Cookstall: quiet Cookbook page, loud Market Stall controls + shared tags */
+[data-style="cookstall"] .card,
+[data-style="cookstall"] .recipe,
+[data-style="cookstall"] .day { border-width: 1px 0 0; padding-left: 0; padding-right: 0; }
+[data-style="cookstall"] .eyebrow,
+[data-style="cookstall"] .day-tag small,
+[data-style="cookstall"] .tab { text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+[data-style="cookstall"] .h1 em { font-style: italic; color: var(--primary); }
+[data-style="cookstall"] .stat-num,
+[data-style="cookstall"] .day-tag b,
+[data-style="cookstall"] .timer-num,
+[data-style="cookstall"] .step-num { font-style: italic; }
+[data-style="cookstall"] .step-num { font-size: 20px; }
+[data-style="cookstall"] .step-text { font-family: var(--font-head); font-weight: 500; font-size: 28px; }
+[data-style="cookstall"] .step-text mark { box-shadow: none; background: var(--primary); color: var(--on-primary); padding: 0 4px; font-style: italic; }
+[data-style="cookstall"] .thumb { width: 56px; height: 72px; border: 2px solid var(--border); border-radius: 0; }
+[data-style="cookstall"] .chip { background: transparent; border: 1px solid var(--border); border-radius: 0; font-weight: 500; }
+[data-style="cookstall"] .chip.shared { background: var(--accent); color: var(--on-accent); border: 2px solid var(--border); border-radius: 6px; box-shadow: 2px 2px 0 var(--border); font-weight: 700; }
+[data-style="cookstall"] .chip .tag { border: 2px solid var(--border); border-radius: 4px; }
+[data-style="cookstall"] .mini-chips span { background: none; border: 1px solid var(--border); border-radius: 0; }
+[data-style="cookstall"] .mini-chips span.s { background: var(--accent); color: var(--on-accent); border: 2px solid var(--border); border-radius: 4px; font-weight: 700; }
+[data-style="cookstall"] .pips i { width: 10px; height: 10px; border-radius: 2px; border: 2px solid var(--border); background: transparent; }
+[data-style="cookstall"] .pips i.on { background: var(--accent); }
+[data-style="cookstall"] .icon-btn,
+[data-style="cookstall"] .btn-secondary { background: var(--bg); border: var(--hard-border); box-shadow: var(--hard-shadow); border-radius: var(--radius-btn); }
+[data-style="cookstall"] .add-btn[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+[data-style="cookstall"] .btn-primary:active,
+[data-style="cookstall"] .add-btn:active,
+[data-style="cookstall"] .icon-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--border); }
+[data-style="cookstall"] .tabbar { background: var(--bg); border-top: 1px solid var(--border); }
+[data-style="cookstall"] .tab[aria-current="page"] { background: var(--primary); color: var(--on-primary); border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--border); }
+[data-style="cookstall"] .progress i { height: 10px; border: 2px solid var(--border); border-radius: 2px; background: transparent; }
+[data-style="cookstall"] .progress i.done { background: var(--text); }
+[data-style="cookstall"] .progress i.now { background: var(--primary); }
+[data-style="cookstall"] .bar { height: 14px; border: 2px solid var(--border); border-radius: 2px; background: transparent; }
+[data-style="cookstall"] .bar > i { background: var(--accent); border-radius: 0; border-right: 2px solid var(--border); }
+[data-style="cookstall"] .g-recipe { fill: var(--primary); stroke: var(--border); stroke-width: 2.5; }
+[data-style="cookstall"] .g-shared { fill: var(--accent); stroke: var(--border); stroke-width: 2; }
+[data-style="cookstall"] .g-link.hot { stroke: var(--text); stroke-width: 2; }
+[data-style="cookstall"] .legend i { border: 2px solid var(--border); }
+[data-style="cookstall"] .leftover .badge { border: 2px solid var(--border); border-radius: 50%; }
+[data-style="cookstall"] .link-btn { color: var(--text); text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--primary); text-underline-offset: 4px; }
+[data-style="cookstall"] .awake { background: var(--bg); border: 2px solid var(--border); color: var(--text); }
+[data-style="cookstall"] .awake::before { border: 2px solid var(--border); }
+[data-style="cookstall"] .sticker { display: inline-block; transform: rotate(-3deg); background: var(--warn-bg); color: var(--warn-text); border: 2px solid var(--border); box-shadow: 2px 2px 0 var(--border); padding: 0 6px; font-style: italic; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+@media (max-width: 420px) {
+  .phone { padding: 6px; border-radius: 36px; height: 740px; }
+  .screen { border-radius: 30px; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 3 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+    <symbol id="i-egg" viewBox="0 0 24 24"><path d="M12 22c6.23-.05 7.87-5.57 7.5-10-.36-4.34-3.95-9.96-7.5-10-3.55.04-7.14 5.66-7.5 10-.37 4.43 1.27 9.95 7.5 10z"/></symbol>
+    <symbol id="i-soup" viewBox="0 0 24 24"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M7 21h10"/><path d="M19.5 12 22 6"/><path d="M16.25 3c.27.1.8.53.75 1.36-.06.83-.93 1.2-1 2.02-.05.78.34 1.24.73 1.62"/><path d="M11.25 3c.27.1.8.53.74 1.36-.05.83-.93 1.2-.98 2.02-.06.78.33 1.24.72 1.62"/><path d="M6.25 3c.27.1.8.53.75 1.36-.06.83-.93 1.2-1 2.02-.05.78.34 1.24.74 1.62"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-timer" viewBox="0 0 24 24"><path d="M10 2h4M12 14l3-3"/><circle cx="12" cy="14" r="8"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <header class="page-head">
+    <div>
+      <h1>Mince · UI style explorations</h1>
+      <p>Same three screens, four visual directions. Pick a style, flip light/dark, and compare how each holds up for a beginner cook at arm's length.</p>
+    </div>
+    <div class="controls">
+      <div class="style-tabs" role="tablist" aria-label="Design style">
+        <button class="style-tab" role="tab" data-style="clay" aria-selected="true">1 · Warm Clay</button>
+        <button class="style-tab" role="tab" data-style="editorial" aria-selected="false">2 · Cookbook</button>
+        <button class="style-tab" role="tab" data-style="brutal" aria-selected="false">3 · Market Stall</button>
+        <button class="style-tab" role="tab" data-style="bento" aria-selected="false">4 · Night Shift</button>
+        <button class="style-tab" role="tab" data-style="blend" aria-selected="false">5 · Cookbook × Clay</button>
+        <button class="style-tab" role="tab" data-style="cookstall" aria-selected="false">6 · Cookbook × Market Stall</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-pressed="false">
+        <svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg><span>Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="brief" aria-live="polite">
+    <div>
+      <h2 id="briefName"></h2>
+      <p class="source" id="briefSource"></p>
+      <p id="briefSummary" style="margin:0"></p>
+      <div class="swatches" id="briefSwatches"></div>
+      <div class="type-sample"><b>Spinach &amp; feta frittata</b><span id="briefFonts"></span></div>
+    </div>
+    <div><h3>Why it fits Mince</h3><ul id="briefPros"></ul></div>
+    <div><h3>Watch out for</h3><ul id="briefCons"></ul></div>
+  </section>
+
+  <main class="phones">
+
+    <!-- ═════════ Screen 1: Kitchen ═════════ -->
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="dots"><i></i><i></i></span></div>
+        <header class="appbar">
+          <div>
+            <p class="eyebrow">Tuesday · 6 things on hand</p>
+            <h1 class="h1">Your <em>kitchen</em></h1>
+          </div>
+          <button class="icon-btn" aria-label="Search ingredients"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+        </header>
+        <div class="scroll">
+          <section class="card">
+            <div class="section-head">
+              <h2 class="h2">On hand</h2>
+              <span class="muted">2 use soon</span>
+            </div>
+            <ul class="chips">
+              <li class="chip">Spinach <span class="tag">2 days</span></li>
+              <li class="chip">Coriander <span class="tag">3 days</span></li>
+              <li class="chip">Feta</li>
+              <li class="chip">Lemon</li>
+              <li class="chip">Chickpeas</li>
+              <li class="chip">Eggs</li>
+            </ul>
+          </section>
+
+          <section>
+            <div class="section-head">
+              <h2 class="h2">Recipes that <span class="sticker">share</span></h2>
+              <span class="muted">most overlap first</span>
+            </div>
+            <div class="recipes">
+              <article class="recipe">
+                <div class="thumb t2" aria-hidden="true"><svg class="icon"><use href="#i-leaf"/></svg></div>
+                <div class="recipe-body">
+                  <h3>Lemony chickpea salad</h3>
+                  <p class="meta"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-clock"/></svg>15 min · No cook</p>
+                  <div class="overlap"><span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>Uses 4 of yours</div>
+                </div>
+                <button class="add-btn" aria-label="Added to plan" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+              </article>
+              <article class="recipe">
+                <div class="thumb t1" aria-hidden="true"><svg class="icon"><use href="#i-egg"/></svg></div>
+                <div class="recipe-body">
+                  <h3>Spinach &amp; feta frittata</h3>
+                  <p class="meta"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-clock"/></svg>25 min · Easy</p>
+                  <div class="overlap"><span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>Uses 3 of yours</div>
+                </div>
+                <button class="add-btn" aria-label="Added to plan" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+              </article>
+              <article class="recipe">
+                <div class="thumb t3" aria-hidden="true"><svg class="icon"><use href="#i-soup"/></svg></div>
+                <div class="recipe-body">
+                  <h3>Coriander lemon rice</h3>
+                  <p class="meta"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-clock"/></svg>30 min · Easy</p>
+                  <div class="overlap"><span class="pips" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>Uses 2 of yours</div>
+                </div>
+                <button class="add-btn" aria-label="Add to plan" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+              </article>
+            </div>
+          </section>
+        </div>
+        <div class="dock"><button class="btn btn-primary">Plan these 2 meals <svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button></div>
+        <nav class="tabbar" aria-label="Main">
+          <button class="tab" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-utensils"/></svg>Kitchen</button>
+          <button class="tab"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Plan</button>
+          <button class="tab"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Cook</button>
+        </nav>
+      </div></div>
+      <span class="phone-label">Kitchen</span>
+    </div>
+
+    <!-- ═════════ Screen 2: Planner ═════════ -->
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="dots"><i></i><i></i></span></div>
+        <header class="appbar">
+          <div>
+            <p class="eyebrow">3 meals · 4 shared ingredients</p>
+            <h1 class="h1">This <em>week</em></h1>
+          </div>
+          <button class="icon-btn" aria-label="Add a meal"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </header>
+        <div class="scroll">
+          <div class="tiles">
+            <section class="card stat">
+              <span class="muted">Perishables used</span>
+              <span class="stat-num">94%</span>
+              <div class="bar" role="img" aria-label="94 percent used"><i></i></div>
+            </section>
+            <section class="card leftover">
+              <span class="badge" aria-hidden="true"><svg class="icon"><use href="#i-leaf"/></svg></span>
+              <p><strong>20 g spinach left</strong><span class="muted">after Wednesday</span></p>
+              <button class="link-btn">Use it up <svg class="icon icon-sm" aria-hidden="true"><use href="#i-right"/></svg></button>
+            </section>
+            <section class="card graph span-2">
+              <div class="section-head" style="margin:0"><h2 class="h2">Shared ingredients</h2><span class="muted">tap to explore</span></div>
+              <svg viewBox="0 0 300 172" role="img" aria-label="Graph: frittata, chickpea salad and coriander rice share spinach, feta, lemon and coriander">
+                <line class="g-link" x1="58" y1="92" x2="26" y2="28"/>
+                <line class="g-link hot" x1="58" y1="92" x2="112" y2="30"/>
+                <line class="g-link hot" x1="58" y1="92" x2="104" y2="148"/>
+                <line class="g-link hot" x1="168" y1="88" x2="112" y2="30"/>
+                <line class="g-link hot" x1="168" y1="88" x2="104" y2="148"/>
+                <line class="g-link hot" x1="168" y1="88" x2="228" y2="28"/>
+                <line class="g-link hot" x1="168" y1="88" x2="214" y2="150"/>
+                <line class="g-link hot" x1="274" y1="96" x2="228" y2="28"/>
+                <line class="g-link hot" x1="274" y1="96" x2="214" y2="150"/>
+                <circle class="g-single" cx="26" cy="28" r="8"/>
+                <circle class="g-shared" cx="112" cy="30" r="10"/>
+                <circle class="g-shared" cx="104" cy="148" r="10"/>
+                <circle class="g-shared" cx="228" cy="28" r="10"/>
+                <circle class="g-shared" cx="214" cy="150" r="10"/>
+                <circle class="g-recipe" cx="58" cy="92" r="17"/>
+                <circle class="g-recipe" cx="168" cy="88" r="17"/>
+                <circle class="g-recipe" cx="274" cy="96" r="17"/>
+                <text class="g-label" x="26" y="12" text-anchor="middle">eggs</text>
+                <text class="g-label" x="112" y="12" text-anchor="middle">spinach</text>
+                <text class="g-label" x="104" y="170" text-anchor="middle">feta</text>
+                <text class="g-label" x="228" y="12" text-anchor="middle">lemon</text>
+                <text class="g-label" x="214" y="170" text-anchor="middle">coriander</text>
+                <text class="g-label r" x="58" y="124" text-anchor="middle">Frittata</text>
+                <text class="g-label r" x="168" y="120" text-anchor="middle">Salad</text>
+                <text class="g-label r" x="274" y="128" text-anchor="middle">Rice</text>
+              </svg>
+              <div class="legend">
+                <span><i style="background:var(--primary)" class="lg-r"></i>Recipe</span>
+                <span><i style="background:var(--accent)" class="lg-s"></i>Shared</span>
+                <span><i style="background:var(--surface-2);border:1.5px solid var(--text-muted)"></i>Used once</span>
+              </div>
+            </section>
+          </div>
+
+          <section>
+            <div class="section-head"><h2 class="h2">Cook order</h2><span class="muted">perishables first</span></div>
+            <div class="days">
+              <article class="day">
+                <div class="day-tag"><small>Mon</small><b>3</b></div>
+                <div><h3>Spinach &amp; feta frittata</h3><div class="mini-chips"><span class="s">spinach</span><span class="s">feta</span><span>eggs</span></div></div>
+              </article>
+              <article class="day">
+                <div class="day-tag"><small>Tue</small><b>4</b></div>
+                <div><h3>Lemony chickpea salad</h3><div class="mini-chips"><span class="s">spinach</span><span class="s">coriander</span><span class="s">lemon</span></div></div>
+              </article>
+              <article class="day">
+                <div class="day-tag"><small>Wed</small><b>5</b></div>
+                <div><h3>Coriander lemon rice</h3><div class="mini-chips"><span class="s">coriander</span><span class="s">lemon</span></div></div>
+              </article>
+            </div>
+          </section>
+        </div>
+        <div class="dock"><button class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Start Monday's cook</button></div>
+        <nav class="tabbar" aria-label="Main">
+          <button class="tab"><svg class="icon" aria-hidden="true"><use href="#i-utensils"/></svg>Kitchen</button>
+          <button class="tab" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Plan</button>
+          <button class="tab"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Cook</button>
+        </nav>
+      </div></div>
+      <span class="phone-label">Planner</span>
+    </div>
+
+    <!-- ═════════ Screen 3: Cook Mode ═════════ -->
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="dots"><i></i><i></i></span></div>
+        <div class="cook-top">
+          <button class="icon-btn" aria-label="Exit cook mode"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+          <div class="title"><p>Cook mode · Monday</p><h2>Spinach &amp; feta frittata</h2></div>
+        </div>
+        <div class="progress" role="img" aria-label="Step 3 of 7"><i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i><i></i><i></i></div>
+        <span class="awake">Screen stays on</span>
+        <div class="step">
+          <span class="step-num">Step 3 of 7</span>
+          <p class="step-text">Add the <mark>spinach</mark> to the pan and stir until it wilts, about two minutes. Then crumble in the <mark>feta</mark>.</p>
+          <ul class="chips" style="margin:0" aria-label="Ingredients for this step">
+            <li class="chip shared">180 g spinach</li>
+            <li class="chip shared">80 g feta</li>
+          </ul>
+          <section class="card timer-card">
+            <div class="timer">
+              <span class="timer-num">2:00</span>
+              <button class="btn btn-secondary"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg>Start timer</button>
+            </div>
+          </section>
+        </div>
+        <div class="cook-nav">
+          <button class="btn btn-secondary" aria-label="Previous step"><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg>Back</button>
+          <button class="btn btn-primary">Next step <svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+      </div></div>
+      <span class="phone-label">Cook Mode</span>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const STYLES = {
+  clay: {
+    name: "1 · Warm Clay",
+    source: "Skill pick for “meal planning recipe cooking app” → Claymorphism · Recipe & Cooking palette",
+    summary: "Soft, chunky and friendly. Pillowy cards with thick light borders and double shadows; terracotta for actions, fresh green to mark shared ingredients.",
+    fonts: "Varela Round / Nunito Sans",
+    swatches: [["#FFFBEB","bg"],["#9A3412","primary"],["#059669","shared"],["#FFEDD5","use soon"],["#0F172A","text"]],
+    pros: ["Unintimidating for a beginner — feels like a helper, not a tool", "Big, squishy targets read as tappable with flour on your hands", "Warm food palette straight from the skill’s cooking-app profile"],
+    cons: ["Skill data marks dark mode as “conditional” — soft shadows flatten on dark", "Can tip into childish if headings get too bubbly", "Double shadows cost a bit more to keep consistent across components"]
+  },
+  editorial: {
+    name: "2 · Cookbook",
+    source: "Minimalism & Swiss Style · “Classic Elegant” pairing",
+    summary: "A printed cookbook on screen. Hairline rules instead of boxes, serif display type with italic accents, one tomato-red accent for shared items.",
+    fonts: "Playfair Display / Inter",
+    swatches: [["#FAF7F2","paper"],["#1A1917","ink"],["#B91C1C","shared"],["#E9E1D5","plate"],["#5C5750","muted"]],
+    pros: ["Calm and content-first — the recipe is the hero, great in Cook Mode", "Easiest of the four to keep AA in both themes (ink on paper)", "Feels trustworthy and polished in a 3-hour build: few components to perfect"],
+    cons: ["Less colour guidance; shared vs. not relies on one accent + labels", "Thin rules and serifs need size discipline at arm’s length", "Risks feeling austere or “premium” rather than beginner-friendly"]
+  },
+  brutal: {
+    name: "3 · Market Stall",
+    source: "Neubrutalism · “Neubrutalist Bold” pairing",
+    summary: "Loud, outlined and fun. Black borders, offset hard shadows, mustard actions and herb-teal for shared ingredients, like hand-painted market signs.",
+    fonts: "Lexend Mega / Public Sans",
+    swatches: [["#FFF4D6","bg"],["#FFD23F","primary"],["#4ECDC4","shared"],["#FF6B6B","use soon"],["#000000","outline"]],
+    pros: ["Most memorable in a design-challenge lineup", "Hard edges make every tap target unmistakable — strong at arm’s length", "Flat colours + outlines invert cleanly to dark mode"],
+    cons: ["Wide display font eats horizontal space at 375 px", "Visual noise can fatigue during a long cook", "Trend-driven; may date faster than the others"]
+  },
+  bento: {
+    name: "4 · Night Shift",
+    source: "Bento Box Grid + Dark Mode (OLED) · “Geometric Modern” pairing",
+    summary: "Modular tiles, dark-first. The shared-ingredient graph and waste stats become hero tiles; lime for shared, orange for recipes, pill-shaped controls.",
+    fonts: "Outfit / Work Sans",
+    swatches: [["#0A0D0B","bg (dark)"],["#151B17","tile"],["#A3E635","shared"],["#FB923C","recipe"],["#E8F0EA","text"]],
+    pros: ["Gives the graph and waste score the prominence the core idea deserves", "Dark-first is easy on the eyes in a dim kitchen", "Tile grid scales naturally to tablet/desktop later"],
+    cons: ["Dashboard feel may read “app for experts” to a beginner", "Light theme needs equal care or it looks like an afterthought", "Tiles invite adding stats — scope creep in a 3-hour build"]
+  },
+  blend: {
+    name: "5 · Cookbook × Clay",
+    source: "Blend of 2 + 1 · Minimalism & Swiss layout with the Recipe & Cooking palette",
+    summary: "Cookbook’s serif headings, tracked small caps and warm paper, carried on Clay’s rounded cards and soft 3D buttons. Terracotta for actions, green for shared ingredients.",
+    fonts: "Playfair Display / Nunito Sans",
+    swatches: [["#FAF6EF","paper"],["#9A3412","primary"],["#047857","shared"],["#FFEDD5","use soon"],["#1F1A17","ink"]],
+    pros: ["Cookbook’s trust and calm, without the austerity — still feels like a helper", "Hairline borders and single soft shadows hold up in dark mode, unlike full claymorphism", "Serif step text in Cook Mode reads like a recipe card at arm’s length"],
+    cons: ["Two personalities to keep in balance — italics and colour accents must stay rare", "Serif headings need ≥ 17px; keep small labels in the sans", "Green and terracotta both carry meaning; never rely on colour alone (keep the labels)"]
+  },
+  cookstall: {
+    name: "6 · Cookbook × Market Stall",
+    source: "Blend of 2 + 3 · Minimalism & Swiss layout with Neubrutalist controls · palette from 5",
+    summary: "A quiet cookbook page where only the things you tap or need to notice get loud: ink-outlined terracotta buttons with hard shadows, green shared tags, peach stickers for use-soon.",
+    fonts: "Playfair Display / Public Sans",
+    swatches: [["#FAF6EF","paper"],["#1F1A17","ink"],["#9A3412","action"],["#047857","shared"],["#FFEDD5","use soon"]],
+    pros: ["Clear split: reading is calm, anything tappable is unmistakable — ideal at arm’s length", "Warm food palette keeps the outlines feeling like a kitchen, not a startup", "Hard outlines invert cleanly to dark mode; no soft shadows to rescue"],
+    cons: ["Loud elements must stay rare or it collapses into full brutalism", "Serif + chunky outlines is an unusual pairing; needs consistent stroke widths (1px rules, 2–3px controls)", "Terracotta and green are close in weight — keep labels so shared vs. action never relies on colour alone"]
+  }
+};
+
+const root = document.documentElement;
+const tabs = document.querySelectorAll(".style-tab");
+const themeBtn = document.getElementById("themeToggle");
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} }
+};
+
+function renderBrief(key) {
+  const s = STYLES[key];
+  document.getElementById("briefName").textContent = s.name;
+  document.getElementById("briefSource").textContent = s.source;
+  document.getElementById("briefSummary").textContent = s.summary;
+  document.getElementById("briefFonts").textContent = s.fonts;
+  document.getElementById("briefSwatches").innerHTML = s.swatches
+    .map(([hex, label]) => `<span class="swatch" style="background:${hex}" title="${hex}"><span>${label}</span></span>`).join("");
+  document.getElementById("briefPros").innerHTML = s.pros.map(p => `<li>${p}</li>`).join("");
+  document.getElementById("briefCons").innerHTML = s.cons.map(p => `<li>${p}</li>`).join("");
+}
+
+function setStyle(key) {
+  if (!STYLES[key]) key = "blend";
+  root.dataset.style = key;
+  tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.style === key)));
+  renderBrief(key);
+  store.set("mince-style", key);
+  if (location.hash.slice(1) !== key) history.replaceState(null, "", "#" + key);
+}
+
+function setTheme(theme) {
+  root.dataset.theme = theme;
+  const dark = theme === "dark";
+  themeBtn.setAttribute("aria-pressed", String(dark));
+  themeBtn.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#i-${dark ? "sun" : "moon"}"/></svg><span>${dark ? "Light" : "Dark"}</span>`;
+  store.set("mince-theme", theme);
+}
+
+tabs.forEach(t => t.addEventListener("click", () => setStyle(t.dataset.style)));
+themeBtn.addEventListener("click", () => setTheme(root.dataset.theme === "dark" ? "light" : "dark"));
+window.addEventListener("hashchange", () => setStyle(location.hash.slice(1)));
+
+// Demo interaction: toggle recipes in/out of the plan
+document.querySelectorAll(".add-btn").forEach(b => b.addEventListener("click", () => {
+  const on = b.getAttribute("aria-pressed") !== "true";
+  b.setAttribute("aria-pressed", String(on));
+  b.setAttribute("aria-label", on ? "Added to plan" : "Add to plan");
+  b.querySelector("use").setAttribute("href", on ? "#i-check" : "#i-plus");
+}));
+
+setStyle(location.hash.slice(1) || store.get("mince-style") || "blend");
+setTheme(store.get("mince-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+</script>
+</body>
+</html>

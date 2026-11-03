@@ -1,0 +1,163 @@
+/*
+ * Mince design tokens — "Cookbook × Market Stall" (warm palette).
+ * Spec: docs/design-spec.md · Reference: design/mockups/style-explorations.html#cookstall
+ *
+ * Components use the semantic tokens below, never raw hex values.
+ * Theme: follows the OS by default; set data-theme="light" | "dark" on <html> to override.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ── Colour: surfaces & text ── */
+  --color-bg: #FAF6EF;            /* paper */
+  --color-surface-2: #F4ECE2;     /* subtle fill: progress tracks, chips at rest */
+  --color-text: #1F1A17;          /* ink */
+  --color-text-muted: #5E564F;
+
+  /* ── Colour: roles ── */
+  --color-primary: #9A3412;       /* actions: buttons, active tab, step highlight */
+  --color-on-primary: #FFFFFF;
+  --color-accent: #047857;        /* shared ingredients, and nothing else */
+  --color-on-accent: #FFFFFF;
+  --color-warn-bg: #FFEDD5;       /* use-soon / leftover */
+  --color-warn-text: #7C2D12;
+
+  /* ── Colour: lines ── */
+  --color-ink: #1F1A17;           /* control outlines + hard shadows */
+  --color-rule: #1F1A17;          /* 1px section rules */
+  --color-ring: #9A3412;          /* focus ring */
+  --color-track: #EFE5D9;         /* empty progress / meter */
+  --color-graph-link: #E3D6C8;    /* graph edge to a single-use ingredient */
+
+  /* ── Colour: recipe thumbnails (decorative tints) ── */
+  --color-thumb-1: #FBE3CF;
+  --color-thumb-2: #D8F0E3;
+  --color-thumb-3: #F6E7C1;
+  --color-thumb-ink: #7C2D12;
+
+  /* ── Typography ── */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --weight-display: 700;
+  --weight-display-light: 500;   /* Cook Mode step text */
+  --weight-body: 400;
+  --weight-medium: 500;
+  --weight-strong: 700;
+
+  --text-label: 0.75rem;        /* 12px, uppercase + tracked only */
+  --text-small: 0.8125rem;      /* 13px, metadata */
+  --text-body: 1rem;            /* 16px */
+  --text-body-lg: 1.0625rem;    /* 17px, buttons + Cook Mode minimum */
+  --text-h3: 1.0625rem;         /* 17px, recipe titles */
+  --text-h2: 1.25rem;           /* 20px, section heads */
+  --text-h1: 2.125rem;          /* 34px, screen titles */
+  --text-step: 1.75rem;         /* 28px, Cook Mode step */
+  --text-stat: 2.5rem;          /* 40px, big numbers */
+  --text-timer: 2.75rem;        /* 44px */
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-body: 1.5;
+  --tracking-display: -0.015em;
+  --tracking-label: 0.12em;
+
+  /* ── Space (4px base) ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;   /* screen gutter */
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ── Shape ── */
+  --radius-none: 0;      /* cards, rules, on-hand chips */
+  --radius-xs: 4px;      /* tags, small shared chips */
+  --radius-sm: 6px;      /* shared chips */
+  --radius-control: 8px; /* buttons, icon buttons, active tab */
+  --radius-full: 999px;
+
+  /* ── Strokes: three widths only ── */
+  --stroke-rule: 1px;     /* reading layer */
+  --stroke-tag: 2px;      /* tags, chips, progress, thumbnails */
+  --stroke-control: 3px;  /* anything you tap */
+
+  /* ── Hard shadows (Market Stall) — offset, no blur ── */
+  --shadow-control: 4px 4px 0 var(--color-ink);
+  --shadow-control-pressed: 2px 2px 0 var(--color-ink);
+  --shadow-tab: 3px 3px 0 var(--color-ink);
+  --shadow-tag: 2px 2px 0 var(--color-ink);
+  --press-offset: 2px;
+
+  /* ── Sizing ── */
+  --tap-min: 48px;
+  --button-height: 56px;
+  --tabbar-item-height: 56px;
+
+  /* ── Motion ── */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-theme: 250ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Dark: OS preference, unless the user forced light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #17120F;
+    --color-surface-2: #2D231D;
+    --color-text: #F5EDE4;
+    --color-text-muted: #C3B5A8;
+    --color-primary: #FDBA74;
+    --color-on-primary: #2A1508;
+    --color-accent: #34D399;
+    --color-on-accent: #03140E;
+    --color-warn-bg: #4A2512;
+    --color-warn-text: #FED7AA;
+    --color-ink: #F5EDE4;
+    --color-rule: #F5EDE4;
+    --color-ring: #FDBA74;
+    --color-track: #33281F;
+    --color-graph-link: #43362D;
+    --color-thumb-1: #4A2614;
+    --color-thumb-2: #123D2C;
+    --color-thumb-3: #45350F;
+    --color-thumb-ink: #FED7AA;
+  }
+}
+
+/* Dark: explicit user choice (same values as above) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #17120F;
+  --color-surface-2: #2D231D;
+  --color-text: #F5EDE4;
+  --color-text-muted: #C3B5A8;
+  --color-primary: #FDBA74;
+  --color-on-primary: #2A1508;
+  --color-accent: #34D399;
+  --color-on-accent: #03140E;
+  --color-warn-bg: #4A2512;
+  --color-warn-text: #FED7AA;
+  --color-ink: #F5EDE4;
+  --color-rule: #F5EDE4;
+  --color-ring: #FDBA74;
+  --color-track: #33281F;
+  --color-graph-link: #43362D;
+  --color-thumb-1: #4A2614;
+  --color-thumb-2: #123D2C;
+  --color-thumb-3: #45350F;
+  --color-thumb-ink: #FED7AA;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-theme: 0ms;
+    --press-offset: 0px;
+  }
+}
