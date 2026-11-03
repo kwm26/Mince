@@ -95,8 +95,71 @@ export interface PlanResult {
   solveMs: number;
 }
 
+// ── Shared contracts between src/lib modules and the screens ──
+
+/** A user's edit to an estimated shelf life or pack size (data-model §10). */
+export interface IngredientOverride { shelfLifeDays?: number; packSize?: number; }
+
+/** Recipe data with the user's overrides applied. Every solve, preview and lens takes one. */
+export interface Catalog {
+  recipes: Recipe[];
+  ingredients: Ingredient[];
+  recipeById: ReadonlyMap<string, Recipe>;
+  ingredientById: ReadonlyMap<string, Ingredient>;
+}
+
+/** §4 metrics plus cooking time, for a plan's batches. */
+export interface Metrics {
+  wastePacks: number;
+  reuseRate: number;
+  proteinByDay: number[];
+  cookMinutesByDay: number[];
+}
+
+/** A Steer edit (data-model §7). `add` comes from the map and is resolved as a swap into that day. */
+export type Edit =
+  | { kind: 'move'; batchIndex: number; toDay: number }
+  | { kind: 'swap'; batchIndex: number; recipeId: string }
+  | { kind: 'remove'; batchIndex: number }
+  | { kind: 'add'; recipeId: string; day: number };
+
+/** The cost of an edit before it is applied (data-model §7). */
+export interface Preview {
+  edit: Edit;
+  feasible: boolean;                    // constraints 2–6 still hold
+  reason?: string;                      // why not, in the infeasible-reason style
+  before: Metrics;
+  after: Metrics;
+  delta: { wastePacks: number; proteinByDay: number[]; cookMinutes: number };
+  plan: PlanResult;                     // the edited plan, not re-solved
+}
+
+/** A swap that uses up a leftover ingredient (data-model §11 absorbers). */
+export interface Absorber {
+  ingredientId: string;
+  recipeId: string;
+  day: number;
+  replacesBatchIndex: number;
+  deltaWastePacks: number;              // negative = less waste
+}
+
+/** Leftovers in the current plan and the best absorber, for the Waste lens. */
+export interface WasteInfo {
+  leftoverPacks: Record<string, number>; // ingredientId → leftover packs (> 0 only)
+  best?: Absorber;
+}
+
 // §11 Ingredient map & lenses
 export type LensName = 'week' | 'hubs' | 'freshness' | 'waste' | 'protein' | 'families';
+
+/** Everything a lens may read. `plan` is null before the first solve. */
+export interface LensContext {
+  catalog: Catalog;
+  constraints: Constraints;
+  plan: PlanResult | null;
+  today: string;                        // ISO date
+  waste?: WasteInfo;                    // computed by the optimizer stream; absent before a plan exists
+}
 
 export interface LensNode {
   emphasis: 'high' | 'normal' | 'dim';

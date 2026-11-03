@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Ingredient, Recipe } from '../types';
 import {
+  catalog,
   defaultConstraints,
   fridges,
   fridgeToPantry,
@@ -10,6 +11,7 @@ import {
   recipes,
   weekToConstraints,
   weeks,
+  withOverrides,
 } from './data';
 
 const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -224,6 +226,14 @@ describe('loading', () => {
     expect(c.maxCookMinutes).not.toBe(w!.maxCookMinutes);
     expect(c.pantry.map((p) => p.ingredientId)).toEqual(fridges.find((f) => f.id === 'fresh-shop')!.items.map((x) => x.ingredientId));
     expect(c.cookedFoodLifeDays).toBe(3);
+  });
+
+  it('applies ingredient overrides without touching the shipped data', () => {
+    const edited = withOverrides({ spinach: { shelfLifeDays: 3, packSize: 6 }, nope: { packSize: 2 }, lemon: { packSize: -1 } });
+    expect(edited.ingredientById.get('spinach')).toMatchObject({ shelfLifeDays: 3, packSize: 6 });
+    expect(edited.ingredientById.get('lemon')!.packSize).toBe(ingredient('lemon').packSize);
+    expect(ingredient('spinach').shelfLifeDays).toBe(5);
+    expect(withOverrides({})).toBe(catalog);
   });
 
   it('rejects a week with an unknown fridge', () => {

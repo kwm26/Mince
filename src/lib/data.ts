@@ -5,7 +5,7 @@ import recipesJson from '../../data/recipes.json';
 import ingredientsJson from '../../data/ingredients.json';
 import fridgesJson from '../../data/fridges.json';
 import weeksJson from '../../data/weeks.json';
-import type { Constraints, FridgeSeed, Ingredient, PantryItem, Recipe, WeekSeed } from '../types';
+import type { Catalog, Constraints, FridgeSeed, Ingredient, IngredientOverride, PantryItem, Recipe, WeekSeed } from '../types';
 
 export const recipes = recipesJson as Recipe[];
 export const ingredients = ingredientsJson as Ingredient[];
@@ -14,6 +14,28 @@ export const weeks = weeksJson as WeekSeed[];
 
 export const ingredientById: ReadonlyMap<string, Ingredient> = new Map(ingredients.map((i) => [i.id, i]));
 export const recipeById: ReadonlyMap<string, Recipe> = new Map(recipes.map((r) => [r.id, r]));
+
+/** The recipe data as shipped, with no overrides. */
+export const catalog: Catalog = { recipes, ingredients, recipeById, ingredientById };
+
+/**
+ * The catalog with the user's shelf-life and pack-size edits applied (data-model §10).
+ * data/*.json is never changed; unknown ids and non-positive values are ignored.
+ */
+export function withOverrides(overrides: Readonly<Record<string, IngredientOverride>>): Catalog {
+  const ids = Object.keys(overrides).filter((id) => ingredientById.has(id));
+  if (ids.length === 0) return catalog;
+  const edited = ingredients.map((i) => {
+    const o = overrides[i.id];
+    if (!o) return i;
+    return {
+      ...i,
+      shelfLifeDays: o.shelfLifeDays && o.shelfLifeDays > 0 ? Math.round(o.shelfLifeDays) : i.shelfLifeDays,
+      packSize: o.packSize && o.packSize > 0 ? o.packSize : i.packSize,
+    };
+  });
+  return { recipes, ingredients: edited, recipeById, ingredientById: new Map(edited.map((i) => [i.id, i])) };
+}
 
 export function defaultConstraints(startDate: string): Constraints {
   const days = 7;
