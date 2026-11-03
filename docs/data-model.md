@@ -164,7 +164,7 @@ Roles: `need` counts **core** and **unexpired optional** uses (`qty_{r,i,d}` fro
 - `reuseRate = |{perishable i used by ≥ 2 distinct recipes in the plan}| / |{perishable i used, bought or from the pantry}|`. Two batches of the same recipe don't count as reuse.
 
 ## 5. Post-solve schedule (`src/lib/schedule.ts`)
-Assign portions to days per meal type: **fresh portions first**, first-in-first-out (oldest batch first); frozen portions fill the days fresh portions can't. The result is `meals`.
+Assign portions to days per meal type, matching what constraint 7 maximizes: every portion whose life ends inside the week is eaten; of the portions that could wait past the last day, the highest-protein ones are eaten. Each day eats the portion closest to spoiling first, then **fresh before frozen**, then oldest batch first. The result is `meals`.
 - **Freezing raw items:** for any freezable ingredient used on a day > `shelfLifeDays` (§3 "good through"), set `freeze: true` on its shopping entry ("freeze on shopping day") and add a note on the day before cooking: "move the chicken to the fridge tonight".
 - **Frozen cooked portions:** note on the cook day ("freeze 3 portions"), and on the day before each one is eaten ("move 1 portion to the fridge tonight"). Portions still frozen after day D−1 are listed as "in the freezer", not as waste.
 
