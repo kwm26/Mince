@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { catalog } from './data';
 import { buildGraph, scaleRadius } from './graph';
-import { computeLayout, convexHull, hashId, paddedHull } from './layout';
+import { computeLayout, convexHull, hashId, paddedHull, placeLabels } from './layout';
 
 describe('computeLayout', () => {
   const graph = buildGraph(catalog, { includeSingleUse: true });
@@ -34,6 +34,26 @@ describe('computeLayout', () => {
     for (let i = 0; i < recipes.length; i++)
       for (let j = i + 1; j < recipes.length; j++)
         expect(Math.hypot(recipes[i]!.x - recipes[j]!.x, recipes[i]!.y - recipes[j]!.y)).toBeGreaterThan(2 * 17);
+  });
+});
+
+describe('placeLabels', () => {
+  it('moves a colliding label to a free side, and drops it when no side is free', () => {
+    const a = { id: 'a', x: 100, y: 100, r: 10, text: 'Lemon' };
+    const b = { id: 'b', x: 104, y: 100, r: 10, text: 'Lime' };
+    const placed = placeLabels([a, b], 360, 480);
+    expect(placed).toHaveLength(2);
+    expect(placed[0]?.y).toBeGreaterThan(100);
+    expect(placed[1]?.y).toBeLessThan(100);
+    const crowded = placeLabels([a, b, { ...b, id: 'c' }, { ...b, id: 'd' }, { ...b, id: 'e' }], 360, 480);
+    expect(crowded.map((p) => p.id)).not.toContain('e');
+  });
+
+  it('always places a forced label', () => {
+    const a = { id: 'a', x: 100, y: 100, r: 10, text: 'Lemon' };
+    const blocked = [{ x: 0, y: 0, w: 360, h: 480 }];
+    expect(placeLabels([a], 360, 480, blocked)).toHaveLength(0);
+    expect(placeLabels([{ ...a, force: true }], 360, 480, blocked)).toHaveLength(1);
   });
 });
 

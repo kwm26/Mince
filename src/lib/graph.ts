@@ -285,9 +285,9 @@ export function nodeName(catalog: Catalog, id: string): string {
   return catalog.recipeById.get(id)?.title ?? catalog.ingredientById.get(id)?.name ?? id;
 }
 
-/** A shorter recipe title for map labels and sentences: drops "(…)" and anything after " with ". */
+/** A shorter recipe title for map labels and sentences: drops "(…)", then anything after " with " or a comma. */
 export function shortTitle(title: string): string {
   const noParens = title.replace(/\s*\(.*?\)/g, '').trim();
-  const cut = noParens.split(/\s+with\s+/i)[0] ?? noParens;
+  const cut = (noParens.split(/\s+with\s+|,\s*/i)[0] ?? noParens).trim();
   return cut.split(/\s+/).length >= 2 ? cut : noParens;
 }
