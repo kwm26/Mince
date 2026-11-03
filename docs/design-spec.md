@@ -36,11 +36,30 @@ All values are tokens in `tokens.css`. Components never use raw hex values.
 | `--color-text` | `#1F1A17` ink | `#F5EDE4` | Body and headings, completed progress segments | — |
 | `--color-text-muted` | `#5E564F` | `#C3B5A8` | Metadata, labels, captions | Anything the user must read to act |
 | `--color-primary` | `#9A3412` terracotta | `#FDBA74` | Primary buttons, active tab, add-to-plan, the italic accent word in titles, the current step highlight | Shared ingredients |
-| `--color-accent` | `#047857` green | `#34D399` | **Shared ingredients only**: shared chips, graph nodes, meter fill, overlap pips, "added" state | Buttons, decoration |
+| `--color-accent` | `#047857` green | `#34D399` | **Shared ingredients only**: shared chips, meter fill, overlap pips, "added" state. On the map, shared-ness is size + outline, not green | Buttons, decoration, map nodes |
 | `--color-warn-bg` / `-text` | `#FFEDD5` / `#7C2D12` | `#4A2512` / `#FED7AA` | Use-soon tags ("2 days"), leftover badge, stickers | Errors (use text + icon) |
 | `--color-ink` | `#1F1A17` | `#F5EDE4` | Control outlines and hard shadows | — |
 | `--color-rule` | `#1F1A17` | `#F5EDE4` | 1px section rules | — |
 | `--color-ring` | `#9A3412` | `#FDBA74` | Focus ring | — |
+| `--color-cat-*` | see below | see below | Ingredient nodes on the map (2D and 3D), legend swatches | Text, buttons, anything off the map |
+
+### Ingredient categories (map only)
+
+One graphic colour per `Category`, used to fill ingredient nodes on the map. Recipe nodes stay `--color-primary`. Each is ≥ 3:1 against `--color-bg` as a graphic (WCAG 1.4.11); it is never used for text.
+
+| Token | Light | vs bg | Dark | vs bg |
+|---|---|---|---|---|
+| `--color-cat-protein` | `#BE185D` rose | 5.60 | `#F472B6` | 7.02 |
+| `--color-cat-produce` | `#4D7C0F` olive | 4.64 | `#A3E635` | 12.33 |
+| `--color-cat-herb` | `#0F766E` teal | 5.08 | `#2DD4BF` | 9.98 |
+| `--color-cat-dairy` | `#4F46E5` indigo | 5.84 | `#93C5FD` | 10.31 |
+| `--color-cat-grain` | `#A16207` ochre | 4.57 | `#FACC15` | 12.14 |
+| `--color-cat-pantry` | `#78716C` stone | 4.45 | `#A8A29E` | 7.37 |
+| `--color-cat-spice` | `#7E22CE` violet | 6.48 | `#C084FC` | 7.03 |
+| `--color-cat-fruit` | `#0369A1` sky | 5.51 | `#38BDF8` | 8.68 |
+| `--color-cat-other` | `#57534E` grey | 7.08 | `#D6D3D1` | 12.48 |
+
+The category is always also said in words: the legend names each swatch, and the bottom sheet and text list read "Produce · keeps 5 days".
 
 Always pair a fill with its `on-` token: `--color-on-primary` on primary and `--color-on-accent` on accent. Never hardcode black or white text on a role colour, because the pairs flip between themes.
 
@@ -62,7 +81,8 @@ Every pair passes AA for normal text (≥ 4.5:1). Re-measure any new pair before
 ### Never rely on colour alone
 
 Terracotta (action) and green (shared) are close in visual weight. Every coloured signal also carries a word or a shape:
-- Shared chips show the ingredient name, and the graph legend labels its colours.
+- Shared chips show the ingredient name, and the graph legend labels its colours (each category swatch has its word).
+- On the map, shared ingredients are bigger with a 2px ink outline; single-use ones are smaller with a 1px muted outline. The legend says which is which.
 - Overlap pips come with "Uses 4 of yours".
 - Use-soon tags say "2 days", not just a colour.
 - The added state switches its icon from + to ✓ and updates `aria-label`.
@@ -159,8 +179,9 @@ A muted label, the big number in italic serif, and a meter: 14px tall, 2px ink b
 ### Shared-ingredient graph
 Drawn by `d3-force` to SVG. These are the base node styles; the full Plan map, its lenses and its text list are in §11. Single-use ingredient nodes only appear when the map includes them (off by default).
 - **Recipe node:** radius 17, primary fill, 2.5px ink stroke.
-- **Shared ingredient node:** radius 10, accent fill, 2px ink stroke.
-- **Single-use ingredient node:** radius 8, surface-2 fill, 1.5px muted stroke.
+- **Shared ingredient node:** radius 10, category fill (`--color-cat-*`), 2px ink stroke.
+- **Single-use ingredient node:** radius 8, category fill, 1px muted stroke.
+- Shared-ness is carried by size and outline, never by colour; colour is the category (§2).
 - **Edges:** to a shared ingredient, 2px in `--color-text`; to a single-use one, 2px in `--color-graph-link`.
 - **Labels:** Public Sans, 11–12px / 600, in `--color-text`. This is the one exception to the 12px floor, and only because the graph is supplementary: every fact in it is also in text (the day rows, or the lens list under the map).
 - **Legend:** always visible, swatches with 2px ink borders.
@@ -247,6 +268,10 @@ Extends the shared-ingredient graph in §5. Same tokens, same three stroke width
 - One active at a time; default lens is **This week** once a plan exists, otherwise **Hubs**.
 
 **Key sentence.** Directly under the chips: the lens `sentence` in Playfair Display 20px / 700 (h2 style), one line, wraps if needed. This is the insight; the map is the evidence.
+
+**Colour = category.** Ingredient nodes are filled with their category colour (§2), recipes with primary. The legend always lists a swatch + word for each category on screen, plus Recipe, Shared (big, ink outline) and Used by one recipe (small, thin outline). Lens emphasis is drawn on top with opacity, size, badges, ghost edges and hulls, so it reads the same over any fill.
+
+**2D / 3D.** A segmented 2D / 3D toggle sits in the map header (48px targets; 2D default; choice kept in localStorage). 3D renders the same nodes as spheres and edges as lines with WebGL (`three`, lazy-loaded), z from the family/category layout in `src/lib/layout3d.ts`. Drag orbits, pinch/wheel zooms, double-tap resets; tapping a sphere opens the same bottom sheet. Auto-rotate is off by default and unavailable under reduced motion. Without WebGL the 2D map shows with a one-line note. The canvas keeps `role="img"` + the lens sentence; the text list stays the accessible equivalent.
 
 **Node states** (on top of §5's base styles):
 | State | Style |

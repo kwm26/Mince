@@ -3,6 +3,7 @@ import type { LensContext, LensName, Preview } from '../../types';
 import { BASE_RADIUS, buildGraph, degree, neighbours, shared } from '../../lib/graph';
 import { computeLayout, paddedHull, placeLabels, type LabelRequest } from '../../lib/layout';
 import { LENSES, displayName, lens, mapData, mapLabel } from '../../lib/lenses';
+import { CATEGORIES, categoryLabel } from '../../lib/labels';
 import { ChoiceChips } from '../ChoiceChips';
 import { EmptyState } from '../EmptyState';
 import { BADGE_H, HULL_CHAR_W, MapCanvas, textWidth, type CanvasEdge, type CanvasGhost, type CanvasHull, type CanvasNode, type Emphasis, type NodeKind } from './MapCanvas';
@@ -107,7 +108,8 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
           y: Math.max(1, p.y - radius * 0.6 - BADGE_H),
         };
       }
-      nodes.push({ id, kind, x: p.x, y: p.y, base, radius, emphasis, selected: selection.includes(id), badge });
+      const category = isRecipe ? undefined : catalog.ingredientById.get(id)?.category;
+      nodes.push({ id, kind, category, x: p.x, y: p.y, base, radius, emphasis, selected: selection.includes(id), badge });
     }
     nodes.sort((a, b) => RANK[a.emphasis] - RANK[b.emphasis] || Number(a.selected) - Number(b.selected));
 
@@ -181,7 +183,9 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
     return { nodes, edges, ghosts, hulls };
   }, [visible, layout, catalog, full, result, focus, selection, lensName, families]);
 
+  const presentCats = new Set(canvas.nodes.flatMap((n) => (n.category ? [n.category] : [])));
   const legend: LegendFlags = {
+    categories: CATEGORIES.filter((c) => presentCats.has(c)),
     single: canvas.nodes.some((n) => n.kind === 'single'),
     dim: canvas.nodes.some((n) => n.emphasis === 'dim'),
     badge: canvas.nodes.some((n) => n.badge) ? BADGE_MEANING[lensName] : undefined,
@@ -189,6 +193,14 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
     ghost: canvas.ghosts.length > 0,
     families: canvas.hulls.length > 0,
   };
+
+  const byCategory = legend.categories.map((c) => [
+    c,
+    canvas.nodes
+      .filter((n) => n.category === c)
+      .map((n) => displayName(catalog, n.id) + (n.kind === 'shared' ? ' (shared)' : ''))
+      .sort((x, y) => x.localeCompare(y)),
+  ] as const);
 
   const chooseLens = (id: string) => {
     userChose.current = true;
@@ -307,6 +319,18 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
               <li key={i}>{row}</li>
             ))}
           </ul>
+        )}
+        {byCategory.length > 0 && (
+          <>
+            <h4 className="map-sheet-sub">Ingredients on the map, by colour</h4>
+            <ul className="map-list">
+              {byCategory.map(([c, names]) => (
+                <li key={c}>
+                  <strong>{categoryLabel(c)}</strong> ({names.length}): {names.join(', ')}
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </div>
 

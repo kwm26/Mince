@@ -4,6 +4,7 @@ import type { LensContext, Preview } from '../../types';
 import { ChoiceChips } from '../ChoiceChips';
 import { XIcon } from '../icons';
 import { formatAmount } from '../../lib/kitchen';
+import { categoryLabel } from '../../lib/labels';
 import { displayName, mapData, mapLabel, phrase, signedPacks, weekday } from '../../lib/lenses';
 import { shared, type Graph } from '../../lib/graph';
 
@@ -116,7 +117,7 @@ function IngredientFacts({ ctx, graph, id, headingRef, onFocus }: Part & { id: s
         {ing.name}
       </h3>
       <p className="meta">
-        Keeps {ing.shelfLifeDays === 1 ? '1 day' : `${ing.shelfLifeDays} days`} ·{' '}
+        {categoryLabel(ing.category)} · keeps {ing.shelfLifeDays === 1 ? '1 day' : `${ing.shelfLifeDays} days`} ·{' '}
         {ing.packUnit === 'each'
           ? ing.packSize === 1
             ? 'sold singly'

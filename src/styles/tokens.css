@@ -18,7 +18,7 @@
   /* ── Colour: roles ── */
   --color-primary: #9A3412;       /* actions: buttons, active tab, step highlight */
   --color-on-primary: #FFFFFF;
-  --color-accent: #047857;        /* shared ingredients, and nothing else */
+  --color-accent: #047857;        /* shared chips, meter, pips; on the map shared-ness is size + outline */
   --color-on-accent: #FFFFFF;
   --color-warn-bg: #FFEDD5;       /* use-soon / leftover */
   --color-warn-text: #7C2D12;
@@ -36,6 +36,23 @@
   --color-thumb-2: #D8F0E3;
   --color-thumb-3: #F6E7C1;
   --color-thumb-ink: #7C2D12;
+
+  /* ── Colour: ingredient categories (map nodes only; design-spec §2, §11) ──
+   * Graphic contrast vs --color-bg (WCAG 1.4.11, needs >= 3:1):
+   * light vs #FAF6EF: protein 5.60, produce 4.64, herb 5.08, dairy 5.84, grain 4.57,
+   *                   pantry 4.45, spice 6.48, fruit 5.51, other 7.08
+   * dark  vs #17120F: protein 7.02, produce 12.33, herb 9.98, dairy 10.31, grain 12.14,
+   *                   pantry 7.37, spice 7.03, fruit 8.68, other 12.48
+   * Colour never carries the category alone: the legend, sheet and text list name it. */
+  --color-cat-protein: #BE185D;
+  --color-cat-produce: #4D7C0F;
+  --color-cat-herb: #0F766E;
+  --color-cat-dairy: #4F46E5;
+  --color-cat-grain: #A16207;
+  --color-cat-pantry: #78716C;
+  --color-cat-spice: #7E22CE;
+  --color-cat-fruit: #0369A1;
+  --color-cat-other: #57534E;
 
   /* ── Typography ── */
   --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
@@ -129,6 +146,15 @@
     --color-thumb-2: #123D2C;
     --color-thumb-3: #45350F;
     --color-thumb-ink: #FED7AA;
+    --color-cat-protein: #F472B6;
+    --color-cat-produce: #A3E635;
+    --color-cat-herb: #2DD4BF;
+    --color-cat-dairy: #93C5FD;
+    --color-cat-grain: #FACC15;
+    --color-cat-pantry: #A8A29E;
+    --color-cat-spice: #C084FC;
+    --color-cat-fruit: #38BDF8;
+    --color-cat-other: #D6D3D1;
   }
 }
 
@@ -155,6 +181,15 @@
   --color-thumb-2: #123D2C;
   --color-thumb-3: #45350F;
   --color-thumb-ink: #FED7AA;
+  --color-cat-protein: #F472B6;
+  --color-cat-produce: #A3E635;
+  --color-cat-herb: #2DD4BF;
+  --color-cat-dairy: #93C5FD;
+  --color-cat-grain: #FACC15;
+  --color-cat-pantry: #A8A29E;
+  --color-cat-spice: #C084FC;
+  --color-cat-fruit: #38BDF8;
+  --color-cat-other: #D6D3D1;
 }
 
 @media (prefers-reduced-motion: reduce) {

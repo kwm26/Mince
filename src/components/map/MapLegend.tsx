@@ -1,6 +1,9 @@
 import type { ReactNode } from 'react';
+import type { Category } from '../../types';
+import { categoryLabel } from '../../lib/labels';
 
 export interface LegendFlags {
+  categories: Category[]; // ingredient categories on the map, in legend order
   single: boolean;     // single-use ingredients are on the map
   dim: boolean;        // some nodes are faded
   badge?: string;      // what a tag means under this lens, e.g. "Days left"
@@ -17,7 +20,7 @@ function Swatch({ children }: { children: ReactNode }) {
   );
 }
 
-/** Always-visible key for the map's colours, shapes and tags (design-spec §5, §11). */
+/** Always-visible key for the map's colours, shapes and tags (design-spec §5, §11). Every colour has its word. */
 export function MapLegend({ flags }: { flags: LegendFlags }) {
   return (
     <ul className="map-legend" aria-label="Map key">
@@ -31,16 +34,24 @@ export function MapLegend({ flags }: { flags: LegendFlags }) {
         <Swatch>
           <circle className="map-legend-shared" cx="10" cy="10" r="5" />
         </Swatch>
-        Shared ingredient
+        Shared: big, dark outline
       </li>
       {flags.single && (
         <li>
           <Swatch>
             <circle className="map-legend-single" cx="10" cy="10" r="4" />
           </Swatch>
-          Used by one recipe
+          Used by one recipe: small, thin outline
         </li>
       )}
+      {flags.categories.map((c) => (
+        <li key={c} className={`map-cat--${c}`}>
+          <Swatch>
+            <circle className="map-legend-cat" cx="10" cy="10" r="6" />
+          </Swatch>
+          {categoryLabel(c)}
+        </li>
+      ))}
       {flags.dim && (
         <li>
           <Swatch>
