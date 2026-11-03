@@ -22,7 +22,7 @@ Favor clarity, polish and a working optimizer over breadth.
 ## Stack
 - Vite + React 18 + TypeScript (strict)
 - Plain CSS with CSS custom properties (tokens in `src/styles/tokens.css`), no UI framework
-- Optimizer: `javascript-lp-solver` (pure-JS integer programming), run in a **Web Worker** so the UI never blocks. Switch to `highs-js` only if solves exceed ~300 ms.
+- Optimizer: `highs` (HiGHS MILP solver compiled to WebAssembly), run in a **Web Worker** so the UI never blocks
 - Baseline: a greedy planner, kept for side-by-side comparison with the optimal solution
 - Shared-ingredient graph: `d3-force` rendering to SVG (per the design spec)
 - Tests: Vitest for everything in `src/lib/`
@@ -51,4 +51,4 @@ src/styles/      tokens.css, base.css
 - Small commits with conventional messages (`feat:`, `fix:`, `docs:`, `chore:`).
 
 ## Done means
-Type-checks, tests pass, a solve completes in < 300 ms for a 7-day plan, works at 375px wide, works in dark mode, deployed preview loads.
+Type-checks, tests pass, a 7-day solve completes in < 2 s in the worker (previews < 5 ms), works at 375px wide, works in dark mode, deployed preview loads.

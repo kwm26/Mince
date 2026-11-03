@@ -6,7 +6,8 @@
     "shelfLifeDays": 2,
     "packUnit": "lb",
     "packSize": 1.5,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "chicken-thigh",
@@ -15,7 +16,8 @@
     "shelfLifeDays": 2,
     "packUnit": "lb",
     "packSize": 1.5,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "ground-turkey",
@@ -24,7 +26,8 @@
     "shelfLifeDays": 2,
     "packUnit": "lb",
     "packSize": 1,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "ground-beef-lean",
@@ -33,7 +36,8 @@
     "shelfLifeDays": 2,
     "packUnit": "lb",
     "packSize": 1,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "flank-steak",
@@ -42,7 +46,8 @@
     "shelfLifeDays": 3,
     "packUnit": "lb",
     "packSize": 1.5,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "pork-tenderloin",
@@ -51,7 +56,8 @@
     "shelfLifeDays": 3,
     "packUnit": "lb",
     "packSize": 1.25,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "ham-diced",
@@ -69,7 +75,8 @@
     "shelfLifeDays": 2,
     "packUnit": "lb",
     "packSize": 1.5,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "cod",
@@ -78,7 +85,8 @@
     "shelfLifeDays": 2,
     "packUnit": "lb",
     "packSize": 1.5,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "shrimp",
@@ -87,7 +95,8 @@
     "shelfLifeDays": 2,
     "packUnit": "lb",
     "packSize": 1,
-    "estimated": true
+    "estimated": true,
+    "freezable": true
   },
   {
     "id": "tuna-canned",

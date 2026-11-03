@@ -32,6 +32,7 @@ interface Ingredient {
   packSize: number;
   staple?: boolean;        // assumed owned; ignored for waste and shopping
   estimated?: boolean;     // shelf life / pack size are estimates, not sourced
+  freezable?: boolean;     // raw item can go in the freezer on shopping day (raw meat, fish)
 }
 
 interface RecipeIngredient {
@@ -71,6 +72,8 @@ interface Constraints {
   mealsPerDay: { breakfast: number; main: number }; // default { breakfast: 1, main: 2 }
   maxCookMinutes: number[];             // per day, length = days; default 60; 0 = no cooking
   cookedFoodLifeDays: number;           // default 3: a batch is eaten on days d..d+2
+  frozenLifeDays: number;               // default 30: shelf life of a freezable item once frozen
+  maxRepeatsPerRecipe: number;          // default 2: variety rule, batches of the same recipe per week
   pins: { recipeId: string; day: number }[];
   excluded: string[];                   // recipe ids
   pantry: PantryItem[];
@@ -90,11 +93,13 @@ interface PlanResult {
 
 ## 3. The optimization model (`src/lib/model.ts` builds it; `solve.worker.ts` runs it)
 
-Solver: `javascript-lp-solver` (MILP), run in a Web Worker, with a **250 ms timeout**. On timeout, return the best solution found (`timeout-best`). If none was found, fall back to the greedy plan.
+Solver: `highs` (HiGHS compiled to WebAssembly, MILP), run in a Web Worker, with a **2 s time limit**. On timeout, return the best solution found (`timeout-best`). If none was found, fall back to the greedy plan. Show a "Solving…" state; previews (§7) never wait for the solver.
+
+**Validated offline.** This exact model was run on `data/*.json` with an open-source MILP solver (CBC) before the build: with the defaults it is feasible, hits 150 g protein/day, and solves in 0.3–2 s. Two things were required, both now in the model: **freezing** (raw meat and fish only last ~2 days, so without it the back half of the week has no protein) and the **variety rule** (without it the optimum is the same bowl four times).
 
 **Indices.** Recipes *r* (eligible: not excluded, `macrosPerServing.protein != null` unless pinned), days *d* = 0…D−1, non-staple ingredients *i*.
 
-**Pre-computed feasibility mask (key simplification).** One shopping trip on day 0. Recipe *r* may be cooked on day *d* only if every **core, non-staple** ingredient has `shelfLifeDays ≥ d` (or is in the pantry with `daysLeft ≥ d`). Infeasible (r, d) pairs get no variable. This handles expiry without time-indexed inventory.
+**Pre-computed feasibility mask (key simplification).** One shopping trip on day 0. Recipe *r* may be cooked on day *d* only if every **core, non-staple** ingredient has an effective life ≥ *d*: `frozenLifeDays` if `freezable`, else `shelfLifeDays` (or pantry `daysLeft`). Infeasible (r, d) pairs get no variable. This handles expiry without time-indexed inventory.
 
 **Variables.**
 - `y[r,d] ∈ {0,1}`: cook one batch of *r* on day *d*
@@ -107,7 +112,8 @@ Solver: `javascript-lp-solver` (MILP), run in a Web Worker, with a **250 ms time
 3. **Enough food, cumulatively** (per meal type *m*, needing `n_m` portions per day): for each day *t*, `Σ_{d ≤ t, r ∈ m} servings_r · y[r,d] ≥ n_m · (t + 1)`.
 4. **Nothing cooked spoils, cumulatively:** for each day *t*, `Σ_{d ≤ t, r ∈ m} servings_r · y[r,d] ≤ n_m · (t + L)`, where *L* = `cookedFoodLifeDays`.
 5. **Ingredients:** `packSize_i · b[i] + pantryAmount_i ≥ Σ_{r,d} qty_{r,i} · y[r,d]` (core and optional roles).
-6. **Protein (soft, weekly form for tractability):** `Σ_{r,d} servings_r · protein_r · y[r,d] / D + s ≥ proteinPerDay`. Per-day protein is reported after solving (§5).
+6. **Variety:** for each recipe *r*, `Σ_d y[r,d] ≤ maxRepeatsPerRecipe`.
+7. **Protein (soft, weekly form for tractability):** `Σ_{r,d} servings_r · protein_r · y[r,d] / D + s ≥ proteinPerDay`. Per-day protein is reported after solving (§5).
 
 **Objective (minimize).**
 ```
@@ -125,7 +131,7 @@ Defaults: `waste 1.0, protein 2.0, cookTime 0.3`. The Steer sliders change these
 - `reuseRate = |{perishable i used by ≥ 2 batches}| / |{perishable i used}|`
 
 ## 5. Post-solve schedule (`src/lib/schedule.ts`)
-Assign portions to days first-in-first-out (oldest batch first), per meal type. This gives `proteinByDay` and the day rows. If a portion would be eaten after `day + L − 1`, flag it (constraint 4 should prevent this; the flag catches bugs).
+Assign portions to days first-in-first-out (oldest batch first), per meal type. For any freezable ingredient used on day ≥ `shelfLifeDays`, add "freeze on shopping day" to the shopping list and a "move to the fridge tonight" note on the day before cooking. This gives `proteinByDay` and the day rows. If a portion would be eaten after `day + L − 1`, flag it (constraint 4 should prevent this; the flag catches bugs).
 
 ## 6. Greedy baseline (`src/lib/greedy.ts`)
 Start from the pins. Repeatedly, for the first day whose meals aren't covered, add the feasible (r, d) that minimizes Δ`wastePacks`, breaking ties by higher protein per serving, then shorter time. This is the comparison baseline, and the fallback when the solver fails.
@@ -149,7 +155,10 @@ For each batch, generate up to 3 reasons from the model (no LLM):
 - Adding a recipe that reuses a leftover perishable lowers `wastePacks`.
 - Optimal `wastePacks` ≤ greedy `wastePacks` on the default week.
 - Preview Δ equals (metrics after − metrics before).
-- A 7-day solve finishes in < 300 ms (or returns `timeout-best`).
+- A 7-day solve finishes in < 2 s in the worker (or returns `timeout-best`).
+- Freezing: a chicken recipe can be placed on day 5 only when `freezable` is true.
+- Variety: no recipe appears in more than `maxRepeatsPerRecipe` batches.
+- Default week on the real data is feasible with 0 protein shortfall at 150 g/day (regression test for the offline validation).
 
 ## 10. Data rules
 - `data/recipes.json` and `data/ingredients.json` are the only recipe data. Never invent recipes, macros or URLs.

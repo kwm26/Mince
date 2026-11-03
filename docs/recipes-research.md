@@ -1,10 +1,10 @@
-# Recipe Research (draft dataset)
+# Recipe Research
 
 24 healthy, high-protein recipes for bodybuilding and meal prep (4 breakfasts, 20 mains), gathered by web research on established recipe, dietitian and fitness sites. Each recipe page was fetched and checked; nothing was invented.
 
 - **Macros** are per serving, exactly as stated on the source page ("–" means not stated).
 - **Ingredient lists** are recorded as facts. **Steps are paraphrased** in our own words, not copied. Always credit and link the source in the app.
-- Shelf life, pack sizes and some quantity conversions in `data/*.draft.json` are **estimates** (`estimated: true`, `qtyNote`).
+- Shelf life, pack sizes and some quantity conversions in `data/*.json` are **estimates** (`estimated: true`, `qtyNote`).
 - Selection favored recipes that **reuse the same perishables**, since Mince optimizes for that.
 
 ## Recipes
