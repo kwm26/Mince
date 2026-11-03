@@ -3,11 +3,12 @@
 // fails honestly so the screen shows its real error state. It never fabricates
 // plan numbers.
 
-import type { Constraints, Edit, IngredientOverride, PlanResult, Preview } from './types';
+import type { Catalog, Constraints, Edit, IngredientOverride, PlanResult, Preview } from './types';
 
 export interface PlanEngine {
   solve(c: Constraints, overrides: Record<string, IngredientOverride>): Promise<PlanResult>;
-  preview(plan: PlanResult, edit: Edit, c: Constraints): Preview;
+  /** `catalog` carries the user's overrides, so a preview of a saved plan prices the same packs as its solve. */
+  preview(plan: PlanResult, edit: Edit, c: Constraints, catalog: Catalog): Preview;
   applyEdit(c: Constraints, plan: PlanResult, edit: Edit): Constraints;
 }
 

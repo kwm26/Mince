@@ -4,6 +4,7 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
 import { App } from './App';
+import { optimizerEngine, PlanMap } from './optimizer';
 import { applyTheme, readTheme } from './theme';
 
 // Apply a saved light/dark choice before the first paint, so there's no flash.
@@ -14,6 +15,6 @@ if (!root) throw new Error('Missing #root element');
 
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <App engine={optimizerEngine} mapSlot={(api) => <PlanMap api={api} />} />
   </StrictMode>,
 );

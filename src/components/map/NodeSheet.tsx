@@ -98,7 +98,7 @@ function RecipeFacts({ ctx, graph, id, headingRef, previewAdd, onAddToPlan, onCl
         </ul>
       )}
       <p className="muted">Tap another recipe to see what the two share.</p>
-      {previewAdd && onAddToPlan && (
+      {onAddToPlan && (
         <AddToPlan ctx={ctx} recipeId={id} previewAdd={previewAdd} onAddToPlan={onAddToPlan} onDone={onClose} />
       )}
     </>
@@ -180,13 +180,13 @@ function AddToPlan({
 }: {
   ctx: LensContext;
   recipeId: string;
-  previewAdd: (recipeId: string, day: number) => Preview | null;
+  previewAdd?: (recipeId: string, day: number) => Preview | null; // absent: the host previews after the hand-off
   onAddToPlan: (recipeId: string, day: number) => void;
   onDone: () => void;
 }) {
   const [picking, setPicking] = useState(false);
   const [day, setDay] = useState<number | null>(null);
-  const preview = useMemo(() => (day === null ? undefined : previewAdd(recipeId, day)), [day, previewAdd, recipeId]);
+  const preview = useMemo(() => (day === null || !previewAdd ? undefined : previewAdd(recipeId, day)), [day, previewAdd, recipeId]);
   const days = Array.from({ length: ctx.constraints.days }, (_, d) => d);
 
   if (!picking) {
@@ -209,7 +209,7 @@ function AddToPlan({
         value={day === null ? '' : String(day)}
         onChange={(id) => setDay(Number(id))}
       />
-      {day !== null && preview === null && (
+      {previewAdd && day !== null && preview === null && (
         <p className="map-warn">No preview for {dayName}: there’s no batch it can swap in for there.</p>
       )}
       {preview && <PreviewRows ctx={ctx} preview={preview} />}
@@ -227,14 +227,14 @@ function AddToPlan({
         <button
           type="button"
           className="map-btn map-btn--primary"
-          disabled={!preview || !preview.feasible || day === null}
+          disabled={day === null || (previewAdd !== undefined && (!preview || !preview.feasible))}
           onClick={() => {
             if (day === null) return;
             onAddToPlan(recipeId, day);
             onDone();
           }}
         >
-          {day === null ? 'Pick a day' : `Add to ${dayName}`}
+          {day === null ? 'Pick a day' : previewAdd ? `Add to ${dayName}` : `See the cost for ${dayName}`}
         </button>
       </div>
     </div>

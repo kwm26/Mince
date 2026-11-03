@@ -83,11 +83,11 @@ function SteerBody({ request, engine, solve, onClose }: { request: SteerRequest;
   const preview = useMemo<{ ok: true; value: Preview } | { ok: false; message: string } | null>(() => {
     if (!edit || !plan0) return null;
     try {
-      return { ok: true, value: engine.preview(plan0, edit, c0) };
+      return { ok: true, value: engine.preview(plan0, edit, c0, catalog) };
     } catch (e) {
       return { ok: false, message: errorText(e) };
     }
-  }, [edit, plan0, c0, engine]);
+  }, [edit, plan0, c0, engine, catalog]);
 
   if (!plan0) {
     return <p className="muted">There's no plan to change yet. Plan the week first.</p>;
@@ -194,7 +194,12 @@ function SteerBody({ request, engine, solve, onClose }: { request: SteerRequest;
                 proteinByDay={preview.value.delta.proteinByDay}
                 cookMinutes={preview.value.delta.cookMinutes}
               />
-              <p className="muted">Estimated from this edit alone. Apply keeps it as a pin and re-plans the rest of the week.</p>
+              <p className="muted">
+                Estimated from this edit alone.{' '}
+                {edit?.kind === 'remove'
+                  ? 'Apply rules this meal out for that day and re-plans the rest of the week.'
+                  : 'Apply keeps it as a pin and re-plans the rest of the week.'}
+              </p>
             </>
           )}
         </section>
