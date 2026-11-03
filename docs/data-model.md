@@ -226,7 +226,7 @@ Pure functions only; the UI maps their output to tokens. No React or d3 imports 
 - `neighbours(nodeId)` = directly connected node ids.
 - `shared(recipeA, recipeB)` = non-staple ingredient ids used by both.
 
-**Families (clusters).** Project to a recipe–recipe graph where edge weight = number of shared **perishable** ingredients (`shelfLifeDays ≤ 14`). Run **label propagation**, deterministic: nodes visited in id order, ties broken by smallest label, max 20 iterations. Name each family by its top 2 perishables by within-family degree ("cilantro–lime"). Families of size 1 are labelled "standalone".
+**Families (clusters).** Project to a recipe–recipe graph where edge weight = number of shared **perishable** ingredients (`shelfLifeDays ≤ 14`). Run **label propagation**, deterministic: nodes visited in id order, ties broken by smallest label, max 20 iterations. Each candidate label's score is penalised by `k_i · K_l / 2m` (modularity-weighted label propagation, Barber & Clark 2009; `k_i` = node strength, `K_l` = total strength of label *l*, `m` = total edge weight). Plain propagation chains all 24 recipes into one family through lemon and Greek yogurt; with the penalty the real data splits into four families. Name each family by its top 2 perishables by within-family degree ("cilantro–lime"). Families of size 1 are labelled "standalone".
 
 **Absorbers.** `absorbers(ingredientId, plan, constraints)` = **swaps**: replace a planned, unpinned batch with a recipe of the same meal type on the same day that uses the ingredient. Adding a batch would break constraint 4, so absorbers never add. Keep only swaps where constraints 2–6 still hold, ranked by Δ`wastePacks` from `preview.ts` (most negative first). The Waste lens shows the top one ("Swap in the steak fajita bowls Thu → −0.6 packs").
 
@@ -248,7 +248,9 @@ interface LensResult {
 | `protein` | Recipe `size` ∝ protein per serving; < 30 g: `dim`; `protein == null`: `dim` + badge "n/a". |
 | `families` | `family` set on every recipe node; sentence names the family the current plan mostly sits in. |
 
-**Layout.** Run d3-force for a fixed 300 ticks with nodes seeded deterministically (by id hash), then render static. No continuous animation; same data → same picture.
+**Layout** (`src/lib/layout.ts`, d3-force but no DOM). Run d3-force for a fixed 300 ticks with nodes seeded deterministically (by id hash), each family's recipes pulled toward their own anchor so the families read as clusters, then render static. Single-use ingredients are placed beside their one recipe afterwards, so showing them never moves other nodes. No continuous animation; same data → same picture.
+
+**Freshness and raw meat.** Freezable items not yet bought (raw meat and fish) still get a days-left badge but are not `high`, since they can be frozen on shopping day (§3).
 
 **Tests (add to §9).**
 - Staples never appear as nodes; single-use ingredients appear only with `includeSingleUse`.
