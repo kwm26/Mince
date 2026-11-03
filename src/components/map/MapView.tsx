@@ -1,4 +1,6 @@
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { computeLayout3D } from '../../lib/layout3d';
+import type { Edge3D } from './Map3D';
 import type { LensContext, LensName, Preview } from '../../types';
 import { BASE_RADIUS, buildGraph, degree, neighbours, shared } from '../../lib/graph';
 import { computeLayout, paddedHull, placeLabels, type LabelRequest } from '../../lib/layout';
@@ -20,6 +22,27 @@ export interface MapViewProps {
 }
 
 const RANK: Record<Emphasis, number> = { dim: 0, normal: 1, high: 2 };
+
+// three.js only loads when someone opens the 3D view.
+const Map3D = lazy(() => import('./Map3D'));
+type Dimension = '2d' | '3d';
+const DIMENSION_KEY = 'mince.map.dimension';
+
+function readDimension(): Dimension {
+  try {
+    return localStorage.getItem(DIMENSION_KEY) === '3d' ? '3d' : '2d';
+  } catch {
+    return '2d';
+  }
+}
+
+function writeDimension(d: Dimension): void {
+  try {
+    localStorage.setItem(DIMENSION_KEY, d);
+  } catch {
+    // Storage unavailable: the choice just won't persist.
+  }
+}
 
 const BADGE_MEANING: Partial<Record<LensName, string>> = {
   freshness: 'Days left',
@@ -44,6 +67,15 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
   useEffect(() => {
     if (!userChose.current) setLensName(hasPlan ? 'week' : 'hubs');
   }, [hasPlan]);
+
+  const [dimension, setDimension] = useState<Dimension>(readDimension);
+  const [no3d, setNo3d] = useState(false);
+  const chooseDimension = (d: string) => {
+    const next: Dimension = d === '3d' ? '3d' : '2d';
+    setDimension(next);
+    writeDimension(next);
+  };
+  const show3d = dimension === '3d' && !no3d;
 
   const [selection, setSelection] = useState<string[]>([]);
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -183,6 +215,19 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
     return { nodes, edges, ghosts, hulls };
   }, [visible, layout, catalog, full, result, focus, selection, lensName, families]);
 
+  const layout3d = useMemo(
+    () => computeLayout3D(full, layout, { groups: families.byRecipe, categoryOf: (id) => catalog.ingredientById.get(id)?.category }),
+    [full, layout, families, catalog],
+  );
+  const edges3d = useMemo<Edge3D[]>(
+    () =>
+      canvas.edges.map((e) => {
+        const [from = '', to = ''] = e.id.split('>');
+        return { from, to, emphasis: e.emphasis };
+      }),
+    [canvas.edges],
+  );
+
   const presentCats = new Set(canvas.nodes.flatMap((n) => (n.category ? [n.category] : [])));
   const legend: LegendFlags = {
     categories: CATEGORIES.filter((c) => presentCats.has(c)),
@@ -283,6 +328,32 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
         </div>
       )}
 
+      <ChoiceChips
+        label="Map view"
+        options={[
+          { id: '2d', label: '2D' },
+          { id: '3d', label: '3D' },
+        ]}
+        value={dimension}
+        onChange={chooseDimension}
+      />
+      {dimension === '3d' && no3d && <p className="muted">3D isn't available on this device, so here's the 2D map.</p>}
+
+      {show3d ? (
+        <div className="map-frame map-frame--3d">
+          <Suspense fallback={<p className="muted map3d-loading">Loading the 3D view…</p>}>
+            <Map3D
+              sentence={result.sentence}
+              nodes={canvas.nodes}
+              edges={edges3d}
+              layout={layout3d}
+              onNodeTap={onNodeTap}
+              onBackgroundTap={onBackgroundTap}
+              onUnavailable={() => setNo3d(true)}
+            />
+          </Suspense>
+        </div>
+      ) : (
       <div className="map-frame">
         <MapCanvas
           width={layout.width}
@@ -305,7 +376,12 @@ export function MapView({ ctx, previewAdd, onAddToPlan }: MapViewProps) {
           </button>
         )}
       </div>
-      <p className="muted">Tap a dot for details, or two recipes to compare. Pinch to zoom; double-tap to reset.</p>
+      )}
+      <p className="muted">
+        {show3d
+          ? 'Drag to turn the map, pinch or scroll to zoom, double-tap to reset. Tap a sphere for details.'
+          : 'Tap a dot for details, or two recipes to compare. Pinch to zoom; double-tap to reset.'}
+      </p>
 
       <MapLegend flags={legend} />
 

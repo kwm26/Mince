@@ -16,12 +16,14 @@
     "d3-force": "^3.0.1",
     "highs": "^1.15.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.181.2"
   },
   "devDependencies": {
     "@types/d3-force": "^3.0.10",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
+    "@types/three": "^0.181.0",
     "@vitejs/plugin-react": "^6.2.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",
