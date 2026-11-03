@@ -317,6 +317,7 @@
   border-top: var(--stroke-rule) solid var(--color-rule);
 }
 
+.map-sheet > .eyebrow,
 .map-sheet h3 {
   padding-right: calc(var(--tap-min) + var(--space-2));
 }
